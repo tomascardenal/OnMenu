@@ -10,7 +10,7 @@ namespace OnMenu.Models
         /// <summary>
         /// The ingredient's name
         /// </summary>
-        string name;
+        string name;+
         /// <summary>
         /// Gets or sets the ingredient's name.
         /// </summary>

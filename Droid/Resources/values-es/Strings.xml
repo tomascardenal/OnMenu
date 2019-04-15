@@ -19,4 +19,16 @@
     <string name="app_description">Esta app ha sido escrita en C# y APIs nativas utilizando la plataforma Xamarin. Comparte código con sus versiones de iOS, Android, y Windows.</string>
     <string name="sign_in_text">Ingresa con tu cuenta para agregar y quitar items</string>
     <string name="title_add_ingredient">Nuevo ingrediente</string>
+    <string name="menu_item_save">Guardar</string>
+    <string name="menu_item_cancel">Cancelar</string>
+    <string name="addingredient_name">Nombre:</string>
+    <string name="addingredient_group">Grupo alimenticio:</string>
+    <string name="addingredient_measure">Unidad de medida:</string>
+    <string name="addingredient_allergen">Posible alérgeno:</string>
+    <string name="addingredient_estimatedprice">Precio estimado:</string>
+    <string name="addingredient_placeholder_name">Escriba aquí el nombre del ingrediente</string>
+    <string name="addingredient_placeholder_group">Introduzca el grupo alimenticio correspondiente</string>
+    <string name="addingredient_placeholder_measure">Indique que unidad de medida utilizar para este ingrediente</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
 </resources>
