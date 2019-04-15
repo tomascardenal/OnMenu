@@ -146,7 +146,6 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_save.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_save.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_save.png" />
-    <AndroidResource Include="Resources\layout\activity_add_item.axml" />
     <AndroidResource Include="Resources\layout\activity_item_details.axml" />
     <AndroidResource Include="Resources\layout\activity_main.axml" />
     <AndroidResource Include="Resources\layout\activity_myitem_details.axml" />
@@ -170,6 +169,7 @@
     <AndroidResource Include="Resources\values\styles.xml" />
     <AndroidResource Include="Resources\values-v19\styles.xml" />
     <AndroidResource Include="Resources\values-v21\styles.xml" />
+    <AndroidResource Include="Resources\layout\activity_add_item.axml" />
   </ItemGroup>
   <Import Project="..\OnMenu\OnMenu.projitems" Label="Shared" Condition="Exists('..\OnMenu\OnMenu.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
