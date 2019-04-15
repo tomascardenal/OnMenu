@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="hello">Hola mundo, Haz click!</string>
+    <string name="tab1">Buscar</string>
+    <string name="tab2">Acerca de</string>
+    <string name="signin">Registrate</string>
+    <string name="notnow">Ahora no</string>
+    <string name="signing_in">Registrando...</string>
+    <string name="version_number">Versión 1.0</string>
+    <string name="login">Ingresa</string>
+    <string name="learn_more">Aprende Más</string>
+    <string name="description">Descripción:</string>
+    <string name="title">Título:</string>
+    <string name="text">Texto:</string>
+    <string name="quantity">Cantidad:</string>
+    <string name="hint_name">Nombre</string>
+    <string name="info">Información</string>
+    <string name="hint_description">Descripción</string>
+    <string name="app_description">Esta app ha sido escrita en C# y APIs nativas utilizando la plataforma Xamarin. Comparte código con sus versiones de iOS, Android, y Windows.</string>
+    <string name="sign_in_text">Ingresa con tu cuenta para agregar y quitar items</string>
+    <string name="title_add_ingredient">Nuevo ingrediente</string>
+</resources>
