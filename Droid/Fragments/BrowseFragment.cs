@@ -18,7 +18,7 @@ namespace OnMenu.Droid
         SwipeRefreshLayout refresher;
 
         ProgressBar progress;
-        public static ItemsViewModel ViewModel { get; set; }
+        public static IngredientsViewModel ViewModel { get; set; }
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -29,7 +29,7 @@ namespace OnMenu.Droid
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            ViewModel = new ItemsViewModel();
+            ViewModel = new IngredientsViewModel();
 
             View view = inflater.Inflate(Resource.Layout.fragment_browse, container, false);
             var recyclerView =
@@ -54,8 +54,8 @@ namespace OnMenu.Droid
             refresher.Refresh += Refresher_Refresh;
             adapter.ItemClick += Adapter_ItemClick;
 
-            if (ViewModel.Items.Count == 0)
-                ViewModel.LoadItemsCommand.Execute(null);
+            if (ViewModel.Ingredients.Count == 0)
+                ViewModel.LoadIngredientsCommand.Execute(null);
         }
 
         public override void OnStop()
@@ -67,7 +67,7 @@ namespace OnMenu.Droid
 
         void Adapter_ItemClick(object sender, RecyclerClickEventArgs e)
         {
-            var item = ViewModel.Items[e.Position];
+            var item = ViewModel.Ingredients[e.Position];
             var intent = new Intent(Activity, typeof(BrowseItemDetailActivity));
 
             intent.PutExtra("data", Newtonsoft.Json.JsonConvert.SerializeObject(item));
@@ -76,7 +76,7 @@ namespace OnMenu.Droid
 
         void Refresher_Refresh(object sender, EventArgs e)
         {
-            ViewModel.LoadItemsCommand.Execute(null);
+            ViewModel.LoadIngredientsCommand.Execute(null);
             refresher.Refreshing = false;
         }
 
@@ -88,15 +88,15 @@ namespace OnMenu.Droid
 
     class BrowseItemsAdapter : BaseRecycleViewAdapter
     {
-        ItemsViewModel viewModel;
+        IngredientsViewModel viewModel;
         Activity activity;
 
-        public BrowseItemsAdapter(Activity activity, ItemsViewModel viewModel)
+        public BrowseItemsAdapter(Activity activity, IngredientsViewModel viewModel)
         {
             this.viewModel = viewModel;
             this.activity = activity;
 
-            this.viewModel.Items.CollectionChanged += (sender, args) =>
+            this.viewModel.Ingredients.CollectionChanged += (sender, args) =>
             {
                 this.activity.RunOnUiThread(NotifyDataSetChanged);
             };
@@ -106,26 +106,25 @@ namespace OnMenu.Droid
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             //Setup your layout here
-            View itemView = null;
-            var id = Resource.Layout.item_browse;
-            itemView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
+            View ingredientView = null;
+            var id = Resource.Layout.ingredients_browse;
+            ingredientView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
 
-            var vh = new MyViewHolder(itemView, OnClick, OnLongClick);
+            var vh = new MyViewHolder(ingredientView, OnClick, OnLongClick);
             return vh;
         }
 
         // Replace the contents of a view (invoked by the layout manager)
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            var item = viewModel.Items[position];
+            var ingredient = viewModel.Ingredients[position];
 
             // Replace the contents of the view with that element
             var myHolder = holder as MyViewHolder;
-            myHolder.TextView.Text = item.Text;
-            myHolder.DetailTextView.Text = item.Description;
+            myHolder.TextView.Text = ingredient.Name;
         }
 
-        public override int ItemCount => viewModel.Items.Count;
+        public override int ItemCount => viewModel.Ingredients.Count;
     }
 
     public class MyViewHolder : RecyclerView.ViewHolder

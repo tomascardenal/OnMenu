@@ -2523,8 +2523,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f080038
 			public const int always = 2131230776;
 			
-			// aapt resource value: 0x7f08009f
-			public const int appbar = 2131230879;
+			// aapt resource value: 0x7f0800a0
+			public const int appbar = 2131230880;
 			
 			// aapt resource value: 0x7f080056
 			public const int async = 2131230806;
@@ -2577,8 +2577,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f08008c
 			public const int collapsingToolbarLayout_addIngredient = 2131230860;
 			
-			// aapt resource value: 0x7f0800a0
-			public const int collapsing_toolbar = 2131230880;
+			// aapt resource value: 0x7f0800a1
+			public const int collapsing_toolbar = 2131230881;
 			
 			// aapt resource value: 0x7f0800ac
 			public const int container = 2131230892;
@@ -2733,8 +2733,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f080061
 			public const int list_item = 2131230817;
 			
-			// aapt resource value: 0x7f08009e
-			public const int main_content = 2131230878;
+			// aapt resource value: 0x7f08009f
+			public const int main_content = 2131230879;
 			
 			// aapt resource value: 0x7f0800d3
 			public const int masked = 2131230931;
@@ -2838,8 +2838,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0800c7
 			public const int right_side = 2131230919;
 			
-			// aapt resource value: 0x7f0800a4
-			public const int save_button = 2131230884;
+			// aapt resource value: 0x7f08009e
+			public const int save_button = 2131230878;
 			
 			// aapt resource value: 0x7f08000c
 			public const int save_image_matrix = 2131230732;
@@ -3006,8 +3006,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f08009a
 			public const int toggleAllergen_addIngredient = 2131230874;
 			
-			// aapt resource value: 0x7f0800a1
-			public const int toolbar = 2131230881;
+			// aapt resource value: 0x7f0800a2
+			public const int toolbar = 2131230882;
 			
 			// aapt resource value: 0x7f08008d
 			public const int toolbar_addIngredient = 2131230861;
@@ -3036,11 +3036,11 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f080013
 			public const int transition_transform = 2131230739;
 			
-			// aapt resource value: 0x7f0800a3
-			public const int txtDesc = 2131230883;
+			// aapt resource value: 0x7f0800a4
+			public const int txtDesc = 2131230884;
 			
-			// aapt resource value: 0x7f0800a2
-			public const int txtTitle = 2131230882;
+			// aapt resource value: 0x7f0800a3
+			public const int txtTitle = 2131230883;
 			
 			// aapt resource value: 0x7f08002d
 			public const int uniform = 2131230765;
@@ -3267,7 +3267,7 @@ namespace OnMenu.Droid
 			public const int fragment_myitems = 2130968623;
 			
 			// aapt resource value: 0x7f040030
-			public const int item_browse = 2130968624;
+			public const int ingredients_browse = 2130968624;
 			
 			// aapt resource value: 0x7f040031
 			public const int item_my_item = 2130968625;
@@ -3470,32 +3470,32 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b0010
 			public const int abc_toolbar_collapse_description = 2131427344;
 			
-			// aapt resource value: 0x7f0b0040
-			public const int addingredient_allergen = 2131427392;
-			
-			// aapt resource value: 0x7f0b0041
-			public const int addingredient_estimatedprice = 2131427393;
-			
-			// aapt resource value: 0x7f0b003e
-			public const int addingredient_group = 2131427390;
-			
-			// aapt resource value: 0x7f0b003f
-			public const int addingredient_measure = 2131427391;
-			
-			// aapt resource value: 0x7f0b003d
-			public const int addingredient_name = 2131427389;
+			// aapt resource value: 0x7f0b0042
+			public const int addingredient_allergen = 2131427394;
 			
 			// aapt resource value: 0x7f0b0043
-			public const int addingredient_placeholder_group = 2131427395;
+			public const int addingredient_estimatedprice = 2131427395;
+			
+			// aapt resource value: 0x7f0b0040
+			public const int addingredient_group = 2131427392;
+			
+			// aapt resource value: 0x7f0b0041
+			public const int addingredient_measure = 2131427393;
+			
+			// aapt resource value: 0x7f0b003f
+			public const int addingredient_name = 2131427391;
+			
+			// aapt resource value: 0x7f0b0045
+			public const int addingredient_placeholder_group = 2131427397;
+			
+			// aapt resource value: 0x7f0b0046
+			public const int addingredient_placeholder_measure = 2131427398;
 			
 			// aapt resource value: 0x7f0b0044
-			public const int addingredient_placeholder_measure = 2131427396;
+			public const int addingredient_placeholder_name = 2131427396;
 			
-			// aapt resource value: 0x7f0b0042
-			public const int addingredient_placeholder_name = 2131427394;
-			
-			// aapt resource value: 0x7f0b0038
-			public const int app_description = 2131427384;
+			// aapt resource value: 0x7f0b003a
+			public const int app_description = 2131427386;
 			
 			// aapt resource value: 0x7f0b0028
 			public const int app_name = 2131427368;
@@ -3509,38 +3509,38 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b0020
 			public const int character_counter_pattern = 2131427360;
 			
-			// aapt resource value: 0x7f0b0031
-			public const int description = 2131427377;
+			// aapt resource value: 0x7f0b0033
+			public const int description = 2131427379;
 			
 			// aapt resource value: 0x7f0b0027
 			public const int hello = 2131427367;
 			
+			// aapt resource value: 0x7f0b0039
+			public const int hint_description = 2131427385;
+			
 			// aapt resource value: 0x7f0b0037
-			public const int hint_description = 2131427383;
+			public const int hint_name = 2131427383;
 			
-			// aapt resource value: 0x7f0b0035
-			public const int hint_name = 2131427381;
+			// aapt resource value: 0x7f0b0038
+			public const int info = 2131427384;
 			
-			// aapt resource value: 0x7f0b0036
-			public const int info = 2131427382;
+			// aapt resource value: 0x7f0b0032
+			public const int learn_more = 2131427378;
 			
-			// aapt resource value: 0x7f0b0030
-			public const int learn_more = 2131427376;
+			// aapt resource value: 0x7f0b0031
+			public const int login = 2131427377;
 			
-			// aapt resource value: 0x7f0b002f
-			public const int login = 2131427375;
+			// aapt resource value: 0x7f0b003e
+			public const int menu_item_cancel = 2131427390;
 			
-			// aapt resource value: 0x7f0b003c
-			public const int menu_item_cancel = 2131427388;
+			// aapt resource value: 0x7f0b003d
+			public const int menu_item_save = 2131427389;
 			
-			// aapt resource value: 0x7f0b003b
-			public const int menu_item_save = 2131427387;
+			// aapt resource value: 0x7f0b0048
+			public const int no = 2131427400;
 			
-			// aapt resource value: 0x7f0b0046
-			public const int no = 2131427398;
-			
-			// aapt resource value: 0x7f0b002c
-			public const int notnow = 2131427372;
+			// aapt resource value: 0x7f0b002e
+			public const int notnow = 2131427374;
 			
 			// aapt resource value: 0x7f0b0021
 			public const int password_toggle_content_description = 2131427361;
@@ -3557,20 +3557,20 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b0025
 			public const int path_password_strike_through = 2131427365;
 			
-			// aapt resource value: 0x7f0b0034
-			public const int quantity = 2131427380;
+			// aapt resource value: 0x7f0b0036
+			public const int quantity = 2131427382;
 			
 			// aapt resource value: 0x7f0b0011
 			public const int search_menu_title = 2131427345;
 			
-			// aapt resource value: 0x7f0b0039
-			public const int sign_in_text = 2131427385;
-			
-			// aapt resource value: 0x7f0b002b
-			public const int signin = 2131427371;
+			// aapt resource value: 0x7f0b003b
+			public const int sign_in_text = 2131427387;
 			
 			// aapt resource value: 0x7f0b002d
-			public const int signing_in = 2131427373;
+			public const int signin = 2131427373;
+			
+			// aapt resource value: 0x7f0b002f
+			public const int signing_in = 2131427375;
 			
 			// aapt resource value: 0x7f0b0026
 			public const int status_bar_notification_info_overflow = 2131427366;
@@ -3581,20 +3581,26 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b002a
 			public const int tab2 = 2131427370;
 			
-			// aapt resource value: 0x7f0b0033
-			public const int text = 2131427379;
+			// aapt resource value: 0x7f0b002b
+			public const int tab3 = 2131427371;
 			
-			// aapt resource value: 0x7f0b0032
-			public const int title = 2131427378;
+			// aapt resource value: 0x7f0b002c
+			public const int tab4 = 2131427372;
 			
-			// aapt resource value: 0x7f0b003a
-			public const int title_add_ingredient = 2131427386;
+			// aapt resource value: 0x7f0b0035
+			public const int text = 2131427381;
 			
-			// aapt resource value: 0x7f0b002e
-			public const int version_number = 2131427374;
+			// aapt resource value: 0x7f0b0034
+			public const int title = 2131427380;
 			
-			// aapt resource value: 0x7f0b0045
-			public const int yes = 2131427397;
+			// aapt resource value: 0x7f0b003c
+			public const int title_add_ingredient = 2131427388;
+			
+			// aapt resource value: 0x7f0b0030
+			public const int version_number = 2131427376;
+			
+			// aapt resource value: 0x7f0b0047
+			public const int yes = 2131427399;
 			
 			static String()
 			{

@@ -1,4 +1,5 @@
 ﻿using System;
+using OnMenu.Models;
 
 namespace OnMenu
 {
@@ -10,9 +11,9 @@ namespace OnMenu
         public static void Initialize()
         {
             if (UseMockDataStore)
-                ServiceLocator.Instance.Register<IDataStore<Item>, MockDataStore>();
+                ServiceLocator.Instance.Register<IDataStore<Ingredient>, IngredientDataStore>();
             else
-                ServiceLocator.Instance.Register<IDataStore<Item>, CloudDataStore>();
+                ServiceLocator.Instance.Register<IDataStore<Ingredient>, CloudDataStore>();
         }
     }
 }

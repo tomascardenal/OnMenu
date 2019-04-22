@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using OnMenu.Models;
 
 namespace OnMenu
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => ServiceLocator.Instance.Get<IDataStore<Item>>() ?? new MockDataStore();
+        public IDataStore<Models.Ingredient> IngredientsDataStore => ServiceLocator.Instance.Get<IDataStore<Models.Ingredient>>() ?? new IngredientDataStore();
 
         bool isBusy = false;
         public bool IsBusy

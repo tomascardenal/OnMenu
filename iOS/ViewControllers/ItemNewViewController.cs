@@ -6,7 +6,7 @@ namespace OnMenu.iOS
 {
     public partial class ItemNewViewController : UIViewController
     {
-        public ItemsViewModel ViewModel { get; set; }
+        public IngredientsViewModel ViewModel { get; set; }
 
         public ItemNewViewController(IntPtr handle) : base(handle)
         {
@@ -18,12 +18,12 @@ namespace OnMenu.iOS
 
             btnSaveItem.TouchUpInside += (sender, e) =>
             {
-                var item = new Item
+                var item = new Ingredient
                 {
                     Text = txtTitle.Text,
                     Description = txtDesc.Text
                 };
-                ViewModel.AddItemCommand.Execute(item);
+                ViewModel.AddIngredientsCommand.Execute(item);
                 NavigationController.PopToRootViewController(true);
             };
         }

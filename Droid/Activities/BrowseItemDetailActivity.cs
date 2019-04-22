@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.OS;
 using Android.Widget;
+using OnMenu.Models;
 
 namespace OnMenu.Droid
 {
@@ -14,19 +15,19 @@ namespace OnMenu.Droid
         /// </summary>
         protected override int LayoutResource => Resource.Layout.activity_item_details;
 
-        ItemDetailViewModel viewModel;
+        IngredientDetailViewModel viewModel;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             var data = Intent.GetStringExtra("data");
 
-            var item = Newtonsoft.Json.JsonConvert.DeserializeObject<Item>(data);
-            viewModel = new ItemDetailViewModel(item);
+            var item = Newtonsoft.Json.JsonConvert.DeserializeObject<Ingredient>(data);
+            viewModel = new IngredientDetailViewModel(item);
 
-            FindViewById<TextView>(Resource.Id.description).Text = item.Description;
+            FindViewById<TextView>(Resource.Id.description).Text = item.Name;
 
-            SupportActionBar.Title = item.Text;
+            SupportActionBar.Title = item.Name;
         }
 
         protected override void OnStart()

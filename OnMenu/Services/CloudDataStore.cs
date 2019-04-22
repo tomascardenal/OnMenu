@@ -6,77 +6,78 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Newtonsoft.Json;
+using OnMenu.Models;
 using Plugin.Connectivity;
 
 namespace OnMenu
 {
-    public class CloudDataStore : IDataStore<Item>
+    public class CloudDataStore : IDataStore<Models.Ingredient>
     {
         HttpClient client;
-        IEnumerable<Item> items;
+        IEnumerable<Models.Ingredient> items;
 
         public CloudDataStore()
         {
             client = new HttpClient();
             client.BaseAddress = new Uri($"{App.BackendUrl}/");
 
-            items = new List<Item>();
+            items = new List<Models.Ingredient>();
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Models.Ingredient>> GetIngredientsAsync(bool forceRefresh = false)
         {
             if (forceRefresh && CrossConnectivity.Current.IsConnected)
             {
-                var json = await client.GetStringAsync($"api/item");
-                items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Item>>(json));
+                var json = await client.GetStringAsync($"api/ingredient");
+                items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Models.Ingredient>>(json));
             }
 
             return items;
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<Models.Ingredient> GetIngredientAsync(string name)
         {
-            if (id != null && CrossConnectivity.Current.IsConnected)
+            if (name != null && CrossConnectivity.Current.IsConnected)
             {
-                var json = await client.GetStringAsync($"api/item/{id}");
-                return await Task.Run(() => JsonConvert.DeserializeObject<Item>(json));
+                var json = await client.GetStringAsync($"api/ingredient/{name}");
+                return await Task.Run(() => JsonConvert.DeserializeObject<Models.Ingredient>(json));
             }
 
             return null;
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddIngredientAsync(Models.Ingredient ingredient)
         {
-            if (item == null || !CrossConnectivity.Current.IsConnected)
+            if (ingredient == null || !CrossConnectivity.Current.IsConnected)
                 return false;
 
-            var serializedItem = JsonConvert.SerializeObject(item);
+            var serializedItem = JsonConvert.SerializeObject(ingredient);
 
-            var response = await client.PostAsync($"api/item", new StringContent(serializedItem, Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync($"api/ingredient", new StringContent(serializedItem, Encoding.UTF8, "application/json"));
 
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateIngredientAsync(Models.Ingredient ingredient)
         {
-            if (item == null || item.Id == null || !CrossConnectivity.Current.IsConnected)
+            if (ingredient == null || ingredient.Name == null || !CrossConnectivity.Current.IsConnected)
                 return false;
 
-            var serializedItem = JsonConvert.SerializeObject(item);
+            var serializedItem = JsonConvert.SerializeObject(ingredient);
             var buffer = Encoding.UTF8.GetBytes(serializedItem);
             var byteContent = new ByteArrayContent(buffer);
 
-            var response = await client.PutAsync(new Uri($"api/item/{item.Id}"), byteContent);
+            var response = await client.PutAsync(new Uri($"api/ingredient/{ingredient.Name}"), byteContent);
 
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteIngredientAsync(string name)
         {
-            if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
+            if (string.IsNullOrEmpty(name) && !CrossConnectivity.Current.IsConnected)
                 return false;
 
-            var response = await client.DeleteAsync($"api/item/{id}");
+            var response = await client.DeleteAsync($"api/ingredient/{name}");
 
             return response.IsSuccessStatusCode;
         }

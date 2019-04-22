@@ -41,7 +41,7 @@ namespace OnMenu.Droid
 
             Toolbar.MenuItemClick += (sender, e) =>
             {
-                var intent = new Intent(this, typeof(AddItemActivity)); ;
+                var intent = new Intent(this, typeof(AddIngredientsActivity)); ;
                 StartActivity(intent);
             };
 
@@ -75,7 +75,9 @@ namespace OnMenu.Droid
             switch (position)
             {
                 case 0: return BrowseFragment.NewInstance();
-                case 1: return AboutFragment.NewInstance();
+                case 1: return BrowseFragment.NewInstance();
+                case 2: return BrowseFragment.NewInstance();
+                case 3: return AboutFragment.NewInstance();
             }
             return null;
         }
