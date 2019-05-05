@@ -5,7 +5,7 @@ namespace OnMenu.Models
     /// Model for an Ingredient
     /// by: Tomás Cardenal López
     /// </summary>
-    public class Ingredient
+    public class Ingredient : Item
     {
         /// <summary>
         /// The ingredient's name

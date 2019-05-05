@@ -10,6 +10,7 @@ namespace OnMenu
     {
         List<Models.Ingredient> ingredients;
 
+
         public IngredientDataStore()
         {
             ingredients = new List<Models.Ingredient>();
@@ -25,14 +26,14 @@ namespace OnMenu
             }
         }
 
-        public async Task<bool> AddIngredientAsync(Models.Ingredient ingredient)
+        public async Task<bool> AddItemAsync(Models.Ingredient ingredient)
         {
             ingredients.Add(ingredient);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateIngredientAsync(Models.Ingredient ingredient)
+        public async Task<bool> UpdateItemAsync(Models.Ingredient ingredient)
         {
             var _ingredient = ingredients.Where((Ingredient arg) => arg.Name == ingredient.Name).FirstOrDefault();
             ingredients.Remove(_ingredient);
@@ -41,7 +42,7 @@ namespace OnMenu
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteIngredientAsync(string name)
+        public async Task<bool> DeleteItemAsync(string name)
         {
             var _ingredient = ingredients.Where((Ingredient arg) => arg.Name == name).FirstOrDefault();
             ingredients.Remove(_ingredient);
@@ -49,12 +50,12 @@ namespace OnMenu
             return await Task.FromResult(true);
         }
 
-        public async Task<Models.Ingredient> GetIngredientAsync(string name)
+        public async Task<Models.Ingredient> GetItemAsync(string name)
         {
             return await Task.FromResult(ingredients.FirstOrDefault(s => s.Name == name));
         }
 
-        public async Task<IEnumerable<Models.Ingredient>> GetIngredientsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Models.Ingredient>> GetItemsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(ingredients);
         }

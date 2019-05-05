@@ -11,6 +11,8 @@ namespace OnMenu
         public ObservableCollection<Models.Ingredient> Ingredients { get; set; }
         public Command LoadIngredientsCommand { get; set; }
         public Command AddIngredientsCommand { get; set; }
+        public IDataStore<Models.Ingredient> IngredientDataStore => ServiceLocator.Instance.Get<IDataStore<Models.Ingredient>>() ?? new IngredientDataStore();
+
 
         public IngredientsViewModel()
         {
@@ -30,7 +32,7 @@ namespace OnMenu
             try
             {
                 Ingredients.Clear();
-                var ingredients = await IngredientsDataStore.GetIngredientsAsync(true);
+                var ingredients = await IngredientDataStore.GetItemsAsync(true);
                 foreach (var ingredient in ingredients)
                 {
                     Ingredients.Add(ingredient);
@@ -49,7 +51,7 @@ namespace OnMenu
         async Task AddIngredient(Models.Ingredient ingredient)
         {
             Ingredients.Add(ingredient);
-            await IngredientsDataStore.AddIngredientAsync(ingredient);
+            await IngredientDataStore.AddItemAsync(ingredient);
         }
     }
 }

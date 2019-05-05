@@ -7,7 +7,7 @@ namespace OnMenu.Models
     /// Model for a recipe
     /// by: Tomás Cardenal López
     /// </summary>
-    public class Recipe
+    public class Recipe : Item
     {
         /// <summary>
         /// The recipe's name
@@ -22,12 +22,12 @@ namespace OnMenu.Models
         /// <summary>
         /// List of ingredients on this recipe
         /// </summary>
-        List<Ingredient> ingredients;
+        List<Recipe> ingredients;
         /// <summary>
         /// Gets or sets the list of ingredients on this recipe
         /// </summary>
         /// <value>The list of ingredients.</value>
-        public List<Ingredient> Ingredients { get => ingredients; set => ingredients = value; }
+        public List<Recipe> Ingredients { get => ingredients; set => ingredients = value; }
 
         /// <summary>
         /// The instructions to follow on this recipe
@@ -75,7 +75,7 @@ namespace OnMenu.Models
         /// <param name="instructions">The instructions to follow on this recipe.</param>
         /// <param name="ingredients">List of ingredients.</param>
         /// <param name="rating">The recipe's name.</param>
-        public Recipe(string name, string instructions, List<Ingredient> ingredients, int rating)
+        public Recipe(string name, string instructions, List<Recipe> ingredients, int rating)
         {
             Name = name;
             Instructions = instructions;

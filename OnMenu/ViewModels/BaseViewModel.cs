@@ -8,7 +8,6 @@ namespace OnMenu
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Models.Ingredient> IngredientsDataStore => ServiceLocator.Instance.Get<IDataStore<Models.Ingredient>>() ?? new IngredientDataStore();
 
         bool isBusy = false;
         public bool IsBusy

@@ -24,7 +24,7 @@ namespace OnMenu
             items = new List<Models.Ingredient>();
         }
 
-        public async Task<IEnumerable<Models.Ingredient>> GetIngredientsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Models.Ingredient>> GetItemsAsync(bool forceRefresh = false)
         {
             if (forceRefresh && CrossConnectivity.Current.IsConnected)
             {
@@ -35,7 +35,7 @@ namespace OnMenu
             return items;
         }
 
-        public async Task<Models.Ingredient> GetIngredientAsync(string name)
+        public async Task<Models.Ingredient> GetItemAsync(string name)
         {
             if (name != null && CrossConnectivity.Current.IsConnected)
             {
@@ -46,7 +46,7 @@ namespace OnMenu
             return null;
         }
 
-        public async Task<bool> AddIngredientAsync(Models.Ingredient ingredient)
+        public async Task<bool> AddItemAsync(Models.Ingredient ingredient)
         {
             if (ingredient == null || !CrossConnectivity.Current.IsConnected)
                 return false;
@@ -58,7 +58,7 @@ namespace OnMenu
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> UpdateIngredientAsync(Models.Ingredient ingredient)
+        public async Task<bool> UpdateItemAsync(Models.Ingredient ingredient)
         {
             if (ingredient == null || ingredient.Name == null || !CrossConnectivity.Current.IsConnected)
                 return false;
@@ -72,7 +72,7 @@ namespace OnMenu
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> DeleteIngredientAsync(string name)
+        public async Task<bool> DeleteItemAsync(string name)
         {
             if (string.IsNullOrEmpty(name) && !CrossConnectivity.Current.IsConnected)
                 return false;
