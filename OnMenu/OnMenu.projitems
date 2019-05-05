@@ -11,7 +11,12 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Command.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ServiceLocator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Item.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Items\Ingredient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Items\Item.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Items\Recipe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Login\Token.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Login\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CloudDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\RecipeDataStore.cs" />
@@ -21,8 +26,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\IngredientDetailViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\IngredientsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Recipe.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Ingredient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\RecipeViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Models\Login\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Models\Items\" />
   </ItemGroup>
 </Project>
