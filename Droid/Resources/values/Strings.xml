@@ -13,6 +13,10 @@
     <string name="login">Login</string>
     <string name="learn_more">Learn More</string>
     <string name="description">Description:</string>
+    <string name="ingredient_group">Group</string>
+    <string name="ingredient_measure"></string>
+    <string name="ingredient_allergen"></string>
+    <string name="ingredient_price"></string>
     <string name="title">Title:</string>
     <string name="text">Text:</string>
     <string name="quantity">Quantity:</string>

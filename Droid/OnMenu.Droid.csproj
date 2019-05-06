@@ -123,12 +123,13 @@
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Fragments\AboutFragment.cs" />
-    <Compile Include="Fragments\BrowseFragment.cs" />
+    <Compile Include="Fragments\BrowseIngredientFragment.cs" />
     <Compile Include="Fragments\IFragmentVisible.cs" />
     <Compile Include="Helpers\BaseRecycleViewAdapter.cs" />
     <Compile Include="Helpers\RecyclerClickEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Fragments\BrowseRecipeFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AboutAssets.txt" />
@@ -171,7 +172,8 @@
     <AndroidResource Include="Resources\layout\activity_add_item.axml" />
     <AndroidResource Include="Resources\values-es\Strings.xml" />
     <AndroidResource Include="Resources\layout\activity_add_ingredient.axml" />
-    <AndroidResource Include="Resources\layout\ingredients_browse.axml" />
+    <AndroidResource Include="Resources\layout\ingredient_browse.axml" />
+    <AndroidResource Include="Resources\layout\activity_ingredient_details.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\values-es\" />

@@ -74,9 +74,9 @@ namespace OnMenu.Droid
         {
             switch (position)
             {
-                case 0: return BrowseFragment.NewInstance();
-                case 1: return BrowseFragment.NewInstance();
-                case 2: return BrowseFragment.NewInstance();
+                case 0: return BrowseIngredientFragment.NewInstance();
+                case 1: return BrowseRecipeFragment.NewInstance();
+                case 2: return BrowseIngredientFragment.NewInstance();
                 case 3: return AboutFragment.NewInstance();
             }
             return null;

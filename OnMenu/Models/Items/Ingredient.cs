@@ -8,16 +8,6 @@ namespace OnMenu.Models
     public class Ingredient : Item
     {
         /// <summary>
-        /// The ingredient's name
-        /// </summary>
-        string name;
-        /// <summary>
-        /// Gets or sets the ingredient's name.
-        /// </summary>
-        /// <value>The ingredient's name.</value>
-        public string Name { get => name; set => name = value; }
-
-        /// <summary>
         /// The ingredient's group
         /// </summary>
         string group;

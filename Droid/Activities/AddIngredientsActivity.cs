@@ -23,7 +23,7 @@ namespace OnMenu.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            ViewModel = BrowseFragment.ViewModel;
+            ViewModel = BrowseIngredientFragment.ViewModel;
 
             SetContentView(Resource.Layout.activity_add_ingredient);
             saveButton = FindViewById<FloatingActionButton>(Resource.Id.save_button);

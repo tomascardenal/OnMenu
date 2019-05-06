@@ -5,7 +5,7 @@ namespace OnMenu.iOS
 {
     public partial class BrowseItemDetailViewController : UIViewController
     {
-        public IngredientDetailViewModel ViewModel { get; set; }
+        public BaseViewModel ViewModel { get; set; }
         public BrowseItemDetailViewController(IntPtr handle) : base(handle) { }
 
         public override void ViewDidLoad()

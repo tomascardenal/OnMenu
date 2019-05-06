@@ -13,7 +13,7 @@ namespace OnMenu.Droid
         /// <summary>
         /// Specify the layout to inflace
         /// </summary>
-        protected override int LayoutResource => Resource.Layout.activity_item_details;
+        protected override int LayoutResource => Resource.Layout.activity_ingredient_details;
 
         IngredientDetailViewModel viewModel;
         protected override void OnCreate(Bundle savedInstanceState)

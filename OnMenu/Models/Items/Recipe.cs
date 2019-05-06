@@ -9,15 +9,7 @@ namespace OnMenu.Models
     /// </summary>
     public class Recipe : Item
     {
-        /// <summary>
-        /// The recipe's name
-        /// </summary>
-        string name;
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        /// <value>The recipe's name.</value>
-        public string Name { get => name; set => name = value; }
+      
 
         /// <summary>
         /// List of ingredients on this recipe

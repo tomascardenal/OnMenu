@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OnMenu
 {
-    class RecipeViewModel : BaseViewModel
+    public class RecipeViewModel : BaseViewModel
     {
         public ObservableCollection<Models.Recipe> Recipes { get; set; }
         public Command LoadRecipesCommand { get; set; }
