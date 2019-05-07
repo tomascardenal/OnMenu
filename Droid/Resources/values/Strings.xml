@@ -26,6 +26,7 @@
     <string name="app_description">This app is written in C# and native APIs using the Xamarin Platform. It shares code with its iOS, Android, &amp; Windows versions.</string>
     <string name="sign_in_text">Sign in with your account to save and sync items</string>
     <string name="title_add_ingredient">New ingredient</string>
+    <string name="title_add_recipe">New recipe</string>
     <string name="menu_item_save">Save</string>
     <string name="menu_item_cancel">Cancel</string>
     <string name="addingredient_name">Name:</string>
@@ -36,6 +37,12 @@
     <string name="addingredient_placeholder_name">Write here the name of the ingredient</string>
     <string name="addingredient_placeholder_group">Write here the corresponding food group</string>
     <string name="addingredient_placeholder_measure">Write the measuring unit to use with this ingredient</string>
+    <string name="addrecipe_name">Name:</string>
+    <string name="addrecipe_instructions">Instructions:</string>
+    <string name="addrecipe_hasallergens">Possible allergen:</string>
+    <string name="addrecipe_estimatedprice">Estimated price:</string>
+    <string name="addrecipe_placeholder_name">Write here the name of the ingredient</string>
+    <string name="addrecipe_placeholder_instructions">Write here the corresponding food group</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
 </resources>

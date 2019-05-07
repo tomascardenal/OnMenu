@@ -11,7 +11,7 @@
             android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/nameCell_add"
+            android:id="@+id/nameCell_addIngredient"
             android:padding="10dp">
             <TextView
                 android:text="@string/addingredient_name"
