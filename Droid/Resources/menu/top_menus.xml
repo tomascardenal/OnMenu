@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_edit" android:showAsAction="ifRoom" android:title="Add"/>
+    <item android:id="@+id/menu_addIngredient" android:showAsAction="ifRoom" android:title="Add ingredient"/>
+    <item android:id="@+id/menu_addRecipe" android:showAsAction="ifRoom" android:title="Add recipe"/>
 </menu>

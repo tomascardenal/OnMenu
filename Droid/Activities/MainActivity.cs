@@ -7,6 +7,7 @@ using Android.Widget;
 using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Android.Support.Design.Widget;
+using Android.Util;
 
 namespace OnMenu.Droid
 {
@@ -17,6 +18,7 @@ namespace OnMenu.Droid
     public class MainActivity : BaseActivity
     {
         protected override int LayoutResource => Resource.Layout.activity_main;
+        protected Intent menuIntent;
 
         ViewPager pager;
         TabsAdapter adapter;
@@ -41,8 +43,14 @@ namespace OnMenu.Droid
 
             Toolbar.MenuItemClick += (sender, e) =>
             {
-                var intent = new Intent(this, typeof(AddIngredientsActivity)); ;
-                StartActivity(intent);
+                switch (e.Item.ItemId)
+                {
+                    case Resource.Id.menu_addRecipe:
+                        break;
+                    case Resource.Id.menu_addIngredient:
+                        StartActivity(new Intent(this, typeof(AddIngredientsActivity)));
+                        break;
+                }
             };
 
             SupportActionBar.SetDisplayHomeAsUpEnabled(false);
