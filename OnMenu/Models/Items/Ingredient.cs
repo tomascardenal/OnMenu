@@ -1,5 +1,5 @@
 ﻿using System;
-namespace OnMenu.Models
+namespace OnMenu.Models.Items
 {
     /// <summary>
     /// Model for an Ingredient

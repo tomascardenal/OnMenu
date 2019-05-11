@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
@@ -6,47 +6,47 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Newtonsoft.Json;
-using OnMenu.Models;
+using OnMenu.Models.Items;
 using Plugin.Connectivity;
 
 namespace OnMenu
 {
-    public class CloudDataStore : IDataStore<Models.Ingredient>
+    public class CloudDataStore : IDataStore<Item>
     {
         HttpClient client;
-        IEnumerable<Models.Ingredient> items;
+        IEnumerable<Item> items;
 
         public CloudDataStore()
         {
             client = new HttpClient();
             client.BaseAddress = new Uri($"{App.BackendUrl}/");
 
-            items = new List<Models.Ingredient>();
+            items = new List<Item>();
         }
 
-        public async Task<IEnumerable<Models.Ingredient>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
         {
             if (forceRefresh && CrossConnectivity.Current.IsConnected)
             {
                 var json = await client.GetStringAsync($"api/ingredient");
-                items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Models.Ingredient>>(json));
+                items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Item>>(json));
             }
 
             return items;
         }
 
-        public async Task<Models.Ingredient> GetItemAsync(string name)
+        public async Task<Item> GetItemAsync(string name)
         {
             if (name != null && CrossConnectivity.Current.IsConnected)
             {
                 var json = await client.GetStringAsync($"api/ingredient/{name}");
-                return await Task.Run(() => JsonConvert.DeserializeObject<Models.Ingredient>(json));
+                return await Task.Run(() => JsonConvert.DeserializeObject<Item>(json));
             }
 
             return null;
         }
 
-        public async Task<bool> AddItemAsync(Models.Ingredient ingredient)
+        public async Task<bool> AddItemAsync(Item ingredient)
         {
             if (ingredient == null || !CrossConnectivity.Current.IsConnected)
                 return false;
@@ -58,7 +58,7 @@ namespace OnMenu
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> UpdateItemAsync(Models.Ingredient ingredient)
+        public async Task<bool> UpdateItemAsync(Item ingredient)
         {
             if (ingredient == null || ingredient.Name == null || !CrossConnectivity.Current.IsConnected)
                 return false;

@@ -3,37 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OnMenu.Models;
+using OnMenu.Models.Items;
 
 namespace OnMenu
 {
-    public class IngredientDataStore : IDataStore<Models.Ingredient>
+    public class IngredientDataStore : IDataStore<Ingredient>
     {
-        List<Models.Ingredient> ingredients;
+        List<Ingredient> ingredients;
 
 
         public IngredientDataStore()
         {
-            ingredients = new List<Models.Ingredient>();
-            var _ingredients = new List<Models.Ingredient>
+            ingredients = new List<Ingredient>();
+            var _ingredients = new List<Ingredient>
             {
-                new Models.Ingredient ( "Rice", "Cereals", "g",  true, 0.50f),
-                new Models.Ingredient ( "Egg", "Protein", "units",  true, 1.0f),
+                new Ingredient ( "Rice", "Cereals", "g",  true, 0.50f),
+                new Ingredient ( "Egg", "Protein", "units",  true, 1.0f),
             };
 
-            foreach (Models.Ingredient ingredient in _ingredients)
+            foreach (Ingredient ingredient in _ingredients)
             {
                 ingredients.Add(ingredient);
             }
         }
 
-        public async Task<bool> AddItemAsync(Models.Ingredient ingredient)
+        public async Task<bool> AddItemAsync(Ingredient ingredient)
         {
             ingredients.Add(ingredient);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Models.Ingredient ingredient)
+        public async Task<bool> UpdateItemAsync(Ingredient ingredient)
         {
             var _ingredient = ingredients.Where((Ingredient arg) => arg.Name == ingredient.Name).FirstOrDefault();
             ingredients.Remove(_ingredient);
@@ -50,12 +51,12 @@ namespace OnMenu
             return await Task.FromResult(true);
         }
 
-        public async Task<Models.Ingredient> GetItemAsync(string name)
+        public async Task<Ingredient> GetItemAsync(string name)
         {
             return await Task.FromResult(ingredients.FirstOrDefault(s => s.Name == name));
         }
 
-        public async Task<IEnumerable<Models.Ingredient>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Ingredient>> GetItemsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(ingredients);
         }

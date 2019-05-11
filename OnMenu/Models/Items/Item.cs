@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace OnMenu
+namespace OnMenu.Models.Items
 {
-    public class Item
+    public class Item 
     {
         public string Id { get; set; }
 

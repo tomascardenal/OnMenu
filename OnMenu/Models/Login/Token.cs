@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace OnMenu.Models
+namespace OnMenu.Models.Login
 {
     public class Token
     {

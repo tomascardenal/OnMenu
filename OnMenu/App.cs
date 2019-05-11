@@ -5,7 +5,7 @@ namespace OnMenu
 {
     public class App
     {
-        public static bool UseMockDataStore = true;
+        public static bool UseMockDataStore = false;
         public static string BackendUrl = "http://localhost:5000";
 
         public static void Initialize()
