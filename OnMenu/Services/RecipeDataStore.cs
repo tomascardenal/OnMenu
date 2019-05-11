@@ -3,34 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OnMenu.Models;
+using OnMenu.Models.Items;
 
 namespace OnMenu
 {
-    public class RecipeDataStore : IDataStore<Models.Recipe>
+    public class RecipeDataStore : IDataStore<Recipe>
     {
-        List<Models.Recipe> recipes;
+        List<Recipe> recipes;
 
         public RecipeDataStore()
         {
-            recipes = new List<Models.Recipe>();
-            var _recipes = new List<Models.Recipe>
+            recipes = new List<Recipe>();
+            var _recipes = new List<Recipe>
             {
             };
 
-            foreach (Models.Recipe recipe in _recipes)
+            foreach (Recipe recipe in _recipes)
             {
                 recipes.Add(recipe);
             }
         }
 
-        public async Task<bool> AddItemAsync(Models.Recipe recipe)
+        public async Task<bool> AddItemAsync(Recipe recipe)
         {
             recipes.Add(recipe);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Models.Recipe recipe)
+        public async Task<bool> UpdateItemAsync(Recipe recipe)
         {
             var _recipe = recipes.Where((Recipe arg) => arg.Name == recipe.Name).FirstOrDefault();
             recipes.Remove(_recipe);
@@ -47,12 +48,12 @@ namespace OnMenu
             return await Task.FromResult(true);
         }
 
-        public async Task<Models.Recipe> GetItemAsync(string name)
+        public async Task<Recipe> GetItemAsync(string name)
         {
             return await Task.FromResult(recipes.FirstOrDefault(s => s.Name == name));
         }
 
-        public async Task<IEnumerable<Models.Recipe>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Recipe>> GetItemsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(recipes);
         }

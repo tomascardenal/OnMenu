@@ -1,5 +1,5 @@
 ﻿using System;
-using OnMenu.Models;
+using OnMenu.Models.Items;
 
 namespace OnMenu
 {

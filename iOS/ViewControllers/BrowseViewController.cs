@@ -109,8 +109,8 @@ namespace OnMenu.iOS
             var cell = tableView.DequeueReusableCell(CELL_IDENTIFIER, indexPath);
 
             var item = viewModel.Ingredients[indexPath.Row];
-            cell.TextLabel.Text = item.Text;
-            cell.DetailTextLabel.Text = item.Description;
+            //cell.TextLabel.Text = item.Text;
+            //cell.DetailTextLabel.Text = item.Description;
             cell.LayoutMargins = UIEdgeInsets.Zero;
 
             return cell;

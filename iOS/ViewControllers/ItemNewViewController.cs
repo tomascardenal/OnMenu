@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnMenu.Models.Items;
+using System;
 
 using UIKit;
 
@@ -18,13 +19,13 @@ namespace OnMenu.iOS
 
             btnSaveItem.TouchUpInside += (sender, e) =>
             {
-                var item = new Ingredient
+                /*var item = new Item
                 {
                     Text = txtTitle.Text,
                     Description = txtDesc.Text
                 };
                 ViewModel.AddIngredientsCommand.Execute(item);
-                NavigationController.PopToRootViewController(true);
+                NavigationController.PopToRootViewController(true);*/
             };
         }
     }

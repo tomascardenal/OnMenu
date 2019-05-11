@@ -6,6 +6,7 @@ using Android.Widget;
 using Android.Support.Design.Widget;
 using OnMenu.Models;
 using Android.Views;
+using OnMenu.Models.Items;
 
 namespace OnMenu.Droid
 {

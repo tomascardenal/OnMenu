@@ -2,24 +2,24 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using OnMenu.Models;
+using OnMenu.Models.Items;
 
 namespace OnMenu
 {
     public class IngredientsViewModel : BaseViewModel
     {
-        public ObservableCollection<Models.Ingredient> Ingredients { get; set; }
+        public ObservableCollection<Ingredient> Ingredients { get; set; }
         public Command LoadIngredientsCommand { get; set; }
         public Command AddIngredientsCommand { get; set; }
-        public IDataStore<Models.Ingredient> IngredientDataStore => ServiceLocator.Instance.Get<IDataStore<Models.Ingredient>>() ?? new IngredientDataStore();
+        public IDataStore<Ingredient> IngredientDataStore => ServiceLocator.Instance.Get<IDataStore<Ingredient>>() ?? new IngredientDataStore();
 
 
         public IngredientsViewModel()
         {
             Title = "Ingredient list";
-            Ingredients = new ObservableCollection<Models.Ingredient>();
+            Ingredients = new ObservableCollection<Ingredient>();
             LoadIngredientsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            AddIngredientsCommand = new Command<Models.Ingredient>(async (Models.Ingredient ingredient) => await AddIngredient(ingredient));
+            AddIngredientsCommand = new Command<Ingredient>(async (Ingredient ingredient) => await AddIngredient(ingredient));
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -48,7 +48,7 @@ namespace OnMenu
             }
         }
 
-        async Task AddIngredient(Models.Ingredient ingredient)
+        async Task AddIngredient(Ingredient ingredient)
         {
             Ingredients.Add(ingredient);
             await IngredientDataStore.AddItemAsync(ingredient);

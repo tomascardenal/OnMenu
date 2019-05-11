@@ -13,8 +13,8 @@ namespace OnMenu.iOS
             base.ViewDidLoad();
 
             Title = ViewModel.Title;
-            ItemNameLabel.Text = ViewModel.Item.Text;
-            ItemDescriptionLabel.Text = ViewModel.Item.Description;
+            //ItemNameLabel.Text = ViewModel.Item.Text;
+            //ItemDescriptionLabel.Text = ViewModel.Item.Description;
         }
     }
 }

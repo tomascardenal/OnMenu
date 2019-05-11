@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnMenu.Models.Items;
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -7,18 +8,18 @@ namespace OnMenu
 {
     public class RecipeViewModel : BaseViewModel
     {
-        public ObservableCollection<Models.Recipe> Recipes { get; set; }
+        public ObservableCollection<Recipe> Recipes { get; set; }
         public Command LoadRecipesCommand { get; set; }
         public Command AddRecipesCommand { get; set; }
-        public IDataStore<Models.Recipe> RecipeDataStore => ServiceLocator.Instance.Get<IDataStore<Models.Recipe>>() ?? new RecipeDataStore();
+        public IDataStore<Recipe> RecipeDataStore => ServiceLocator.Instance.Get<IDataStore<Recipe>>() ?? new RecipeDataStore();
 
 
         public RecipeViewModel()
         {
             Title = "Recipe List";
-            Recipes = new ObservableCollection<Models.Recipe>();
+            Recipes = new ObservableCollection<Recipe>();
             LoadRecipesCommand = new Command(async () => await ExecuteLoadRecipesCommand());
-            AddRecipesCommand = new Command<Models.Recipe>(async (Models.Recipe recipe) => await AddRecipe(recipe));
+            AddRecipesCommand = new Command<Recipe>(async (Recipe recipe) => await AddRecipe(recipe));
         }
 
         async Task ExecuteLoadRecipesCommand()
@@ -47,7 +48,7 @@ namespace OnMenu
             }
         }
 
-        async Task AddRecipe(Models.Recipe recipe)
+        async Task AddRecipe(Recipe recipe)
         {
             Recipes.Add(recipe);
             await RecipeDataStore.AddItemAsync(recipe);
