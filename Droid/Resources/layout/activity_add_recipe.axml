@@ -70,12 +70,7 @@
 					android:lines="5"
                     />
 			</LinearLayout>
-			<android.support.v7.widget.ListViewCompat
-				android:minWidth="25px"
-				android:minHeight="25px"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:id="@+id/ingredientList_addRecipe" />
+			
 		</LinearLayout>
 	</ScrollView>
 </RelativeLayout>

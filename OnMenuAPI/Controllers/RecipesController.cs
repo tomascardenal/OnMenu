@@ -19,7 +19,7 @@ namespace OnMenuAPI.Controllers
         }
 
         // GET: api/Recipes/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetRecipes")]
         public string Get(int id)
         {
             return "value";

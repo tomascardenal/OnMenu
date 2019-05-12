@@ -2544,8 +2544,11 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f080063
 			public const int buttonPanel = 2131230819;
 			
-			// aapt resource value: 0x7f0800c4
-			public const int button_learn_more = 2131230916;
+			// aapt resource value: 0x7f0800c3
+			public const int button_learn_more = 2131230915;
+			
+			// aapt resource value: 0x7f0800c6
+			public const int calendarView1 = 2131230918;
 			
 			// aapt resource value: 0x7f0800cc
 			public const int cancel_action = 2131230924;
@@ -2583,14 +2586,14 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0800a1
 			public const int collapsing_toolbar = 2131230881;
 			
-			// aapt resource value: 0x7f0800b7
-			public const int container = 2131230903;
+			// aapt resource value: 0x7f0800b6
+			public const int container = 2131230902;
 			
 			// aapt resource value: 0x7f080066
 			public const int contentPanel = 2131230822;
 			
-			// aapt resource value: 0x7f0800b8
-			public const int coordinator = 2131230904;
+			// aapt resource value: 0x7f0800b7
+			public const int coordinator = 2131230903;
 			
 			// aapt resource value: 0x7f08006d
 			public const int custom = 2131230829;
@@ -2604,23 +2607,23 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f080060
 			public const int default_activity_button = 2131230816;
 			
-			// aapt resource value: 0x7f0800b0
-			public const int description = 2131230896;
+			// aapt resource value: 0x7f0800af
+			public const int description = 2131230895;
 			
-			// aapt resource value: 0x7f0800ba
-			public const int design_bottom_sheet = 2131230906;
-			
-			// aapt resource value: 0x7f0800c1
-			public const int design_menu_item_action_area = 2131230913;
+			// aapt resource value: 0x7f0800b9
+			public const int design_bottom_sheet = 2131230905;
 			
 			// aapt resource value: 0x7f0800c0
-			public const int design_menu_item_action_area_stub = 2131230912;
+			public const int design_menu_item_action_area = 2131230912;
 			
 			// aapt resource value: 0x7f0800bf
-			public const int design_menu_item_text = 2131230911;
+			public const int design_menu_item_action_area_stub = 2131230911;
 			
 			// aapt resource value: 0x7f0800be
-			public const int design_navigation_view = 2131230910;
+			public const int design_menu_item_text = 2131230910;
+			
+			// aapt resource value: 0x7f0800bd
+			public const int design_navigation_view = 2131230909;
 			
 			// aapt resource value: 0x7f080020
 			public const int disableHome = 2131230752;
@@ -2706,9 +2709,6 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0800d5
 			public const int info = 2131230933;
 			
-			// aapt resource value: 0x7f0800af
-			public const int ingredientList_addRecipe = 2131230895;
-			
 			// aapt resource value: 0x7f0800ac
 			public const int instructionsCell_addRecipe = 2131230892;
 			
@@ -2727,8 +2727,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f080000
 			public const int item_touch_helper_previous_elevation = 2131230720;
 			
-			// aapt resource value: 0x7f0800b6
-			public const int largeLabel = 2131230902;
+			// aapt resource value: 0x7f0800b5
+			public const int largeLabel = 2131230901;
 			
 			// aapt resource value: 0x7f080049
 			public const int left = 2131230793;
@@ -2802,8 +2802,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0800aa
 			public const int namelabel_addRecipe = 2131230890;
 			
-			// aapt resource value: 0x7f0800bd
-			public const int navigation_header_container = 2131230909;
+			// aapt resource value: 0x7f0800bc
+			public const int navigation_header_container = 2131230908;
 			
 			// aapt resource value: 0x7f08003b
 			public const int never = 2131230779;
@@ -2841,17 +2841,17 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f080007
 			public const int progress_horizontal = 2131230727;
 			
-			// aapt resource value: 0x7f0800b4
-			public const int progressbar_loading = 2131230900;
+			// aapt resource value: 0x7f0800b3
+			public const int progressbar_loading = 2131230899;
 			
 			// aapt resource value: 0x7f080075
 			public const int radio = 2131230837;
 			
-			// aapt resource value: 0x7f0800c6
-			public const int recyclerView = 2131230918;
-			
 			// aapt resource value: 0x7f0800c5
-			public const int refresher = 2131230917;
+			public const int recyclerView = 2131230917;
+			
+			// aapt resource value: 0x7f0800c4
+			public const int refresher = 2131230916;
 			
 			// aapt resource value: 0x7f08008b
 			public const int relativeLayout_addIngredient = 2131230859;
@@ -2949,14 +2949,14 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0800db
 			public const int sliding_tabs = 2131230939;
 			
-			// aapt resource value: 0x7f0800b5
-			public const int smallLabel = 2131230901;
-			
-			// aapt resource value: 0x7f0800bc
-			public const int snackbar_action = 2131230908;
+			// aapt resource value: 0x7f0800b4
+			public const int smallLabel = 2131230900;
 			
 			// aapt resource value: 0x7f0800bb
-			public const int snackbar_text = 2131230907;
+			public const int snackbar_action = 2131230907;
+			
+			// aapt resource value: 0x7f0800ba
+			public const int snackbar_text = 2131230906;
 			
 			// aapt resource value: 0x7f080043
 			public const int snap = 2131230787;
@@ -2964,8 +2964,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f080064
 			public const int spacer = 2131230820;
 			
-			// aapt resource value: 0x7f0800b3
-			public const int spinner = 2131230899;
+			// aapt resource value: 0x7f0800b2
+			public const int spinner = 2131230898;
 			
 			// aapt resource value: 0x7f080008
 			public const int split_action_bar = 2131230728;
@@ -2994,8 +2994,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f08001f
 			public const int tabMode = 2131230751;
 			
-			// aapt resource value: 0x7f0800b1
-			public const int tabs = 2131230897;
+			// aapt resource value: 0x7f0800b0
+			public const int tabs = 2131230896;
 			
 			// aapt resource value: 0x7f080019
 			public const int tag_transition_group = 2131230745;
@@ -3012,11 +3012,11 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f080069
 			public const int textSpacerNoTitle = 2131230825;
 			
-			// aapt resource value: 0x7f0800c3
-			public const int textView1 = 2131230915;
-			
 			// aapt resource value: 0x7f0800c2
-			public const int text_input_password_toggle = 2131230914;
+			public const int textView1 = 2131230914;
+			
+			// aapt resource value: 0x7f0800c1
+			public const int text_input_password_toggle = 2131230913;
 			
 			// aapt resource value: 0x7f080014
 			public const int textinput_counter = 2131230740;
@@ -3054,8 +3054,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f08006e
 			public const int topPanel = 2131230830;
 			
-			// aapt resource value: 0x7f0800b9
-			public const int touch_outside = 2131230905;
+			// aapt resource value: 0x7f0800b8
+			public const int touch_outside = 2131230904;
 			
 			// aapt resource value: 0x7f08000f
 			public const int transition_current_scene = 2131230735;
@@ -3090,8 +3090,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f080016
 			public const int view_offset_helper = 2131230742;
 			
-			// aapt resource value: 0x7f0800b2
-			public const int viewpager = 2131230898;
+			// aapt resource value: 0x7f0800b1
+			public const int viewpager = 2131230897;
 			
 			// aapt resource value: 0x7f0800dd
 			public const int visible = 2131230941;
@@ -3303,82 +3303,88 @@ namespace OnMenu.Droid
 			public const int fragment_about = 2130968623;
 			
 			// aapt resource value: 0x7f040030
-			public const int fragment_browse = 2130968624;
+			public const int fragment_add_ingredient_to_recipe = 2130968624;
 			
 			// aapt resource value: 0x7f040031
-			public const int fragment_myitems = 2130968625;
+			public const int fragment_browse = 2130968625;
 			
 			// aapt resource value: 0x7f040032
-			public const int ingredient_browse = 2130968626;
+			public const int fragment_calendar = 2130968626;
 			
 			// aapt resource value: 0x7f040033
-			public const int item_my_item = 2130968627;
+			public const int fragment_myitems = 2130968627;
 			
 			// aapt resource value: 0x7f040034
-			public const int notification_action = 2130968628;
+			public const int ingredient_browse = 2130968628;
 			
 			// aapt resource value: 0x7f040035
-			public const int notification_action_tombstone = 2130968629;
+			public const int item_my_item = 2130968629;
 			
 			// aapt resource value: 0x7f040036
-			public const int notification_media_action = 2130968630;
+			public const int notification_action = 2130968630;
 			
 			// aapt resource value: 0x7f040037
-			public const int notification_media_cancel_action = 2130968631;
+			public const int notification_action_tombstone = 2130968631;
 			
 			// aapt resource value: 0x7f040038
-			public const int notification_template_big_media = 2130968632;
+			public const int notification_media_action = 2130968632;
 			
 			// aapt resource value: 0x7f040039
-			public const int notification_template_big_media_custom = 2130968633;
+			public const int notification_media_cancel_action = 2130968633;
 			
 			// aapt resource value: 0x7f04003a
-			public const int notification_template_big_media_narrow = 2130968634;
+			public const int notification_template_big_media = 2130968634;
 			
 			// aapt resource value: 0x7f04003b
-			public const int notification_template_big_media_narrow_custom = 2130968635;
+			public const int notification_template_big_media_custom = 2130968635;
 			
 			// aapt resource value: 0x7f04003c
-			public const int notification_template_custom_big = 2130968636;
+			public const int notification_template_big_media_narrow = 2130968636;
 			
 			// aapt resource value: 0x7f04003d
-			public const int notification_template_icon_group = 2130968637;
+			public const int notification_template_big_media_narrow_custom = 2130968637;
 			
 			// aapt resource value: 0x7f04003e
-			public const int notification_template_lines_media = 2130968638;
+			public const int notification_template_custom_big = 2130968638;
 			
 			// aapt resource value: 0x7f04003f
-			public const int notification_template_media = 2130968639;
+			public const int notification_template_icon_group = 2130968639;
 			
 			// aapt resource value: 0x7f040040
-			public const int notification_template_media_custom = 2130968640;
+			public const int notification_template_lines_media = 2130968640;
 			
 			// aapt resource value: 0x7f040041
-			public const int notification_template_part_chronometer = 2130968641;
+			public const int notification_template_media = 2130968641;
 			
 			// aapt resource value: 0x7f040042
-			public const int notification_template_part_time = 2130968642;
+			public const int notification_template_media_custom = 2130968642;
 			
 			// aapt resource value: 0x7f040043
-			public const int select_dialog_item_material = 2130968643;
+			public const int notification_template_part_chronometer = 2130968643;
 			
 			// aapt resource value: 0x7f040044
-			public const int select_dialog_multichoice_material = 2130968644;
+			public const int notification_template_part_time = 2130968644;
 			
 			// aapt resource value: 0x7f040045
-			public const int select_dialog_singlechoice_material = 2130968645;
+			public const int select_dialog_item_material = 2130968645;
 			
 			// aapt resource value: 0x7f040046
-			public const int support_simple_spinner_dropdown_item = 2130968646;
+			public const int select_dialog_multichoice_material = 2130968646;
 			
 			// aapt resource value: 0x7f040047
-			public const int tabs = 2130968647;
+			public const int select_dialog_singlechoice_material = 2130968647;
 			
 			// aapt resource value: 0x7f040048
-			public const int toolbar = 2130968648;
+			public const int support_simple_spinner_dropdown_item = 2130968648;
 			
 			// aapt resource value: 0x7f040049
-			public const int tooltip = 2130968649;
+			public const int tabs = 2130968649;
+			
+			// aapt resource value: 0x7f04004a
+			public const int toolbar = 2130968650;
+			
+			// aapt resource value: 0x7f04004b
+			public const int tooltip = 2130968651;
 			
 			static Layout()
 			{

@@ -84,7 +84,7 @@ namespace OnMenu.Droid
             {
                 case 0: return BrowseIngredientFragment.NewInstance();
                 case 1: return BrowseRecipeFragment.NewInstance();
-                case 2: return BrowseIngredientFragment.NewInstance();
+                case 2: return CalendarFragment.NewInstance();
                 case 3: return AboutFragment.NewInstance();
             }
             return null;

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -116,6 +116,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fragments\AddIngredientToRecipeFragment.cs" />
+    <Compile Include="Fragments\CalendarFragment.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MainApplication.cs" />
     <Compile Include="Activities\AddIngredientsActivity.cs" />
     <Compile Include="Activities\BaseActivity.cs" />
@@ -177,7 +181,14 @@
     <AndroidResource Include="Resources\layout\activity_add_recipe.axml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\values-es\" />
+    <AndroidResource Include="Resources\layout\fragment_add_ingredient_to_recipe.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\fragment_calendar.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="..\OnMenu\OnMenu.projitems" Label="Shared" Condition="Exists('..\OnMenu\OnMenu.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
