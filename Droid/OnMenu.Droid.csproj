@@ -120,6 +120,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\AddRecipeActivity.cs" />
     <Compile Include="Fragments\AddIngredientToRecipeFragment.cs" />
     <Compile Include="Fragments\CalendarFragment.cs">
       <SubType>Code</SubType>
@@ -196,6 +197,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\menu\browse_context_menus.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cancel_icon.png" />
   </ItemGroup>
   <Import Project="..\OnMenu\OnMenu.projitems" Label="Shared" Condition="Exists('..\OnMenu\OnMenu.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

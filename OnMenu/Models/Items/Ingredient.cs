@@ -1,7 +1,4 @@
-﻿using System;
-using Java.Lang;
-
-namespace OnMenu.Models.Items
+﻿namespace OnMenu.Models.Items
 {
     /// <summary>
     /// Model for an Ingredient
