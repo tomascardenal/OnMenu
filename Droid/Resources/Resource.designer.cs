@@ -2766,11 +2766,17 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0800ce
 			public const int media_actions = 2131230926;
 			
-			// aapt resource value: 0x7f0800df
-			public const int menu_addIngredient = 2131230943;
+			// aapt resource value: 0x7f0800e1
+			public const int menu_addIngredient = 2131230945;
+			
+			// aapt resource value: 0x7f0800e2
+			public const int menu_addRecipe = 2131230946;
 			
 			// aapt resource value: 0x7f0800e0
-			public const int menu_addRecipe = 2131230944;
+			public const int menu_deleteItem = 2131230944;
+			
+			// aapt resource value: 0x7f0800df
+			public const int menu_editItem = 2131230943;
 			
 			// aapt resource value: 0x7f0800dc
 			public const int message = 2131230940;
@@ -3400,7 +3406,10 @@ namespace OnMenu.Droid
 		{
 			
 			// aapt resource value: 0x7f0f0000
-			public const int top_menus = 2131689472;
+			public const int browse_context_menus = 2131689472;
+			
+			// aapt resource value: 0x7f0f0001
+			public const int top_menus = 2131689473;
 			
 			static Menu()
 			{

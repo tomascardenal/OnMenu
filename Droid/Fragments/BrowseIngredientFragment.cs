@@ -6,6 +6,8 @@ using Android.Widget;
 using Android.Support.V4.Widget;
 using Android.App;
 using Android.Content;
+using PopupMenu = Android.Support.V7.Widget.PopupMenu;
+using Android.Util;
 
 namespace OnMenu.Droid
 {
@@ -16,6 +18,7 @@ namespace OnMenu.Droid
 
         BrowseIngredientsAdapter adapter;
         SwipeRefreshLayout refresher;
+        PopupMenu contextMenu;
 
         ProgressBar progress;
         public static IngredientsViewModel ViewModel { get; set; }
@@ -43,7 +46,6 @@ namespace OnMenu.Droid
 
             progress = view.FindViewById<ProgressBar>(Resource.Id.progressbar_loading);
             progress.Visibility = ViewStates.Gone;
-
             return view;
         }
 
@@ -53,6 +55,7 @@ namespace OnMenu.Droid
 
             refresher.Refresh += Refresher_Refresh;
             adapter.ItemClick += Adapter_ItemClick;
+            adapter.ItemLongClick += Adapter_ItemLongClick;
 
             if (ViewModel.Ingredients.Count == 0)
                 ViewModel.LoadIngredientsCommand.Execute(null);
@@ -63,6 +66,7 @@ namespace OnMenu.Droid
             base.OnStop();
             refresher.Refresh -= Refresher_Refresh;
             adapter.ItemClick -= Adapter_ItemClick;
+            adapter.ItemLongClick -= Adapter_ItemLongClick;
         }
 
         void Adapter_ItemClick(object sender, RecyclerClickEventArgs e)
@@ -72,6 +76,15 @@ namespace OnMenu.Droid
 
             intent.PutExtra("data", Newtonsoft.Json.JsonConvert.SerializeObject(item));
             Activity.StartActivity(intent);
+        }
+
+        void Adapter_ItemLongClick(object sender, RecyclerClickEventArgs e)
+        {
+            //TODO Edit-Delete context menu
+            BrowseIngredientsAdapter adapter = (BrowseIngredientsAdapter)sender;
+            contextMenu = new PopupMenu(this.Context, adapter.GetView());
+            contextMenu.Inflate(Resource.Menu.browse_context_menus);
+            contextMenu.Show();
         }
 
         void Refresher_Refresh(object sender, EventArgs e)
@@ -90,6 +103,7 @@ namespace OnMenu.Droid
     {
         IngredientsViewModel viewModel;
         Activity activity;
+        IngredientsViewHolder ingredientViewHolder;
 
         public BrowseIngredientsAdapter(Activity activity, IngredientsViewModel viewModel)
         {
@@ -110,8 +124,13 @@ namespace OnMenu.Droid
             var id = Resource.Layout.ingredient_browse;
             ingredientView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
 
-            var vh = new IngredientsViewHolder(ingredientView, OnClick, OnLongClick);
-            return vh;
+            ingredientViewHolder = new IngredientsViewHolder(ingredientView, OnClick, OnLongClick);
+            return ingredientViewHolder;
+        }
+
+        public View GetView()
+        {
+            return ingredientViewHolder.DetailTextView;
         }
 
         // Replace the contents of a view (invoked by the layout manager)
@@ -131,6 +150,7 @@ namespace OnMenu.Droid
     {
         public TextView TextView { get; set; }
         public TextView DetailTextView { get; set; }
+        
 
         public IngredientsViewHolder(View itemView, Action<RecyclerClickEventArgs> clickListener,
                             Action<RecyclerClickEventArgs> longClickListener) : base(itemView)
@@ -140,5 +160,6 @@ namespace OnMenu.Droid
             itemView.Click += (sender, e) => clickListener(new RecyclerClickEventArgs { View = itemView, Position = AdapterPosition });
             itemView.LongClick += (sender, e) => longClickListener(new RecyclerClickEventArgs { View = itemView, Position = AdapterPosition });
         }
+
     }
 }
