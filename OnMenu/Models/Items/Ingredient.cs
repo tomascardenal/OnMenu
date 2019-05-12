@@ -1,4 +1,6 @@
 ﻿using System;
+using Java.Lang;
+
 namespace OnMenu.Models.Items
 {
     /// <summary>
@@ -65,14 +67,14 @@ namespace OnMenu.Models.Items
         /// <param name="measure">The measuring unit for the ingredient.</param>
         /// <param name="allergen">If set to <c>true</c>, the ingredient is an allergen.</param>
         /// <param name="estimatedPrice">Estimated price for the ingredient.</param>
-        public Ingredient(string name, string group, string measure, bool allergen, float estimatedPrice)
+        public Ingredient(string name, string group, string measure, bool allergen, float estimatedPrice):base(name)
         {
-            Name = name;
             Group = group;
             Measure = measure;
             Allergen = allergen;
             EstimatedPrice = estimatedPrice;
             Quantity = 0;
         }
+
     }
 }

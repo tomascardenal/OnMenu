@@ -11,6 +11,8 @@ namespace OnMenu
         public ObservableCollection<Ingredient> Ingredients { get; set; }
         public Command LoadIngredientsCommand { get; set; }
         public Command AddIngredientsCommand { get; set; }
+        public Command DeleteIngredientsCommand { get; set; }
+        public Command UpdateIngredientsCommand { get; set; }
         public IDataStore<Ingredient> IngredientDataStore => ServiceLocator.Instance.Get<IDataStore<Ingredient>>() ?? new IngredientDataStore();
 
 
@@ -20,6 +22,8 @@ namespace OnMenu
             Ingredients = new ObservableCollection<Ingredient>();
             LoadIngredientsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             AddIngredientsCommand = new Command<Ingredient>(async (Ingredient ingredient) => await AddIngredient(ingredient));
+            DeleteIngredientsCommand = new Command<Ingredient>(async (Ingredient ingredient) => await DeleteIngredient(ingredient));
+            UpdateIngredientsCommand = new Command<Ingredient>(async (Ingredient ingredient) => await UpdateIngredient(ingredient));
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -52,6 +56,25 @@ namespace OnMenu
         {
             Ingredients.Add(ingredient);
             await IngredientDataStore.AddItemAsync(ingredient);
+        }
+
+        async Task DeleteIngredient(Ingredient ingredient)
+        {
+            Ingredients.Remove(ingredient);
+            await IngredientDataStore.DeleteItemAsync(ingredient.Id);
+        }
+        async Task UpdateIngredient(Ingredient ingredient)
+        {
+            Ingredient _ingredient = null;
+            foreach(Ingredient ing in Ingredients){
+                if(ing.Id == ingredient.Id)
+                {
+                    _ingredient = ing;
+                }
+            }
+            Ingredients.Remove(_ingredient);
+            Ingredients.Add(ingredient);
+            await IngredientDataStore.UpdateItemAsync(ingredient);
         }
     }
 }

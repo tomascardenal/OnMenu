@@ -17,6 +17,8 @@ namespace OnMenu.Droid
         Toolbar toolbar;
         EditText nameField, groupField, measureField, priceField;
         ToggleButton allergenButton;
+        bool editMode = false;
+        Ingredient editIngredient = null;
 
         public IngredientsViewModel ViewModel { get; set; }
 
@@ -35,9 +37,31 @@ namespace OnMenu.Droid
             priceField = FindViewById<EditText>(Resource.Id.estimatedPriceField_addIngredient);
             allergenButton = FindViewById<ToggleButton>(Resource.Id.toggleAllergen_addIngredient);
 
+            var data = Intent.GetStringExtra("ingredient") ?? null;
+            if (data != null)
+            {
+                editMode = true;
+                editIngredient = Newtonsoft.Json.JsonConvert.DeserializeObject<Ingredient>(data);
+                fillForm();
+
+            }
             saveButton.Click += SaveButton_Click;
         }
 
+        private void fillForm()
+        {
+            nameField.Text = editIngredient.Name;
+            groupField.Text = editIngredient.Group;
+            measureField.Text = editIngredient.Measure;
+            allergenButton.Checked = editIngredient.Allergen;
+            priceField.Text = editIngredient.EstimatedPrice.ToString();
+        }
+
+        public void SetEditIngredient(Ingredient ingredient)
+        {
+            editMode = true;
+            editIngredient = ingredient;
+        }
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.top_menus, menu);
@@ -51,16 +75,27 @@ namespace OnMenu.Droid
 
         void SaveButton_Click(object sender, EventArgs e)
         {
-            var ingredient = new Ingredient
-            (
-                nameField.Text,
-                groupField.Text,
-                measureField.Text,
-                allergenButton.Checked,
-                float.Parse(priceField.Text)
-            );
-            ViewModel.AddIngredientsCommand.Execute(ingredient);
-
+            if (editMode)
+            {
+                editIngredient.Name = nameField.Text;
+                editIngredient.Group = groupField.Text;
+                editIngredient.Measure = measureField.Text;
+                editIngredient.Allergen = allergenButton.Checked;
+                editIngredient.EstimatedPrice = float.Parse(priceField.Text);
+                ViewModel.UpdateIngredientsCommand.Execute(editIngredient);
+            }
+            else
+            {
+                Ingredient ingredient = new Ingredient
+                (
+                    nameField.Text,
+                    groupField.Text,
+                    measureField.Text,
+                    allergenButton.Checked,
+                    float.Parse(priceField.Text)
+                );
+                ViewModel.AddIngredientsCommand.Execute(ingredient);
+            }
             Finish();
         }
     }

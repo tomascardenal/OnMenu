@@ -19,6 +19,7 @@ namespace OnMenu.Droid
         BrowseIngredientsAdapter adapter;
         SwipeRefreshLayout refresher;
         PopupMenu contextMenu;
+        int selectedItem;
 
         ProgressBar progress;
         public static IngredientsViewModel ViewModel { get; set; }
@@ -81,10 +82,29 @@ namespace OnMenu.Droid
         void Adapter_ItemLongClick(object sender, RecyclerClickEventArgs e)
         {
             //TODO Edit-Delete context menu
+            selectedItem = e.Position;
             BrowseIngredientsAdapter adapter = (BrowseIngredientsAdapter)sender;
-            contextMenu = new PopupMenu(this.Context, adapter.GetView());
+            contextMenu = new PopupMenu(this.Context, e.View);
             contextMenu.Inflate(Resource.Menu.browse_context_menus);
+            contextMenu.MenuItemClick += OnContextMenuItemClick;
             contextMenu.Show();
+        }
+
+        void OnContextMenuItemClick(object sender, PopupMenu.MenuItemClickEventArgs e)
+        {
+            switch (e.Item.ItemId)
+            {
+                case Resource.Id.menu_deleteItem:
+                    ViewModel.DeleteIngredientsCommand.Execute(ViewModel.Ingredients[selectedItem]);
+                    adapter.NotifyItemRemoved(selectedItem);
+                    break;
+                case Resource.Id.menu_editItem:
+                    Intent intent = new Intent(Activity, typeof(AddIngredientsActivity));
+                    intent.PutExtra("ingredient", Newtonsoft.Json.JsonConvert.SerializeObject(ViewModel.Ingredients[selectedItem]));
+                    Activity.StartActivity(intent);
+                    break;
+            }
+
         }
 
         void Refresher_Refresh(object sender, EventArgs e)
@@ -110,6 +130,7 @@ namespace OnMenu.Droid
             this.viewModel = viewModel;
             this.activity = activity;
 
+    
             this.viewModel.Ingredients.CollectionChanged += (sender, args) =>
             {
                 this.activity.RunOnUiThread(NotifyDataSetChanged);
@@ -130,7 +151,7 @@ namespace OnMenu.Droid
 
         public View GetView()
         {
-            return ingredientViewHolder.DetailTextView;
+            return ingredientViewHolder.TextView;
         }
 
         // Replace the contents of a view (invoked by the layout manager)

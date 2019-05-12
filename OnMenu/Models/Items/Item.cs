@@ -15,5 +15,11 @@ namespace OnMenu.Models.Items
         /// </summary>
         /// <value>The item's name.</value>
         public string Name { get => name; set => name = value; }
+
+        public Item(string name)
+        {
+            Id = Guid.NewGuid().ToString();
+            Name = name;
+        }
     }
 }

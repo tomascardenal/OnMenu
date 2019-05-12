@@ -67,9 +67,8 @@ namespace OnMenu.Models.Items
         /// <param name="instructions">The instructions to follow on this recipe.</param>
         /// <param name="ingredients">List of ingredients.</param>
         /// <param name="rating">The recipe's name.</param>
-        public Recipe(string name, string instructions, List<Recipe> ingredients, int rating)
+        public Recipe(string name, string instructions, List<Recipe> ingredients, int rating):base(name)
         {
-            Name = name;
             Instructions = instructions;
             Ingredients = ingredients;
             Rating = rating;

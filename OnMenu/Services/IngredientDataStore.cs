@@ -36,24 +36,24 @@ namespace OnMenu
 
         public async Task<bool> UpdateItemAsync(Ingredient ingredient)
         {
-            var _ingredient = ingredients.Where((Ingredient arg) => arg.Name == ingredient.Name).FirstOrDefault();
+            var _ingredient = ingredients.Where((Ingredient arg) => arg.Id == ingredient.Id).FirstOrDefault();
             ingredients.Remove(_ingredient);
             ingredients.Add(ingredient);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(string name)
+        public async Task<bool> DeleteItemAsync(string id)
         {
-            var _ingredient = ingredients.Where((Ingredient arg) => arg.Name == name).FirstOrDefault();
+            var _ingredient = ingredients.Where((Ingredient arg) => arg.Id == id).FirstOrDefault();
             ingredients.Remove(_ingredient);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<Ingredient> GetItemAsync(string name)
+        public async Task<Ingredient> GetItemAsync(string id)
         {
-            return await Task.FromResult(ingredients.FirstOrDefault(s => s.Name == name));
+            return await Task.FromResult(ingredients.FirstOrDefault(s => s.Id == id));
         }
 
         public async Task<IEnumerable<Ingredient>> GetItemsAsync(bool forceRefresh = false)
