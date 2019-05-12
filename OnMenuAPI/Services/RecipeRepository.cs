@@ -7,31 +7,31 @@ using System.Threading.Tasks;
 
 namespace OnMenuAPI.Services
 {
-    public class ItemRepository : IItemRepository
+    public class RecipeRepository : IItemRepository<Recipe>
     {
-        public virtual IEnumerable<Item> Index => throw new NotImplementedException();
+        public IEnumerable<Recipe> Index => throw new NotImplementedException();
 
-        public virtual void Delete(string id)
+        public void Delete(string id)
         {
             throw new NotImplementedException();
         }
 
-        public virtual bool DoesItemExist(string id)
+        public bool DoesItemExist(string id)
         {
             throw new NotImplementedException();
         }
 
-        public virtual Item Find(string id)
+        public Recipe Find(string id)
         {
             throw new NotImplementedException();
         }
 
-        public virtual void Insert(Item item)
+        public void Insert(Recipe item)
         {
             throw new NotImplementedException();
         }
 
-        public virtual void Update(Item item)
+        public void Update(Recipe item)
         {
             throw new NotImplementedException();
         }

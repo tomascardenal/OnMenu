@@ -1,4 +1,5 @@
-﻿using OnMenuAPI.Models.Items;
+﻿using OnMenuAPI.Interfaces;
+using OnMenuAPI.Models.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,31 +7,31 @@ using System.Threading.Tasks;
 
 namespace OnMenuAPI.Services
 {
-    public class IngredientRepository : ItemRepository
+    public class IngredientRepository : IItemRepository<Ingredient>
     {
-        public override IEnumerable<Item> Index => throw new NotImplementedException();
+        public  IEnumerable<Ingredient> Index => throw new NotImplementedException();
 
-        public override void Delete(string id)
+        public  void Delete(string id)
         {
             throw new NotImplementedException();
         }
 
-        public override bool DoesItemExist(string id)
+        public bool DoesItemExist(string id)
         {
             throw new NotImplementedException();
         }
 
-        public override Item Find(string id)
+        public Ingredient Find(string id)
         {
             throw new NotImplementedException();
         }
 
-        public override void Insert(Item item)
+        public  void Insert(Ingredient item)
         {
             throw new NotImplementedException();
         }
 
-        public override void Update(Item item)
+        public void Update(Ingredient item)
         {
             throw new NotImplementedException();
         }

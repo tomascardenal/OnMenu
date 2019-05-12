@@ -70,11 +70,15 @@ namespace OnMenu
                 if(ing.Id == ingredient.Id)
                 {
                     _ingredient = ing;
+                    break;
                 }
             }
-            Ingredients.Remove(_ingredient);
-            Ingredients.Add(ingredient);
-            await IngredientDataStore.UpdateItemAsync(ingredient);
+            if (_ingredient != null)
+            {
+                Ingredients.Remove(_ingredient);
+                Ingredients.Add(ingredient);
+                await IngredientDataStore.UpdateItemAsync(ingredient);
+            }
         }
     }
 }

@@ -53,6 +53,32 @@ namespace OnMenu
             Recipes.Add(recipe);
             await RecipeDataStore.AddItemAsync(recipe);
         }
+
+        async Task DeleteRecipe(Recipe recipe)
+        {
+            Recipes.Remove(recipe);
+            await RecipeDataStore.DeleteItemAsync(recipe.Id);
+        }
+
+        async Task UpdateRecipe(Recipe recipe)
+        {
+            Recipe _recipe = null;
+            foreach(Recipe rec in Recipes)
+            {
+                if(rec.Id == recipe.Id)
+                {
+                    _recipe = rec;
+                    break;
+                }
+            }
+            if (_recipe != null)
+            {
+                Recipes.Remove(_recipe);
+                Recipes.Add(recipe);
+                await RecipeDataStore.UpdateItemAsync(recipe);
+            }
+
+        }
     }
 }
 

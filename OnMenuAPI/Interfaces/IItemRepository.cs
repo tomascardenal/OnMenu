@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace OnMenuAPI.Interfaces
 {
-    public interface IItemRepository
+    public interface IItemRepository<T>
     {
         bool DoesItemExist(string id);
-        IEnumerable<Item> Index { get; }
-        Item Find(string id);
-        void Insert(Item item);
-        void Update(Item item);
+        IEnumerable<T> Index { get; }
+        T Find(string id);
+        void Insert(T item);
+        void Update(T item);
         void Delete(string id);
     }
 }
