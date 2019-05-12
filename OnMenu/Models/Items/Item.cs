@@ -1,10 +1,14 @@
-﻿using System;
+﻿using SQLite;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading.Tasks;
 
 namespace OnMenu.Models.Items
-{
+{   
     public class Item 
     {
-        public string Id { get; set; }
+        [PrimaryKey,AutoIncrement]
+        public int Id { get; set; }
 
         /// <summary>
         /// The item's name
@@ -18,8 +22,14 @@ namespace OnMenu.Models.Items
 
         public Item(string name)
         {
-            Id = Guid.NewGuid().ToString();
             Name = name;
+        }
+
+        public Item() {}
+
+        public static explicit operator Item(Task<Ingredient> v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -73,5 +73,7 @@
             Quantity = 0;
         }
 
+        public Ingredient() { }
+
     }
 }

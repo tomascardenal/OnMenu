@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SQLite;
 
 namespace OnMenu.Models.Items
 {
@@ -14,22 +15,14 @@ namespace OnMenu.Models.Items
         /// <summary>
         /// List of ingredients on this recipe
         /// </summary>
-        List<Recipe> ingredients;
-        /// <summary>
-        /// Gets or sets the list of ingredients on this recipe
-        /// </summary>
-        /// <value>The list of ingredients.</value>
-        public List<Recipe> Ingredients { get => ingredients; set => ingredients = value; }
+        
+        //public List<Recipe> Ingredients { get; set; }
+        //TODO implement DB compatible version
 
         /// <summary>
         /// The instructions to follow on this recipe
         /// </summary>
-        string instructions;
-        /// <summary>
-        /// Gets or sets the instructions.
-        /// </summary>
-        /// <value>The instructions to follow.</value>
-        public string Instructions { get => instructions; set => instructions = value; }
+        public string Instructions { get; set; }
 
         /// <summary>
         /// This recipe's rating
@@ -70,9 +63,10 @@ namespace OnMenu.Models.Items
         public Recipe(string name, string instructions, List<Recipe> ingredients, int rating):base(name)
         {
             Instructions = instructions;
-            Ingredients = ingredients;
+          //  Ingredients = ingredients;
             Rating = rating;
         }
 
+        public Recipe() { }
     }
 }

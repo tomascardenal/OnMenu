@@ -9,6 +9,7 @@
     <Import_RootNamespace>OnMenu</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Data\ItemDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Command.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ServiceLocator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Constants.cs" />
@@ -17,7 +18,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Items\Recipe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Login\Token.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Login\User.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\CloudDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\RecipeDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IngredientDataStore.cs" />

@@ -43,7 +43,7 @@ namespace OnMenu
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteItemAsync(int id)
         {
             var _ingredient = ingredients.Where((Ingredient arg) => arg.Id == id).FirstOrDefault();
             ingredients.Remove(_ingredient);
@@ -51,7 +51,7 @@ namespace OnMenu
             return await Task.FromResult(true);
         }
 
-        public async Task<Ingredient> GetItemAsync(string id)
+        public async Task<Ingredient> GetItemAsync(int id)
         {
             return await Task.FromResult(ingredients.FirstOrDefault(s => s.Id == id));
         }
