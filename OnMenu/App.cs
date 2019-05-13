@@ -8,11 +8,22 @@ using SQLite;
 
 namespace OnMenu
 {
+    /// <summary>
+    /// Main app
+    /// </summary>
     public class App
     {
-        public static bool UseMockDataStore = true;
+        /// <summary>
+        /// Whether local storage should be used
+        /// </summary>
         public static bool UseLocalStorage = true;
+        /// <summary>
+        /// The mock backend url
+        /// </summary>
         public static string BackendUrl = "http://localhost:5000";
+        /// <summary>
+        /// Database controller
+        /// </summary>
         private static ItemDatabase _db;
         public static ItemDatabase DB
         {
@@ -26,6 +37,9 @@ namespace OnMenu
             }
         }
 
+        /// <summary>
+        /// Initializes the App
+        /// </summary>
         public static void Initialize()
         {
             ServiceLocator.Instance.Register<IDataStore<Ingredient>, IngredientDataStore>();

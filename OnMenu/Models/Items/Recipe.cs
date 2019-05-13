@@ -65,6 +65,9 @@ namespace OnMenu.Models.Items
             Rating = rating;
         }
 
-        public Recipe() { }
+        /// <summary>
+        /// Empty constructor (Used by sqlite-net-pcl)
+        /// </summary>
+        public Recipe():base() { }
     }
 }

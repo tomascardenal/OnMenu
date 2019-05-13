@@ -3,6 +3,10 @@ using System.Threading.Tasks;
 
 namespace OnMenu
 {
+    /// <summary>
+    /// Interface for a DataStore
+    /// </summary>
+    /// <typeparam name="T">Type of the datastore</typeparam>
     public interface IDataStore<T>
     {
         Task<bool> AddItemAsync(T item);

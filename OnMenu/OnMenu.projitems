@@ -27,8 +27,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\IngredientDetailViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\IngredientsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\RecipeDetailViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\RecipeViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ItemDetailViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\Login\" />

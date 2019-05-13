@@ -2,7 +2,6 @@
 {
     /// <summary>
     /// Model for an Ingredient
-    /// by: Tomás Cardenal López
     /// </summary>
     public class Ingredient : Item
     {
@@ -73,7 +72,10 @@
             Quantity = 0;
         }
 
-        public Ingredient() { }
+        /// <summary>
+        /// Empty constructor (Used by sqlite-net-pcl)
+        /// </summary>
+        public Ingredient():base() { }
 
     }
 }
