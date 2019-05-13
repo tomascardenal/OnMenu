@@ -1,12 +1,10 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.OS;
-using Android.Widget;
 using Android.Support.Design.Widget;
-using OnMenu.Models;
 using Android.Views;
+using Android.Widget;
 using OnMenu.Models.Items;
+using System;
 
 namespace OnMenu.Droid
 {
@@ -14,7 +12,6 @@ namespace OnMenu.Droid
     public class AddIngredientsActivity : Activity
     {
         FloatingActionButton saveButton;
-        Toolbar toolbar;
         EditText nameField, groupField, measureField, priceField;
         ToggleButton allergenButton;
         bool editMode = false;
@@ -29,8 +26,8 @@ namespace OnMenu.Droid
             ViewModel = BrowseIngredientFragment.ViewModel;
 
             SetContentView(Resource.Layout.activity_add_ingredient);
-            saveButton = FindViewById<FloatingActionButton>(Resource.Id.save_button);
 
+            saveButton = FindViewById<FloatingActionButton>(Resource.Id.save_button_addIngredient);
             nameField = FindViewById<EditText>(Resource.Id.nameField_addIngredient);
             groupField = FindViewById<EditText>(Resource.Id.groupField_addIngredient);
             measureField = FindViewById<EditText>(Resource.Id.measureField_addIngredient);
@@ -57,11 +54,6 @@ namespace OnMenu.Droid
             priceField.Text = editIngredient.EstimatedPrice.ToString();
         }
 
-        public void SetEditIngredient(Ingredient ingredient)
-        {
-            editMode = true;
-            editIngredient = ingredient;
-        }
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.top_menus, menu);

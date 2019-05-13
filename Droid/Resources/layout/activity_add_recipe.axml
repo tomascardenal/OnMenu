@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/relativeLayout_addRecipe"
@@ -17,7 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/toolbar_addRecipe"
-            android:title="@string/title_add_recipe" />
+            android:title="@string/title_add_recipe">
+        </Toolbar>
     </android.support.design.widget.CollapsingToolbarLayout>
     <ScrollView
         android:layout_below="@id/collapsingToolbarLayout_addRecipe"
@@ -30,7 +32,7 @@
             android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/nameCell_addIngredient"
+            android:id="@+id/nameCell_addRecipe"
             android:padding="10dp">
             <LinearLayout
                 android:orientation="vertical"
@@ -71,12 +73,20 @@
                     />
             </LinearLayout>
 
-
+        <android.support.design.widget.FloatingActionButton
+        android:id="@+id/save_button_addRecipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_save"
+        app:elevation="4dp"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="@dimen/fab_margin" />
         </LinearLayout>
     </ScrollView>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/addrecipe_btnAddIngredient"
+        android:id="@+id/addIngredientToRecipe_addRecipe"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

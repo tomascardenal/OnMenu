@@ -73,7 +73,7 @@ namespace OnMenu.Droid
         void Adapter_ItemClick(object sender, RecyclerClickEventArgs e)
         {
             var item = ViewModel.Ingredients[e.Position];
-            var intent = new Intent(Activity, typeof(BrowseItemDetailActivity));
+            var intent = new Intent(Activity, typeof(BrowseIngredientDetailActivity));
 
             intent.PutExtra("data", Newtonsoft.Json.JsonConvert.SerializeObject(item));
             Activity.StartActivity(intent);

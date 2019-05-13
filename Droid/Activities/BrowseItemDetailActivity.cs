@@ -7,9 +7,9 @@ using OnMenu.Models.Items;
 
 namespace OnMenu.Droid
 {
-    [Activity(Label = "Details", ParentActivity = typeof(MainActivity))]
+    [Activity(Label = "Ingredient Details", ParentActivity = typeof(MainActivity))]
     [MetaData("android.support.PARENT_ACTIVITY", Value = ".MainActivity")]
-    public class BrowseItemDetailActivity : BaseActivity
+    public class BrowseIngredientDetailActivity : BaseActivity
     {
         /// <summary>
         /// Specify the layout to inflace
@@ -23,12 +23,12 @@ namespace OnMenu.Droid
 
             var data = Intent.GetStringExtra("data");
 
-            var item = Newtonsoft.Json.JsonConvert.DeserializeObject<Ingredient>(data);
-            viewModel = new IngredientDetailViewModel(item);
+            Ingredient ingredient = Newtonsoft.Json.JsonConvert.DeserializeObject<Ingredient>(data);
+            viewModel = new IngredientDetailViewModel(ingredient);
 
-            FindViewById<TextView>(Resource.Id.description).Text = item.Name;
+            FindViewById<TextView>(Resource.Id.description).Text = ingredient.Name;
 
-            SupportActionBar.Title = item.Name;
+            SupportActionBar.Title = ingredient.Name;
         }
 
         protected override void OnStart()

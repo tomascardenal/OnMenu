@@ -1,112 +1,143 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/relativeLayout_addIngredient" android:minWidth="25px" android:minHeight="25px">
-    <android.support.design.widget.CollapsingToolbarLayout android:id="@+id/collapsingToolbarLayout_addIngredient" android:layout_width="match_parent" android:layout_height="60dp">
-        <Toolbar android:minHeight="25px" android:background="?android:attr/colorPrimary" android:minWidth="25px" android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/toolbar_addIngredient" android:title="@string/title_add_ingredient" />
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relativeLayout_addIngredient"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <android.support.design.widget.CollapsingToolbarLayout
+        android:id="@+id/collapsingToolbarLayout_addIngredient"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <Toolbar
+            android:minHeight="25px"
+            android:background="?android:attr/colorPrimary"
+            android:minWidth="25px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/toolbar_addIngredient"
+            android:title="@string/title_add_ingredient" />
     </android.support.design.widget.CollapsingToolbarLayout>
-    <ScrollView android:layout_below="@id/collapsingToolbarLayout_addIngredient" android:layout_width="match_parent" android:layout_height="wrap_content">
-    <LinearLayout android:orientation="vertical" android:minWidth="25px" android:minHeight="25px" android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/linearLayout_addIngredient">
+    <ScrollView
+        android:layout_below="@id/collapsingToolbarLayout_addIngredient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <LinearLayout
             android:orientation="vertical"
             android:minWidth="25px"
             android:minHeight="25px"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/nameCell_addIngredient"
-            android:padding="10dp">
-            <TextView
-                android:text="@string/addingredient_name"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/namelabel_addIngredient"/>
-            <EditText
+            android:layout_height="match_parent"
+            android:id="@+id/linearLayout_addIngredient">
+            <LinearLayout
+                android:orientation="vertical"
+                android:minWidth="25px"
+                android:minHeight="25px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/nameField_addIngredient" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/groupCell_addIngredient"
-            android:padding="10dp">
+                android:id="@+id/nameCell_addIngredient"
+                android:padding="10dp">
                 <TextView
-                android:text="@string/addingredient_group"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/groupLabel_addIngredient"/>
-            <EditText
+                    android:text="@string/addingredient_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/namelabel_addIngredient"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nameField_addIngredient" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:minWidth="25px"
+                android:minHeight="25px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/groupField_addIngredient" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal" 
-            android:minWidth="25px" 
-            android:minHeight="25px" 
-            android:layout_width="match_parent" 
-            android:layout_height="wrap_content" 
-            android:id="@+id/measureCell_addIngredient"
-            android:padding="10dp">
-            <TextView
-                android:text="@string/addingredient_measure"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/measureLabel_addIngredient"
-                android:textAlignment="gravity"
-                android:gravity="center"/>
-            <EditText
+                android:id="@+id/groupCell_addIngredient"
+                android:padding="10dp">
+                <TextView
+                    android:text="@string/addingredient_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/groupLabel_addIngredient"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/groupField_addIngredient" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/measureField_addIngredient" />
-        </LinearLayout>
-        <LinearLayout 
-            android:orientation="horizontal" 
-            android:minWidth="25px" 
-            android:minHeight="25px" 
-            android:layout_width="match_parent" 
-            android:layout_height="wrap_content" 
-            android:id="@+id/allergenCell_addIngredient"
-            android:padding="10dp">
-            <TextView
-                android:text="@string/addingredient_allergen"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/allergenLabel_addIngredient"
-                android:textAlignment="gravity"
-                android:gravity="center"/>
-            <ToggleButton
-                android:id="@+id/toggleAllergen_addIngredient"
+                android:id="@+id/measureCell_addIngredient"
+                android:padding="10dp">
+                <TextView
+                    android:text="@string/addingredient_measure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/measureLabel_addIngredient"
+                    android:textAlignment="gravity"
+                    android:gravity="center"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/measureField_addIngredient" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textOn="@android:string/yes"
-                android:textOff="@android:string/no"
+                android:layout_height="wrap_content"
+                android:id="@+id/allergenCell_addIngredient"
+                android:padding="10dp">
+                <TextView
+                    android:text="@string/addingredient_allergen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/allergenLabel_addIngredient"
+                    android:textAlignment="gravity"
+                    android:gravity="center"/>
+                <ToggleButton
+                    android:id="@+id/toggleAllergen_addIngredient"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textOn="@android:string/yes"
+                    android:textOff="@android:string/no"
                 />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/estimatedPriceCell_addIngredient"
-            android:padding="10dp">
-            <TextView
-                android:text="@string/addingredient_estimatedprice"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/estimatedPriceLabel_addIngredient"
-                android:textAlignment="gravity"
-                android:gravity="center"/>
-            <EditText
-                android:inputType="numberDecimal"
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/estimatedPriceField_addIngredient" />
-        </LinearLayout>
-            <android.support.design.widget.FloatingActionButton android:id="@+id/save_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_save" android:layout_gravity="bottom|right" android:layout_margin="@dimen/fab_margin" />
+                android:layout_height="wrap_content"
+                android:id="@+id/estimatedPriceCell_addIngredient"
+                android:padding="10dp">
+                <TextView
+                    android:text="@string/addingredient_estimatedprice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/estimatedPriceLabel_addIngredient"
+                    android:textAlignment="gravity"
+                    android:gravity="center"/>
+                <EditText
+                    android:inputType="numberDecimal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/estimatedPriceField_addIngredient" />
+            </LinearLayout>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/save_button_addIngredient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_save"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="@dimen/fab_margin" />
 
-    </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 </RelativeLayout>

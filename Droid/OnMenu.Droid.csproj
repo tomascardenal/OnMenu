@@ -141,6 +141,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\BrowseRecipeDetailActivity.cs" />
     <Compile Include="Activities\AddRecipeActivity.cs" />
     <Compile Include="Fragments\AddIngredientToRecipeFragment.cs" />
     <Compile Include="Fragments\CalendarFragment.cs">
@@ -221,6 +222,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\cancel_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_recipe_details.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="..\OnMenu\OnMenu.projitems" Label="Shared" Condition="Exists('..\OnMenu\OnMenu.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
