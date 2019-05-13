@@ -24,17 +24,27 @@ namespace OnMenu
         /// </summary>
         public IngredientDataStore()
         {
-            ingredients = new List<Ingredient>();
-            var _ingredients = new List<Ingredient>
-            {
-                new Ingredient ( "Rice", "Cereals", "g",  true, 0.50f),
-                new Ingredient ( "Egg", "Protein", "units",  true, 1.0f),
-            };
 
-            foreach (Ingredient ingredient in _ingredients)
+            App.DB.GetIngredientsAsync();
+            if (App.DB.IngredientList != null && App.DB.IngredientList.Count != 0)
             {
-                ingredients.Add(ingredient);
+                ingredients = App.DB.IngredientList;
             }
+            else
+            {
+                ingredients = new List<Ingredient>();
+                var _ingredients = new List<Ingredient>
+                {
+                        new Ingredient ( "Rice", "Cereals", "g",  true, 0.50f),
+                        new Ingredient ( "Egg", "Protein", "units",  true, 1.0f),
+                };
+                foreach (Ingredient ingredient in _ingredients)
+                {
+                    App.DB.SaveIngredientAsync(ingredient);
+                    ingredients.Add(ingredient);
+                }
+            }
+
         }
 
         /// <summary>

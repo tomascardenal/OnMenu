@@ -81,7 +81,6 @@ namespace OnMenu.Droid
 
         void Adapter_ItemLongClick(object sender, RecyclerClickEventArgs e)
         {
-            //TODO Edit-Delete context menu
             selectedItem = e.Position;
             BrowseIngredientsAdapter adapter = (BrowseIngredientsAdapter)sender;
             contextMenu = new PopupMenu(this.Context, e.View);

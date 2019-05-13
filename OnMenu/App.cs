@@ -49,6 +49,11 @@ namespace OnMenu
             {
                 File.Create(dbPath);
             }
+            else
+            {
+                File.Delete(dbPath);
+                File.Create(dbPath);
+            }
             _db = new ItemDatabase(dbPath);
             
         }
