@@ -10,7 +10,6 @@ namespace OnMenu.Data
     public class ItemDatabase
     {
         readonly SQLiteAsyncConnection _database;
-
         public ItemDatabase(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
@@ -71,7 +70,7 @@ namespace OnMenu.Data
             }
         }
 
-        public Task<int> DeleteeRecipeAsync(Recipe recipe)
+        public Task<int> DeleteRecipeAsync(Recipe recipe)
         {
             return _database.DeleteAsync<Recipe>(recipe);
         }

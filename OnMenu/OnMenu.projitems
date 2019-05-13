@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Data\ItemDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Command.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ItemParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ServiceLocator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Items\Ingredient.cs" />

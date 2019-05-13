@@ -11,13 +11,11 @@ namespace OnMenu.Models.Items
     public class Recipe : Item
     {
       
-
         /// <summary>
-        /// List of ingredients on this recipe
+        /// List of ingredients on this recipe, represented as the ingredient ID's separated by commas
+        /// <see cref="Helpers.ItemParser"/>
         /// </summary>
-        
-        //public List<Recipe> Ingredients { get; set; }
-        //TODO implement DB compatible version
+        public string Ingredients { get; set; }
 
         /// <summary>
         /// The instructions to follow on this recipe

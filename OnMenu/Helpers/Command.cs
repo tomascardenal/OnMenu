@@ -3,6 +3,10 @@ using System.Windows.Input;
 
 namespace OnMenu
 {
+    /// <summary>
+    /// Encapsulates an action
+    /// </summary>
+    /// <typeparam name="T">Type of the parameter of the command</typeparam>
     public sealed class Command<T> : Command
     {
         public Command(Action<T> execute) : base(o => execute((T)o))
