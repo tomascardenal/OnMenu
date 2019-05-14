@@ -2511,8 +2511,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f080027
 			public const int add = 2131230759;
 			
-			// aapt resource value: 0x7f0800b5
-			public const int addIngredientToRecipe_addRecipe = 2131230901;
+			// aapt resource value: 0x7f0800b4
+			public const int addIngredientToRecipe_addRecipe = 2131230900;
 			
 			// aapt resource value: 0x7f080070
 			public const int alertTitle = 2131230832;
@@ -2904,8 +2904,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f08009e
 			public const int save_button_addIngredient = 2131230878;
 			
-			// aapt resource value: 0x7f0800b4
-			public const int save_button_addRecipe = 2131230900;
+			// aapt resource value: 0x7f0800b5
+			public const int save_button_addRecipe = 2131230901;
 			
 			// aapt resource value: 0x7f08000c
 			public const int save_image_matrix = 2131230732;

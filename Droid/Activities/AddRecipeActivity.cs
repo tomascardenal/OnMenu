@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -70,7 +71,7 @@ namespace OnMenu.Droid.Activities
         /// <summary>
         /// List of arrays for the listview
         /// </summary>
-        List<Ingredient> AddedIngredients;
+        ObservableCollection<Ingredient> AddedIngredients;
 
         /// <summary>
         /// Handles the actions to do when this activity is created
@@ -83,7 +84,7 @@ namespace OnMenu.Droid.Activities
             IngViewModel = BrowseIngredientFragment.ViewModel;
             RecViewModel = BrowseRecipeFragment.ViewModel;
             ingredientNames = IngViewModel.Ingredients.Select(ingredient => ingredient.Name).ToArray();
-            AddedIngredients = new List<Ingredient>();
+            AddedIngredients = new ObservableCollection<Ingredient>();
             if (IngViewModel.Ingredients!=null && IngViewModel.Ingredients.Count > 0)
             {
                 AddedIngredients.Add(IngViewModel.Ingredients[0]);
@@ -183,10 +184,11 @@ namespace OnMenu.Droid.Activities
         /// <summary>
         /// List of ingredients 
         /// </summary>
-        List<Ingredient> ingredientList;
+        ObservableCollection<Ingredient> ingredientList;
         RecipeIngredientsViewHolder holder;
 
         int Position = 0;
+        ViewGroup Parent;
 
         /// <summary>
         /// Returns an item from a position
@@ -212,7 +214,7 @@ namespace OnMenu.Droid.Activities
             }
         }
         
-        public RecipeIngredientsAdapter(List<Ingredient> repeaterList)
+        public RecipeIngredientsAdapter(ObservableCollection<Ingredient> repeaterList)
         {
             ingredientList = repeaterList;
         }
@@ -225,6 +227,7 @@ namespace OnMenu.Droid.Activities
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
+            Parent = parent;
             var view = convertView;
             if (view == null)
             {
@@ -241,8 +244,8 @@ namespace OnMenu.Droid.Activities
 
         private void RemoveIngredientBtn_Click(object sender, EventArgs e)
         {
-            //TODO make an ingredient be removed
-            //ingredientList.RemoveAt(Position); ;
+            //TODO force an ingredient to be removed (Maybe implementing listener up or removing ingredients from normal buttons?
+            ingredientList.RemoveAt(Position);
         }
     }
 

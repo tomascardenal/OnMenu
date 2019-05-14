@@ -21,11 +21,12 @@
             android:title="@string/title_add_recipe">
         </Toolbar>
     </android.support.design.widget.CollapsingToolbarLayout>
-    <ScrollView
+    <LinearLayout
         android:layout_below="@id/collapsingToolbarLayout_addRecipe"
         android:id="@+id/scrollView_addRecipe"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
         <LinearLayout
             android:orientation="vertical"
             android:minWidth="25px"
@@ -33,82 +34,75 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/nameCell_addRecipe"
-            android:padding="10dp">
-            <LinearLayout
-                android:orientation="vertical"
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/nameCell_addRecipe"
-                android:padding="10dp">
-                <TextView
-                    android:text="@string/addrecipe_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/namelabel_addRecipe"/>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/nameField_addRecipe"/>
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/instructionsCell_addRecipe"
-                android:padding="10dp">
-                <TextView
-                    android:text="@string/addrecipe_instructions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/instructionslabel_addRecipe"/>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/instructionsField_addRecipe"
-                    android:lines="5"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/ingredientsCell_addRecipe"
-                android:padding="10dp">
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/ingredientSpinner_addRecipe"/>
-                <TextView
-                    android:text="@string/addrecipe_ingredientList"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/ingredientLabel_addRecipe"/>
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:id="@+id/listviewAddIngredients_addRecipe"/>
-            </LinearLayout>
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/save_button_addRecipe"
+            android:padding="15dp">
+            <TextView
+                android:text="@string/addrecipe_name"
                 android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/namelabel_addRecipe"/>
+            <EditText
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_save"
-                app:elevation="4dp"
-                android:layout_gravity="bottom|right"
-                android:layout_margin="@dimen/fab_margin" />
+                android:id="@+id/nameField_addRecipe"/>
         </LinearLayout>
-    </ScrollView>
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/instructionsCell_addRecipe"
+            android:padding="15dp">
+            <TextView
+                android:text="@string/addrecipe_instructions"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/instructionslabel_addRecipe"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/instructionsField_addRecipe"
+                android:lines="5"
+                    />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ingredientsCell_addRecipe"
+            android:padding="15dp">
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ingredientSpinner_addRecipe"/>
+            <TextView
+                android:text="@string/addrecipe_ingredientList"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/ingredientLabel_addRecipe"/>
+        </LinearLayout>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/listviewAddIngredients_addRecipe"
+            android:padding="15dp"
+        />
+    </LinearLayout>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/addrecipe_btnAddIngredient"
         android:id="@+id/addIngredientToRecipe_addRecipe"
         android:layout_alignParentBottom="true"/>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/save_button_addRecipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_save"
+        app:elevation="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/fab_margin" />
 </RelativeLayout>
