@@ -13,7 +13,7 @@ https://conveyor.cloud/
 - Conexión a base local [X]
 - Conexión a API [ ]
 - Generación automática de menús [ ]
-- Traducciones [ ]
+- Traducciones [X]
 
 ## Futuros objetivos
 - Interfaz completa iOS (necesidad de un mac en disponibilidad para su creación).
