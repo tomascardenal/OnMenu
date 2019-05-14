@@ -92,6 +92,6 @@ namespace OnMenu.Droid
             return null;
         }
 
-        public override int GetItemPosition(Java.Lang.Object @object) => PositionNone;
+        public override int GetItemPosition(Java.Lang.Object frag) => PositionNone;
     }
 }

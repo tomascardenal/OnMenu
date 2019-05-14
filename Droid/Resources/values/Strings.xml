@@ -39,10 +39,10 @@
   <string name="addingredient_placeholder_measure">Write the measuring unit to use with this ingredient</string>
   <string name="addrecipe_name">Name:</string>
   <string name="addrecipe_instructions">Instructions:</string>
-  <string name="addrecipe_hasallergens">Possible allergen:</string>
+  <string name="addrecipe_hasallergens">Has allergens:</string>
   <string name="addrecipe_estimatedprice">Estimated price:</string>
-  <string name="addrecipe_placeholder_name">Write here the name of the ingredient</string>
-  <string name="addrecipe_placeholder_instructions">Write here the corresponding food group</string>
+  <string name="addrecipe_placeholder_name">Write here the name of the recipe</string>
+  <string name="addrecipe_placeholder_instructions">Write here the instrucions to follow</string>
   <string name="addrecipe_btnAddIngredient">Add ingredient</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>

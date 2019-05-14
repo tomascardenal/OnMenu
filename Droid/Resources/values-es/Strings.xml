@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <string name="hello">Hola mundo, Haz click!</string>
-    <string name="tab1">Buscar</string>
-    <string name="tab2">Acerca de</string>
+    <string name="tab1">Ingredientes</string>
+    <string name="tab2">Recetas</string>
+    <string name="tab3">Calendario</string>
+    <string name="tab4">Acerca de...</string>
     <string name="signin">Registrate</string>
     <string name="notnow">Ahora no</string>
     <string name="signing_in">Registrando...</string>
@@ -10,6 +12,10 @@
     <string name="login">Ingresa</string>
     <string name="learn_more">Aprende Más</string>
     <string name="description">Descripción:</string>
+    <string name="ingredient_group">Grupo</string>
+    <string name="ingredient_measure">Medida</string>
+    <string name="ingredient_allergen">Alérgeno</string>
+    <string name="ingredient_price">Precio</string>
     <string name="title">Título:</string>
     <string name="text">Texto:</string>
     <string name="quantity">Cantidad:</string>
@@ -19,6 +25,7 @@
     <string name="app_description">Esta app ha sido escrita en C# y APIs nativas utilizando la plataforma Xamarin. Comparte código con sus versiones de iOS, Android, y Windows.</string>
     <string name="sign_in_text">Ingresa con tu cuenta para agregar y quitar items</string>
     <string name="title_add_ingredient">Nuevo ingrediente</string>
+    <string name="title_add_recipe">Nueva receta</string>
     <string name="menu_item_save">Guardar</string>
     <string name="menu_item_cancel">Cancelar</string>
     <string name="addingredient_name">Nombre:</string>
@@ -29,6 +36,13 @@
     <string name="addingredient_placeholder_name">Escriba aquí el nombre del ingrediente</string>
     <string name="addingredient_placeholder_group">Introduzca el grupo alimenticio correspondiente</string>
     <string name="addingredient_placeholder_measure">Indique que unidad de medida utilizar para este ingrediente</string>
+    <string name="addrecipe_name">Nombre:</string>
+    <string name="addrecipe_instructions">Instrucciones:</string>
+    <string name="addrecipe_hasallergens">Tiene alérgenos:</string>
+    <string name="addrecipe_estimatedprice">Precio estimado:</string>
+    <string name="addrecipe_placeholder_name">Escribe aquí el nombre de la receta</string>
+    <string name="addrecipe_placeholder_instructions">Indica aquí las instrucciones a seguir...</string>
+    <string name="addrecipe_btnAddIngredient">Añade ingredientes</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
 </resources>
