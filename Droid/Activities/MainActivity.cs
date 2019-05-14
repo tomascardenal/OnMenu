@@ -8,6 +8,7 @@ using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Android.Support.Design.Widget;
 using Android.Util;
+using OnMenu.Droid.Activities;
 
 namespace OnMenu.Droid
 {
@@ -46,6 +47,7 @@ namespace OnMenu.Droid
                 switch (e.Item.ItemId)
                 {
                     case Resource.Id.menu_addRecipe:
+                        StartActivity(new Intent(this, typeof(AddRecipeActivity)));
                         break;
                     case Resource.Id.menu_addIngredient:
                         StartActivity(new Intent(this, typeof(AddIngredientsActivity)));
@@ -90,6 +92,6 @@ namespace OnMenu.Droid
             return null;
         }
 
-        public override int GetItemPosition(Java.Lang.Object frag) => PositionNone;
+        public override int GetItemPosition(Java.Lang.Object @object) => PositionNone;
     }
 }

@@ -6,6 +6,7 @@ using Android.Widget;
 using Android.Support.V4.Widget;
 using Android.App;
 using Android.Content;
+using OnMenu.Droid.Activities;
 
 namespace OnMenu.Droid
 {
@@ -68,7 +69,7 @@ namespace OnMenu.Droid
         void Adapter_ItemClick(object sender, RecyclerClickEventArgs e)
         {
             var item = ViewModel.Recipes[e.Position];
-            var intent = new Intent(Activity, typeof(BrowseIngredientDetailActivity));
+            var intent = new Intent(Activity, typeof(BrowseRecipeDetailActivity));
 
             intent.PutExtra("data", Newtonsoft.Json.JsonConvert.SerializeObject(item));
             Activity.StartActivity(intent);
