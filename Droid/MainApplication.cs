@@ -21,6 +21,7 @@ namespace OnMenu.Droid
         {
             base.OnCreate();
             RegisterActivityLifecycleCallbacks(this);
+            CrossCurrentActivity.Current.Init(this);
             App.Initialize();
         }
 
