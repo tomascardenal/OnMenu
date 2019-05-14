@@ -44,6 +44,7 @@
   <string name="addrecipe_placeholder_name">Write here the name of the recipe</string>
   <string name="addrecipe_placeholder_instructions">Write here the instrucions to follow</string>
   <string name="addrecipe_btnAddIngredient">Add ingredient</string>
+  <string name="addrecipe_ingredientList">Ingredient list:</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
 </resources>

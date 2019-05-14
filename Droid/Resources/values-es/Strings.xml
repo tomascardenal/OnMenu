@@ -43,6 +43,7 @@
     <string name="addrecipe_placeholder_name">Escribe aquí el nombre de la receta</string>
     <string name="addrecipe_placeholder_instructions">Indica aquí las instrucciones a seguir...</string>
     <string name="addrecipe_btnAddIngredient">Añade ingredientes</string>
-    <string name="yes">Si</string>
+  <string name="addrecipe_ingredientList">Lista de ingredientes:</string>
+  <string name="yes">Si</string>
     <string name="no">No</string>
 </resources>
