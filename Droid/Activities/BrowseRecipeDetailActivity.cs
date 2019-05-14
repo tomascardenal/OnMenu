@@ -14,6 +14,9 @@ using OnMenu.ViewModels;
 
 namespace OnMenu.Droid.Activities
 {
+    /// <summary>
+    /// Activity to browse recipe details
+    /// </summary>
     [Activity(Label = "Recipe Details", ParentActivity = typeof(MainActivity))]
     [MetaData("android.support.PARENT_ACTIVITY", Value = ".MainActivity")]
     public class BrowseRecipeDetailActivity : BaseActivity
@@ -22,9 +25,14 @@ namespace OnMenu.Droid.Activities
         /// Specify the layout to inflace
         /// </summary>
         protected override int LayoutResource => Resource.Layout.activity_recipe_details;
-
+        /// <summary>
+        /// The view model.
+        /// </summary>
         RecipeDetailViewModel viewModel;
-
+        /// <summary>
+        /// Handles the actions to do when this activity is created
+        /// </summary>
+        /// <param name="savedInstanceState">Saved instance state.</param>
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -39,10 +47,17 @@ namespace OnMenu.Droid.Activities
             SupportActionBar.Title = recipe.Name;
         }
 
+        /// <summary>
+        /// Handles the actions when this activity is started
+        /// </summary>
         protected override void OnStart()
         {
             base.OnStart();
         }
+
+        /// <summary>
+        /// Handles the actions when this activity stops
+        /// </summary>
         protected override void OnStop()
         {
             base.OnStop();

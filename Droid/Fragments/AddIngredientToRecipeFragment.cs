@@ -14,16 +14,37 @@ using OnMenu.Models.Items;
 
 namespace OnMenu.Droid
 {
+    /// <summary>
+    /// Fragment to add ingredients to a recipe
+    /// </summary>
     public class AddIngredientToRecipeFragment : Android.Support.V4.App.Fragment, IFragmentVisible
     {
+        /// <summary>
+        /// Spinner with the ingredients
+        /// </summary>
         Spinner ingredientSpinner;
+        /// <summary>
+        /// Button to remove an ingredient
+        /// </summary>
         ImageButton removeIngredientBtn;
+        /// <summary>
+        /// The adapter for the spinner
+        /// </summary>
         ArrayAdapter adapter;
+        /// <summary>
+        /// The ingredient names.
+        /// </summary>
         List<String> ingredientNames;
-
+        /// <summary>
+        /// Gets or sets the view model.
+        /// </summary>
+        /// <value>The view model.</value>
         public static IngredientsViewModel ViewModel { get; set; }
 
-
+        /// <summary>
+        /// Handles the actions to do when this fragment is created
+        /// </summary>
+        /// <param name="savedInstanceState">Saved instance state.</param>
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -31,6 +52,13 @@ namespace OnMenu.Droid
             // Create your fragment here
         }
 
+        /// <summary>
+        /// Handles the actions when this fragment view is created
+        /// </summary>
+        /// <returns>The created view.</returns>
+        /// <param name="inflater">Inflater.</param>
+        /// <param name="container">Container.</param>
+        /// <param name="savedInstanceState">Saved instance state.</param>
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             ViewModel = new IngredientsViewModel();
@@ -44,6 +72,9 @@ namespace OnMenu.Droid
             return view;
         }
 
+        /// <summary>
+        /// Handles the actions when this fragment is started
+        /// </summary>
         public override void OnStart()
         {
             base.OnStart();
@@ -52,10 +83,13 @@ namespace OnMenu.Droid
                 ViewModel.LoadIngredientsCommand.Execute(null);
 
             ingredientNames = ViewModel.Ingredients.Select(ingredient => ingredient.Name).ToList();
-            ArrayAdapter adapter = new ArrayAdapter(this.Context,Resource.Id.addRecipe_ingredientSpinner, ingredientNames);
+            adapter = new ArrayAdapter(this.Context,Resource.Id.addRecipe_ingredientSpinner, ingredientNames);
             ingredientSpinner.Adapter = adapter;
         }
 
+        /// <summary>
+        /// Informs that the fragment became visible and executes the actions inside
+        /// </summary>
         public void BecameVisible()
         {
         }

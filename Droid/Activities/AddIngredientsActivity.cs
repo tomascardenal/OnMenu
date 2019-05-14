@@ -8,17 +8,54 @@ using System;
 
 namespace OnMenu.Droid
 {
+    /// <summary>
+    /// Activity to add ingredients
+    /// </summary>
     [Activity(Label = "AddItemActivity")]
     public class AddIngredientsActivity : Activity
     {
+        /// <summary>
+        /// The save button.
+        /// </summary>
         FloatingActionButton saveButton;
-        EditText nameField, groupField, measureField, priceField;
+        /// <summary>
+        /// The name field.
+        /// </summary>
+        EditText nameField;
+        /// <summary>
+        /// The group field.
+        /// </summary>
+        EditText groupField;
+        /// <summary>
+        /// The measure field.
+        /// </summary>
+        EditText measureField;
+        /// <summary>
+        /// The price field.
+        /// </summary>
+        EditText priceField;
+        /// <summary>
+        /// The allergen button.
+        /// </summary>
         ToggleButton allergenButton;
+        /// <summary>
+        /// Whether this activity is on edit mode or not
+        /// </summary>
         bool editMode = false;
+        /// <summary>
+        /// The ingredient to edit
+        /// </summary>
         Ingredient editIngredient = null;
-
+        /// <summary>
+        /// Gets or sets the view model.
+        /// </summary>
+        /// <value>The view model.</value>
         public IngredientsViewModel ViewModel { get; set; }
 
+        /// <summary>
+        /// Handles the actions to do when this Activity is created
+        /// </summary>
+        /// <param name="savedInstanceState">Saved instance state.</param>
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -45,6 +82,9 @@ namespace OnMenu.Droid
             saveButton.Click += SaveButton_Click;
         }
 
+        /// <summary>
+        /// Fills the form.
+        /// </summary>
         private void fillForm()
         {
             nameField.Text = editIngredient.Name;
@@ -54,17 +94,32 @@ namespace OnMenu.Droid
             priceField.Text = editIngredient.EstimatedPrice.ToString();
         }
 
+        /// <summary>
+        /// Handles the actions to do when the options menu is created
+        /// </summary>
+        /// <returns><c>true</c>, if create options menu was oned, <c>false</c> otherwise.</returns>
+        /// <param name="menu">Menu.</param>
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.top_menus, menu);
             return base.OnCreateOptionsMenu(menu);
         }
 
+        /// <summary>
+        /// Handles the actions to do when an menu item is selected
+        /// </summary>
+        /// <returns><c>true</c>, if completed sucessfully, <c>false</c> otherwise.</returns>
+        /// <param name="item">Item.</param>
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             return base.OnOptionsItemSelected(item);
         }
 
+        /// <summary>
+        /// Handles the actions when the save button is clicked
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event args.</param>
         void SaveButton_Click(object sender, EventArgs e)
         {
             if (editMode)

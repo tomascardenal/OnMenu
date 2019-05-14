@@ -11,17 +11,41 @@ using Android.Util;
 
 namespace OnMenu.Droid
 {
+    /// <summary>
+    /// Fragment to browse ingredients
+    /// </summary>
     public class BrowseIngredientFragment : Android.Support.V4.App.Fragment, IFragmentVisible
     {
+        /// <summary>
+        /// Starts a new instance
+        /// </summary>
+        /// <returns>The instance.</returns>
         public static BrowseIngredientFragment NewInstance() =>
             new BrowseIngredientFragment { Arguments = new Bundle() };
-
+        /// <summary>
+        /// The adapter.
+        /// </summary>
         BrowseIngredientsAdapter adapter;
+        /// <summary>
+        /// The refresher.
+        /// </summary>
         SwipeRefreshLayout refresher;
+        /// <summary>
+        /// The context menu.
+        /// </summary>
         PopupMenu contextMenu;
+        /// <summary>
+        /// The selected item.
+        /// </summary>
         int selectedItem;
-
+        /// <summary>
+        /// The progress bar.
+        /// </summary>
         ProgressBar progress;
+        /// <summary>
+        /// Gets or sets the view model.
+        /// </summary>
+        /// <value>The view model.</value>
         public static IngredientsViewModel ViewModel { get; set; }
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -82,7 +106,6 @@ namespace OnMenu.Droid
         void Adapter_ItemLongClick(object sender, RecyclerClickEventArgs e)
         {
             selectedItem = e.Position;
-            BrowseIngredientsAdapter adapter = (BrowseIngredientsAdapter)sender;
             contextMenu = new PopupMenu(this.Context, e.View);
             contextMenu.Inflate(Resource.Menu.browse_context_menus);
             contextMenu.MenuItemClick += OnContextMenuItemClick;
