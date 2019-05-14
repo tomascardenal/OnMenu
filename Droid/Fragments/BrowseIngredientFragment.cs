@@ -48,6 +48,10 @@ namespace OnMenu.Droid
         /// <value>The view model.</value>
         public static IngredientsViewModel ViewModel { get; set; }
 
+        /// <summary>
+        /// Handles the actions when this fragment is created
+        /// </summary>
+        /// <param name="savedInstanceState">Saved instance state.</param>
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -55,6 +59,13 @@ namespace OnMenu.Droid
             // Create your fragment here
         }
 
+        /// <summary>
+        /// Handles the actions when this fragment view is created
+        /// </summary>
+        /// <returns>The created view.</returns>
+        /// <param name="inflater">Inflater.</param>
+        /// <param name="container">Container.</param>
+        /// <param name="savedInstanceState">Saved instance state.</param>
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             ViewModel = new IngredientsViewModel();
@@ -74,6 +85,9 @@ namespace OnMenu.Droid
             return view;
         }
 
+        /// <summary>
+        /// Handles the actions when this fragment is started
+        /// </summary>
         public override void OnStart()
         {
             base.OnStart();
@@ -86,6 +100,9 @@ namespace OnMenu.Droid
                 ViewModel.LoadIngredientsCommand.Execute(null);
         }
 
+        /// <summary>
+        /// Handles the actions when this fragment stops
+        /// </summary>
         public override void OnStop()
         {
             base.OnStop();
@@ -94,6 +111,11 @@ namespace OnMenu.Droid
             adapter.ItemLongClick -= Adapter_ItemLongClick;
         }
 
+        /// <summary>
+        /// Handles the actions when an adapter item is clicked
+        /// </summary>
+        /// <param name="sender">the adapter item</param>
+        /// <param name="e">the event args</param>
         void Adapter_ItemClick(object sender, RecyclerClickEventArgs e)
         {
             var item = ViewModel.Ingredients[e.Position];
@@ -103,6 +125,11 @@ namespace OnMenu.Droid
             Activity.StartActivity(intent);
         }
 
+        /// <summary>
+        /// Handles the actions when an adapter item is longclicked
+        /// </summary>
+        /// <param name="sender">the adapter item</param>
+        /// <param name="e">the event args</param>
         void Adapter_ItemLongClick(object sender, RecyclerClickEventArgs e)
         {
             selectedItem = e.Position;
@@ -112,6 +139,11 @@ namespace OnMenu.Droid
             contextMenu.Show();
         }
 
+        /// <summary>
+        /// Handles the actions when an item of the context menu is clicked
+        /// </summary>
+        /// <param name="sender">the item</param>
+        /// <param name="e">the event args</param>
         void OnContextMenuItemClick(object sender, PopupMenu.MenuItemClickEventArgs e)
         {
             switch (e.Item.ItemId)
@@ -129,24 +161,50 @@ namespace OnMenu.Droid
 
         }
 
+        /// <summary>
+        /// Handles the actions when the refresher is triggered
+        /// </summary>
+        /// <param name="sender">The refresher</param>
+        /// <param name="e">the event args</param>
         void Refresher_Refresh(object sender, EventArgs e)
         {
             ViewModel.LoadIngredientsCommand.Execute(null);
             refresher.Refreshing = false;
         }
 
+
+        /// <summary>
+        /// Informs that the fragment became visible and executes the actions inside
+        /// </summary>
         public void BecameVisible()
         {
 
         }
     }
 
+    /// <summary>
+    /// Adapter class to browse ingredients on a RecyclerView
+    /// </summary>
     class BrowseIngredientsAdapter : BaseRecycleViewAdapter
     {
+        /// <summary>
+        /// The view model
+        /// </summary>
         IngredientsViewModel viewModel;
+        /// <summary>
+        /// The activity
+        /// </summary>
         Activity activity;
+        /// <summary>
+        /// The viewholder
+        /// </summary>
         IngredientsViewHolder ingredientViewHolder;
 
+        /// <summary>
+        /// Instantiates a new adapter
+        /// </summary>
+        /// <param name="activity">The activity for this adapter</param>
+        /// <param name="viewModel">The view model for this adapter</param>
         public BrowseIngredientsAdapter(Activity activity, IngredientsViewModel viewModel)
         {
             this.viewModel = viewModel;
@@ -158,8 +216,12 @@ namespace OnMenu.Droid
                 this.activity.RunOnUiThread(NotifyDataSetChanged);
             };
         }
-
-        // Create new views (invoked by the layout manager)
+        /// <summary>
+        /// Creates new views (invoked by the layout manager)
+        /// </summary>
+        /// <param name="parent">The parent ViewGroup</param>
+        /// <param name="viewType">the viewtype</param>
+        /// <returns>The viewholder</returns>
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             //Setup your layout here
@@ -171,12 +233,11 @@ namespace OnMenu.Droid
             return ingredientViewHolder;
         }
 
-        public View GetView()
-        {
-            return ingredientViewHolder.TextView;
-        }
-
-        // Replace the contents of a view (invoked by the layout manager)
+        /// <summary>
+        /// Replace the contents of a view (invoked by the layout manager)
+        /// </summary>
+        /// <param name="holder">The viewholder</param>
+        /// <param name="position">The position</param>        
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             var ingredient = viewModel.Ingredients[position];
@@ -184,17 +245,34 @@ namespace OnMenu.Droid
             // Replace the contents of the view with that element
             var myHolder = holder as IngredientsViewHolder;
             myHolder.TextView.Text = ingredient.Name;
+            myHolder.DetailTextView.Text = ingredient.Group;
         }
-
+        /// <summary>
+        /// Gets the item count
+        /// </summary>
         public override int ItemCount => viewModel.Ingredients.Count;
     }
 
+    /// <summary>
+    /// Viewholder for the ingredients
+    /// </summary>
     public class IngredientsViewHolder : RecyclerView.ViewHolder
     {
+        /// <summary>
+        /// Textfield for the rows on the recycler view
+        /// </summary>
         public TextView TextView { get; set; }
+        /// <summary>
+        /// Detail textfield for the rows on the recycler view
+        /// </summary>
         public TextView DetailTextView { get; set; }
         
-
+        /// <summary>
+        /// Instantiates a new viewholder
+        /// </summary>
+        /// <param name="itemView">the view of the item</param>
+        /// <param name="clickListener">the clicklistener</param>
+        /// <param name="longClickListener">the longclicklistener</param>
         public IngredientsViewHolder(View itemView, Action<RecyclerClickEventArgs> clickListener,
                             Action<RecyclerClickEventArgs> longClickListener) : base(itemView)
         {
