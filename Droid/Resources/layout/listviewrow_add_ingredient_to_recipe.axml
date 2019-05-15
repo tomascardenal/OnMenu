@@ -4,26 +4,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout
+    <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageButton
-            android:src="@drawable/cancel_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxHeight="25px"
-            android:background = "@android:color/transparent"
-            android:layout_alignParentRight = "true"
-            android:id="@+id/removeIngredientBtn_addRecipe" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_alignParentLeft = "true"
-            android:layout_toStartOf="@id/removeIngredientBtn_addRecipe"
+            android:minWidth="30px"
+            android:minHeight="30px"
+            android:layout_weight="1"
             android:id="@+id/ingredientTextView_addRecipe" />
-    </RelativeLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:minWidth="30px"
+            android:minHeight="30px"
+            android:numeric="decimal"
+            android:layout_weight="2"
+            android:id="@+id/quantityEditText_addRecipe"
+        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minWidth="30px"
+            android:minHeight="30px"
+            android:layout_weight="2"
+            android:id="@+id/measurementTextView_addRecipe" />
+    </LinearLayout>
 </FrameLayout>
 

@@ -73,10 +73,32 @@
             android:layout_height="wrap_content"
             android:id="@+id/ingredientsCell_addRecipe"
             android:padding="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/addrecipe_btnAddIngredient"
+                    android:id="@+id/addIngredientToRecipe_addRecipe"
+                    android:layout_alignParentBottom="true"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight ="1"
+                    android:text="@string/addrecipe_btnRemoveIngredient"
+                    android:id="@+id/addIngredientToRecipe_addRecipe"
+                    android:layout_alignParentBottom="true"/>
+
+            </LinearLayout>
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/ingredientSpinner_addRecipe"/>
+
             <TextView
                 android:text="@string/addrecipe_ingredientList"
                 android:layout_width="wrap_content"
@@ -90,12 +112,7 @@
             android:padding="15dp"
         />
     </LinearLayout>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/addrecipe_btnAddIngredient"
-        android:id="@+id/addIngredientToRecipe_addRecipe"
-        android:layout_alignParentBottom="true"/>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/save_button_addRecipe"
         android:layout_width="wrap_content"

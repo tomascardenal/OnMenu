@@ -9,6 +9,7 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Java.Lang;
@@ -121,6 +122,7 @@ namespace OnMenu.Droid.Activities
         {
             Ingredient i = IngViewModel.Ingredients[ingredientSpinner.SelectedItemPosition];
             AddedIngredients.Add(i);
+            ingredientListView.Invalidate();
         }
 
         /// <summary>
@@ -229,23 +231,26 @@ namespace OnMenu.Droid.Activities
         {
             Parent = parent;
             var view = convertView;
+            Position = position;
             if (view == null)
             {
                 view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.listviewrow_add_ingredient_to_recipe,parent,false);
                 TextView ingredientTextView = view.FindViewById<TextView>(Resource.Id.ingredientTextView_addRecipe);
-                ImageButton removeIngredientBtn = view.FindViewById<ImageButton>(Resource.Id.removeIngredientBtn_addRecipe);
-                view.Tag = new RecipeIngredientsViewHolder() {IngredientTextView = ingredientTextView, RemoveIngredientBtn = removeIngredientBtn };
+                EditText quantityEditText = view.FindViewById<EditText>(Resource.Id.quantityEditText_addRecipe);
+                TextView measurementTextView = view.FindViewById<TextView>(Resource.Id.measurementTextView_addRecipe);
+                view.Tag = new RecipeIngredientsViewHolder() {IngredientTextView = ingredientTextView, QuantityEditText = quantityEditText, MeasurementTextView = measurementTextView};
             }
             holder = (RecipeIngredientsViewHolder)view.Tag;
             holder.IngredientTextView.Text = ingredientList[position].Name;
-            holder.RemoveIngredientBtn.Click += RemoveIngredientBtn_Click;
+            holder.QuantityEditText.Text = 0.ToString();
+            holder.QuantityEditText.TextChanged += QuantityEditText_TextChanged;
+            holder.MeasurementTextView.Text = ingredientList[position].Measure;
             return view;
         }
 
-        private void RemoveIngredientBtn_Click(object sender, EventArgs e)
+        private void QuantityEditText_TextChanged(object sender, EventArgs e)
         {
-            //TODO force an ingredient to be removed (Maybe implementing listener up or removing ingredients from normal buttons?
-            ingredientList.RemoveAt(Position);
+            
         }
     }
 
@@ -258,9 +263,14 @@ namespace OnMenu.Droid.Activities
         /// TextView with the ingredient
         /// </summary>
         public TextView IngredientTextView;
+        //Maybe handle this after confirming the ingredient quantity, or when adding the ingredient, ask for a quantity
         /// <summary>
-        /// Button to remove an ingredient
+        /// Field to indicate the quantity of an ingredient in the recipe
         /// </summary>
-        public ImageButton RemoveIngredientBtn;
+        public EditText QuantityEditText;
+        /// <summary>
+        /// Field to indicate the measurement of an ingredient
+        /// </summary>
+        public TextView MeasurementTextView; 
     }
 }
