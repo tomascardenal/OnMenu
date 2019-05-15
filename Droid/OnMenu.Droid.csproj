@@ -145,6 +145,7 @@
     <Compile Include="Fragments\CalendarFragment.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helpers\Utils.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="Activities\AddIngredientsActivity.cs" />
     <Compile Include="Activities\BaseActivity.cs" />

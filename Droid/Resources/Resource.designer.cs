@@ -2511,8 +2511,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f080027
 			public const int add = 2131230759;
 			
-			// aapt resource value: 0x7f0800b1
-			public const int addIngredientToRecipe_addRecipe = 2131230897;
+			// aapt resource value: 0x7f0800b2
+			public const int addIngredientToRecipe_addRecipe = 2131230898;
 			
 			// aapt resource value: 0x7f080070
 			public const int alertTitle = 2131230832;
@@ -2721,8 +2721,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0800b3
 			public const int ingredientLabel_addRecipe = 2131230899;
 			
-			// aapt resource value: 0x7f0800b2
-			public const int ingredientSpinner_addRecipe = 2131230898;
+			// aapt resource value: 0x7f0800b1
+			public const int ingredientSpinner_addRecipe = 2131230897;
 			
 			// aapt resource value: 0x7f0800d1
 			public const int ingredientTextView_addRecipe = 2131230929;
@@ -2881,7 +2881,7 @@ namespace OnMenu.Droid
 			public const int progressbar_loading = 2131230906;
 			
 			// aapt resource value: 0x7f0800d2
-			public const int quantityEditText_addRecipe = 2131230930;
+			public const int quantityTextView_addRecipe = 2131230930;
 			
 			// aapt resource value: 0x7f080075
 			public const int radio = 2131230837;
@@ -3572,6 +3572,9 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b0010
 			public const int abc_toolbar_collapse_description = 2131427344;
 			
+			// aapt resource value: 0x7f0b0057
+			public const int accept = 2131427415;
+			
 			// aapt resource value: 0x7f0b0047
 			public const int addingredient_allergen = 2131427399;
 			
@@ -3638,6 +3641,9 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b001f
 			public const int bottom_sheet_behavior = 2131427359;
 			
+			// aapt resource value: 0x7f0b0056
+			public const int cancel = 2131427414;
+			
 			// aapt resource value: 0x7f0b0020
 			public const int character_counter_pattern = 2131427360;
 			
@@ -3680,8 +3686,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b0042
 			public const int menu_item_save = 2131427394;
 			
-			// aapt resource value: 0x7f0b0057
-			public const int no = 2131427415;
+			// aapt resource value: 0x7f0b0059
+			public const int no = 2131427417;
 			
 			// aapt resource value: 0x7f0b002e
 			public const int notnow = 2131427374;
@@ -3746,8 +3752,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b0030
 			public const int version_number = 2131427376;
 			
-			// aapt resource value: 0x7f0b0056
-			public const int yes = 2131427414;
+			// aapt resource value: 0x7f0b0058
+			public const int yes = 2131427416;
 			
 			static String()
 			{

@@ -11,8 +11,10 @@ using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Util;
 using Android.Views;
+using Android.Views.InputMethods;
 using Android.Widget;
 using Java.Lang;
+using OnMenu.Droid.Helpers;
 using OnMenu.Models.Items;
 
 namespace OnMenu.Droid.Activities
@@ -30,7 +32,7 @@ namespace OnMenu.Droid.Activities
         /// <summary>
         /// The name field.
         /// </summary>
-        EditText nameField; 
+        EditText nameField;
         /// <summary>
         /// The instructions field.
         /// </summary>
@@ -59,12 +61,12 @@ namespace OnMenu.Droid.Activities
         /// Gets or sets the recipes view model.
         /// </summary>
         /// <value>The view model.</value>
-        public RecipeViewModel RecViewModel { get;set; }
+        public RecipeViewModel RecViewModel { get; set; }
         /// <summary>
         /// Gets or sets the ingredients view model.
         /// </summary>
         /// <value>The view model.</value>
-        public IngredientsViewModel IngViewModel { get;set; }
+        public IngredientsViewModel IngViewModel { get; set; }
         /// <summary>
         /// The ingredient names.
         /// </summary>
@@ -73,6 +75,10 @@ namespace OnMenu.Droid.Activities
         /// List of arrays for the listview
         /// </summary>
         ObservableCollection<Ingredient> AddedIngredients;
+        /// <summary>
+        /// Dialog builder for asking ingredient quantities
+        /// </summary>
+        AlertDialog.Builder alertIngredientBuilder;
 
         /// <summary>
         /// Handles the actions to do when this activity is created
@@ -86,11 +92,11 @@ namespace OnMenu.Droid.Activities
             RecViewModel = BrowseRecipeFragment.ViewModel;
             ingredientNames = IngViewModel.Ingredients.Select(ingredient => ingredient.Name).ToArray();
             AddedIngredients = new ObservableCollection<Ingredient>();
-            if (IngViewModel.Ingredients!=null && IngViewModel.Ingredients.Count > 0)
+            if (IngViewModel.Ingredients != null && IngViewModel.Ingredients.Count > 0)
             {
                 AddedIngredients.Add(IngViewModel.Ingredients[0]);
             }
-
+            //TODO ingredient removal
             SetContentView(Resource.Layout.activity_add_recipe);
             saveButton = FindViewById<FloatingActionButton>(Resource.Id.save_button_addRecipe);
             nameField = FindViewById<EditText>(Resource.Id.nameField_addRecipe);
@@ -103,7 +109,7 @@ namespace OnMenu.Droid.Activities
             ingredientSpinner.Adapter = new ArrayAdapter(this.ApplicationContext, Android.Resource.Layout.SimpleListItem1, ingredientNames);
 
             var data = Intent.GetStringExtra("recipe") ?? null;
-            if(data != null)
+            if (data != null)
             {
                 editMode = true;
                 editRecipe = Newtonsoft.Json.JsonConvert.DeserializeObject<Recipe>(data);
@@ -120,10 +126,30 @@ namespace OnMenu.Droid.Activities
         /// <param name="e">the event args</param>
         private void AddIngredientButton_Click(object sender, EventArgs e)
         {
-            Ingredient i = IngViewModel.Ingredients[ingredientSpinner.SelectedItemPosition];
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-
-            AddedIngredients.Add(i);
+            View alertView = LayoutInflater.From(this).Inflate(Resource.Layout.input_quantity_layout, null);
+            EditText quantityInput = alertView.FindViewById<EditText>(Resource.Id.editQuantity_dialog);
+            alertIngredientBuilder = new AlertDialog.Builder(this);
+            alertIngredientBuilder.SetView(alertView);
+            alertIngredientBuilder.SetCancelable(false)
+                .SetPositiveButton(this.ApplicationContext.GetString(Resource.String.accept), delegate
+                {
+                    float q;
+                    if (!float.TryParse(quantityInput.Text, out q)) {
+                        q = 1;
+                    }
+                    IngViewModel.Ingredients[ingredientSpinner.SelectedItemPosition].Quantity = q;
+                    //TODO control the ingredient wasn't already added, and just edit the quantity
+                    AddedIngredients.Add(IngViewModel.Ingredients[ingredientSpinner.SelectedItemPosition]);
+                    //FORCE KEYBOARD TO HIDE, PLEASE
+                    Utils.HideKeyboardFromInput(this, quantityInput);
+                })
+                .SetNegativeButton(this.ApplicationContext.GetString(Resource.String.cancel), delegate
+                {
+                    alertIngredientBuilder.Dispose();
+                });
+            AlertDialog dialog = alertIngredientBuilder.Create();
+            dialog.Show();
+            //If keyboard is shown, it actually does refresh, but we need a better solution for keyboard input (maybe?)
             ingredientListView.Invalidate();
         }
 
@@ -180,7 +206,8 @@ namespace OnMenu.Droid.Activities
     /// An adapter for a listview adding ingredients to a recipe
     /// </summary>
     //A little trick
-    public class RecipeIngredientsAdapter : BaseAdapter<Ingredient>{
+    public class RecipeIngredientsAdapter : BaseAdapter<Ingredient>
+    {
         /// <summary>
         /// The adapter for the spinner
         /// </summary>
@@ -199,7 +226,8 @@ namespace OnMenu.Droid.Activities
         /// </summary>
         /// <param name="position">The position of the item</param>
         /// <returns>The item on that position</returns>
-        public override Ingredient this[int position] {
+        public override Ingredient this[int position]
+        {
             get
             {
                 return ingredientList[position];
@@ -211,13 +239,14 @@ namespace OnMenu.Droid.Activities
             ingredientList.Add(i);
         }
 
-        public override int Count {
+        public override int Count
+        {
             get
             {
                 return ingredientList.Count;
             }
         }
-        
+
         public RecipeIngredientsAdapter(ObservableCollection<Ingredient> repeaterList)
         {
             ingredientList = repeaterList;
@@ -236,24 +265,19 @@ namespace OnMenu.Droid.Activities
             Position = position;
             if (view == null)
             {
-                view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.listviewrow_add_ingredient_to_recipe,parent,false);
+                view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.listviewrow_add_ingredient_to_recipe, parent, false);
                 TextView ingredientTextView = view.FindViewById<TextView>(Resource.Id.ingredientTextView_addRecipe);
-                EditText quantityEditText = view.FindViewById<EditText>(Resource.Id.quantityEditText_addRecipe);
+                TextView quantityEditText = view.FindViewById<TextView>(Resource.Id.quantityTextView_addRecipe);
                 TextView measurementTextView = view.FindViewById<TextView>(Resource.Id.measurementTextView_addRecipe);
-                view.Tag = new RecipeIngredientsViewHolder() {IngredientTextView = ingredientTextView, QuantityEditText = quantityEditText, MeasurementTextView = measurementTextView};
+                view.Tag = new RecipeIngredientsViewHolder() { IngredientTextView = ingredientTextView, QuantityTextView = quantityEditText, MeasurementTextView = measurementTextView };
             }
             holder = (RecipeIngredientsViewHolder)view.Tag;
             holder.IngredientTextView.Text = ingredientList[position].Name;
-            holder.QuantityEditText.Text = 0.ToString();
-            holder.QuantityEditText.TextChanged += QuantityEditText_TextChanged;
+            holder.QuantityTextView.Text = ingredientList[position].Quantity.ToString();
             holder.MeasurementTextView.Text = ingredientList[position].Measure;
             return view;
         }
 
-        private void QuantityEditText_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
     }
 
     /// <summary>
@@ -265,14 +289,13 @@ namespace OnMenu.Droid.Activities
         /// TextView with the ingredient
         /// </summary>
         public TextView IngredientTextView;
-        //Maybe handle this after confirming the ingredient quantity, or when adding the ingredient, ask for a quantity
         /// <summary>
         /// Field to indicate the quantity of an ingredient in the recipe
         /// </summary>
-        public EditText QuantityEditText;
+        public TextView QuantityTextView;
         /// <summary>
         /// Field to indicate the measurement of an ingredient
         /// </summary>
-        public TextView MeasurementTextView; 
+        public TextView MeasurementTextView;
     }
 }

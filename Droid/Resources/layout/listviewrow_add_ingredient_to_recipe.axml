@@ -16,14 +16,14 @@
             android:minHeight="30px"
             android:layout_weight="1"
             android:id="@+id/ingredientTextView_addRecipe" />
-        <EditText
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content" 
             android:minWidth="30px"
             android:minHeight="30px"
             android:numeric="decimal"
             android:layout_weight="2"
-            android:id="@+id/quantityEditText_addRecipe"
+            android:id="@+id/quantityTextView_addRecipe"
         />
         <TextView
             android:layout_width="match_parent"
