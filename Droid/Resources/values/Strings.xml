@@ -46,6 +46,7 @@
   <string name="addrecipe_btnAddIngredient">Add ingredient</string>
   <string name="addrecipe_btnRemoveIngredient">Remove ingredient</string>
   <string name="addrecipe_ingredientList">Ingredient list:</string>
+  <string name="addrecipe_addQuantity">Type the necessary quantity</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
 </resources>

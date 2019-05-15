@@ -121,6 +121,8 @@ namespace OnMenu.Droid.Activities
         private void AddIngredientButton_Click(object sender, EventArgs e)
         {
             Ingredient i = IngViewModel.Ingredients[ingredientSpinner.SelectedItemPosition];
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
             AddedIngredients.Add(i);
             ingredientListView.Invalidate();
         }
