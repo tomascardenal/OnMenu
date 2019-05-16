@@ -47,6 +47,8 @@
   <string name="addrecipe_btnRemoveIngredient">Remove ingredient</string>
   <string name="addrecipe_ingredientList">Ingredient list:</string>
   <string name="addrecipe_addQuantity">Type the necessary quantity</string>
+  <string name="addrecipe_confirmDeleteIngredient">Are you sure you want to delete this ingredient from the recipe?</string>
+  <string name="addrecipe_removeInfoToast">Long click an ingredient to remove it from the recipe</string>
   <string name="cancel">Cancel</string>
   <string name="accept">Accept</string>
   <string name="yes">Yes</string>

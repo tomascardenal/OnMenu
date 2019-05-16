@@ -90,13 +90,6 @@
                     android:text="@string/addrecipe_btnAddIngredient"
                     android:id="@+id/addIngredientToRecipe_addRecipe"
                     android:layout_alignParentBottom="true"/>
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight ="1"
-                    android:text="@string/addrecipe_btnRemoveIngredient"
-                    android:id="@+id/addIngredientToRecipe_addRecipe"
-                    android:layout_alignParentBottom="true"/>
 
             </LinearLayout>
         </LinearLayout>

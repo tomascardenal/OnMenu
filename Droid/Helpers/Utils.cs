@@ -20,6 +20,11 @@ namespace OnMenu.Droid.Helpers
             InputMethodManager imm = (InputMethodManager)activity.GetSystemService(Context.InputMethodService);
             imm.HideSoftInputFromWindow(input.WindowToken, 0);
         }
+        public static void ShowKeyboardFromInput(Activity activity, EditText input)
+        {
+            InputMethodManager imm = (InputMethodManager)activity.GetSystemService(Context.InputMethodService);
+            imm.ShowSoftInputFromInputMethod(input.WindowToken, 0);
+        }
 
     }
 }

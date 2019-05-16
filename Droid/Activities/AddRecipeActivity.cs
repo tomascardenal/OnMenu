@@ -79,6 +79,10 @@ namespace OnMenu.Droid.Activities
         /// Dialog builder for asking ingredient quantities
         /// </summary>
         AlertDialog.Builder alertIngredientBuilder;
+        /// <summary>
+        /// Show the hint to delete an ingredient
+        /// </summary>
+        bool toastAlert = true;
 
         /// <summary>
         /// Handles the actions to do when this activity is created
@@ -117,6 +121,20 @@ namespace OnMenu.Droid.Activities
             }
             addIngredientButton.Click += AddIngredientButton_Click;
             saveButton.Click += SaveButton_Click;
+            ingredientListView.ItemLongClick += IngredientListView_ItemLongClick;
+        }
+
+        private void IngredientListView_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
+        {
+            AlertDialog.Builder confirmAlert = new AlertDialog.Builder(this);
+            confirmAlert.SetTitle(AddedIngredients[e.Position].Name);
+            confirmAlert.SetMessage(GetString(Resource.String.addrecipe_confirmDeleteIngredient));
+            confirmAlert.SetPositiveButton(GetString(Resource.String.yes),(senderFromAlert, args)=>
+            {
+                AddedIngredients.RemoveAt(e.Position);
+            });
+            Dialog dialog = confirmAlert.Create();
+            dialog.Show();
         }
 
         /// <summary>
@@ -126,20 +144,29 @@ namespace OnMenu.Droid.Activities
         /// <param name="e">the event args</param>
         private void AddIngredientButton_Click(object sender, EventArgs e)
         {
+            Ingredient i = IngViewModel.Ingredients[ingredientSpinner.SelectedItemPosition];
             View alertView = LayoutInflater.From(this).Inflate(Resource.Layout.input_quantity_layout, null);
             EditText quantityInput = alertView.FindViewById<EditText>(Resource.Id.editQuantity_dialog);
+            TextView ingredientAlert = alertView.FindViewById<TextView>(Resource.Id.ingredientTitle_dialog);
+            TextView unitAlert = alertView.FindViewById<TextView>(Resource.Id.ingredientUnit_dialog);
+            ingredientAlert.Text = i.Name;
+            unitAlert.Text = i.Measure;
+            quantityInput.Text = i.Quantity.ToString();
             alertIngredientBuilder = new AlertDialog.Builder(this);
             alertIngredientBuilder.SetView(alertView);
             alertIngredientBuilder.SetCancelable(false)
                 .SetPositiveButton(this.ApplicationContext.GetString(Resource.String.accept), delegate
                 {
                     float q;
-                    if (!float.TryParse(quantityInput.Text, out q)) {
+                    if (!float.TryParse(quantityInput.Text, out q))
+                    {
                         q = 1;
                     }
-                    IngViewModel.Ingredients[ingredientSpinner.SelectedItemPosition].Quantity = q;
-                    //TODO control the ingredient wasn't already added, and just edit the quantity
-                    AddedIngredients.Add(IngViewModel.Ingredients[ingredientSpinner.SelectedItemPosition]);
+                    i.Quantity = q;
+                    if (!AddedIngredients.Contains(i))
+                    {
+                        AddedIngredients.Add(i);
+                    }
                     //FORCE KEYBOARD TO HIDE, PLEASE
                     Utils.HideKeyboardFromInput(this, quantityInput);
                 })
@@ -149,6 +176,12 @@ namespace OnMenu.Droid.Activities
                 });
             AlertDialog dialog = alertIngredientBuilder.Create();
             dialog.Show();
+            Utils.ShowKeyboardFromInput(this, quantityInput);
+            if (toastAlert)
+            {
+                Toast.MakeText(this, Resource.String.addrecipe_removeInfoToast, ToastLength.Long).Show();
+                toastAlert = false;
+            }
             //If keyboard is shown, it actually does refresh, but we need a better solution for keyboard input (maybe?)
             ingredientListView.Invalidate();
         }
