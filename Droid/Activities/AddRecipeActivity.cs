@@ -9,12 +9,15 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
+using Android.Support.V4.Widget;
+using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
 using Java.Lang;
 using OnMenu.Droid.Helpers;
+using OnMenu.Helpers;
 using OnMenu.Models.Items;
 
 namespace OnMenu.Droid.Activities
@@ -42,13 +45,17 @@ namespace OnMenu.Droid.Activities
         /// </summary>
         Button addIngredientButton;
         /// <summary>
-        /// The ingredient Listview.
+        /// The ingredient RecyclerView.
         /// </summary>
-        ListView ingredientListView;
+        RecyclerView ingredientRecyclerView;
         /// <summary>
         /// Spinner with the ingredients
         /// </summary>
         Spinner ingredientSpinner;
+        /// <summary>
+        /// Refresh layout for the RecyclerView
+        /// </summary>
+        SwipeRefreshLayout swipeRefreshLayout;
         /// <summary>
         /// Whether this activity is on editmode or not
         /// </summary>
@@ -68,11 +75,15 @@ namespace OnMenu.Droid.Activities
         /// <value>The view model.</value>
         public IngredientsViewModel IngViewModel { get; set; }
         /// <summary>
+        /// The recyclerview adapter.
+        /// </summary>
+        RecipeIngredientsAdapter adapter;
+        /// <summary>
         /// The ingredient names.
         /// </summary>
         string[] ingredientNames;
         /// <summary>
-        /// List of arrays for the listview
+        /// List of arrays for the RecyclerView
         /// </summary>
         ObservableCollection<Ingredient> AddedIngredients;
         /// <summary>
@@ -100,16 +111,16 @@ namespace OnMenu.Droid.Activities
             {
                 AddedIngredients.Add(IngViewModel.Ingredients[0]);
             }
-            //TODO ingredient removal
             SetContentView(Resource.Layout.activity_add_recipe);
             saveButton = FindViewById<FloatingActionButton>(Resource.Id.save_button_addRecipe);
             nameField = FindViewById<EditText>(Resource.Id.nameField_addRecipe);
             instructionsField = FindViewById<EditText>(Resource.Id.instructionsField_addRecipe);
             addIngredientButton = FindViewById<Button>(Resource.Id.addIngredientToRecipe_addRecipe);
-            ingredientListView = FindViewById<ListView>(Resource.Id.listviewAddIngredients_addRecipe);
+            ingredientRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerviewAddIngredients_addRecipe);
             ingredientSpinner = FindViewById<Spinner>(Resource.Id.ingredientSpinner_addRecipe);
+            swipeRefreshLayout = FindViewById<SwipeRefreshLayout>(Resource.Id.swipeRefreshLayout_addRecipe);
 
-            ingredientListView.Adapter = new RecipeIngredientsAdapter(AddedIngredients);
+            ingredientRecyclerView.SetAdapter(adapter = new RecipeIngredientsAdapter(this, AddedIngredients));
             ingredientSpinner.Adapter = new ArrayAdapter(this.ApplicationContext, Android.Resource.Layout.SimpleListItem1, ingredientNames);
 
             var data = Intent.GetStringExtra("recipe") ?? null;
@@ -121,18 +132,25 @@ namespace OnMenu.Droid.Activities
             }
             addIngredientButton.Click += AddIngredientButton_Click;
             saveButton.Click += SaveButton_Click;
-            ingredientListView.ItemLongClick += IngredientListView_ItemLongClick;
+            adapter.ItemLongClick += IngredientRecyclerView_ItemLongClick;
+            swipeRefreshLayout.Refresh += SwipeRefreshLayout_Refresh;
         }
 
-        private void IngredientListView_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
+        private void SwipeRefreshLayout_Refresh(object sender, EventArgs e)
+        {
+            this.RunOnUiThread(adapter.NotifyDataSetChanged);
+            swipeRefreshLayout.Refreshing = false;
+        }
+
+        private void IngredientRecyclerView_ItemLongClick(object sender, RecyclerClickEventArgs e)
         {
             AlertDialog.Builder confirmAlert = new AlertDialog.Builder(this);
             confirmAlert.SetTitle(AddedIngredients[e.Position].Name);
             confirmAlert.SetMessage(GetString(Resource.String.addrecipe_confirmDeleteIngredient));
-            confirmAlert.SetPositiveButton(GetString(Resource.String.yes),(senderFromAlert, args)=>
-            {
-                AddedIngredients.RemoveAt(e.Position);
-            });
+            confirmAlert.SetPositiveButton(GetString(Resource.String.yes), (senderFromAlert, args) =>
+             {
+                 AddedIngredients.RemoveAt(e.Position);
+             });
             Dialog dialog = confirmAlert.Create();
             dialog.Show();
         }
@@ -176,14 +194,13 @@ namespace OnMenu.Droid.Activities
                 });
             AlertDialog dialog = alertIngredientBuilder.Create();
             dialog.Show();
-            Utils.ShowKeyboardFromInput(this, quantityInput);
             if (toastAlert)
             {
                 Toast.MakeText(this, Resource.String.addrecipe_removeInfoToast, ToastLength.Long).Show();
                 toastAlert = false;
             }
-            //If keyboard is shown, it actually does refresh, but we need a better solution for keyboard input (maybe?)
-            ingredientListView.Invalidate();
+            this.RunOnUiThread(adapter.NotifyDataSetChanged);
+
         }
 
         /// <summary>
@@ -214,6 +231,9 @@ namespace OnMenu.Droid.Activities
         {
             nameField.Text = editRecipe.Name;
             instructionsField.Text = editRecipe.Instructions;
+            AddedIngredients.Clear();
+            //Don't want to have a reference to different objects on the RecyclerView
+            ItemParser.IdCSVToIngredientList(editRecipe.Ingredients, IngViewModel).ForEach(item => AddedIngredients.Add(item));
         }
 
         /// <summary>
@@ -225,98 +245,77 @@ namespace OnMenu.Droid.Activities
         {
             if (editMode)
             {
-
+                editRecipe.Name = nameField.Text;
+                editRecipe.Instructions = instructionsField.Text;
+                editRecipe.Ingredients = ItemParser.IngredientsToIdCSV(AddedIngredients.ToList());
+                RecViewModel.UpdateRecipesCommand.Execute(editRecipe);
             }
             else
             {
-
+                Recipe recipe = new Recipe
+                (
+                    nameField.Text,
+                    instructionsField.Text,
+                    AddedIngredients.ToList(),
+                    0
+                );
+                RecViewModel.AddRecipesCommand.Execute(recipe);
             }
             Finish();
         }
     }
 
     /// <summary>
-    /// An adapter for a listview adding ingredients to a recipe
+    /// An adapter for a recyclerview adding ingredients to a recipe
     /// </summary>
-    //A little trick
-    public class RecipeIngredientsAdapter : BaseAdapter<Ingredient>
+    public class RecipeIngredientsAdapter : BaseRecycleViewAdapter
     {
-        /// <summary>
-        /// The adapter for the spinner
-        /// </summary>
-        ArrayAdapter adapter;
+
         /// <summary>
         /// List of ingredients 
         /// </summary>
-        ObservableCollection<Ingredient> ingredientList;
+        public ObservableCollection<Ingredient> IngredientList;
+        AddRecipeActivity activity;
         RecipeIngredientsViewHolder holder;
 
-        int Position = 0;
-        ViewGroup Parent;
+        public RecipeIngredientsAdapter(AddRecipeActivity activity, ObservableCollection<Ingredient> ingredientList)
+        {
+            this.activity = activity;
+            IngredientList = ingredientList;
+            IngredientList.CollectionChanged += (sender, args) =>
+            {
+                this.activity.RunOnUiThread(NotifyDataSetChanged);
+            };
+        }
+
+
+        public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
+        {
+            View ingRecView =
+                LayoutInflater.From(parent.Context).Inflate(Resource.Layout.recyclerviewrow_add_ingredient_to_recipe, parent, false);
+            holder = new RecipeIngredientsViewHolder(ingRecView, OnClick, OnLongClick);
+            return holder;
+        }
+
+        public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
+        {
+            Ingredient ingredient = IngredientList[position];
+            RecipeIngredientsViewHolder aHolder = holder as RecipeIngredientsViewHolder;
+            aHolder.IngredientTextView.Text = IngredientList[position].Name;
+            aHolder.QuantityTextView.Text = IngredientList[position].Quantity.ToString();
+            aHolder.MeasurementTextView.Text = IngredientList[position].Measure;
+        }
 
         /// <summary>
-        /// Returns an item from a position
+        /// Gets the item count
         /// </summary>
-        /// <param name="position">The position of the item</param>
-        /// <returns>The item on that position</returns>
-        public override Ingredient this[int position]
-        {
-            get
-            {
-                return ingredientList[position];
-            }
-        }
-
-        public void AddIngredient(Ingredient i)
-        {
-            ingredientList.Add(i);
-        }
-
-        public override int Count
-        {
-            get
-            {
-                return ingredientList.Count;
-            }
-        }
-
-        public RecipeIngredientsAdapter(ObservableCollection<Ingredient> repeaterList)
-        {
-            ingredientList = repeaterList;
-        }
-
-        public override long GetItemId(int position)
-        {
-            this.Position = position;
-            return position;
-        }
-
-        public override View GetView(int position, View convertView, ViewGroup parent)
-        {
-            Parent = parent;
-            var view = convertView;
-            Position = position;
-            if (view == null)
-            {
-                view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.listviewrow_add_ingredient_to_recipe, parent, false);
-                TextView ingredientTextView = view.FindViewById<TextView>(Resource.Id.ingredientTextView_addRecipe);
-                TextView quantityEditText = view.FindViewById<TextView>(Resource.Id.quantityTextView_addRecipe);
-                TextView measurementTextView = view.FindViewById<TextView>(Resource.Id.measurementTextView_addRecipe);
-                view.Tag = new RecipeIngredientsViewHolder() { IngredientTextView = ingredientTextView, QuantityTextView = quantityEditText, MeasurementTextView = measurementTextView };
-            }
-            holder = (RecipeIngredientsViewHolder)view.Tag;
-            holder.IngredientTextView.Text = ingredientList[position].Name;
-            holder.QuantityTextView.Text = ingredientList[position].Quantity.ToString();
-            holder.MeasurementTextView.Text = ingredientList[position].Measure;
-            return view;
-        }
-
+        public override int ItemCount => IngredientList.Count;
     }
 
     /// <summary>
     /// Viewholder to add ingredients to a recipe
     /// </summary>
-    public class RecipeIngredientsViewHolder : Java.Lang.Object
+    public class RecipeIngredientsViewHolder : RecyclerView.ViewHolder
     {
         /// <summary>
         /// TextView with the ingredient
@@ -330,5 +329,16 @@ namespace OnMenu.Droid.Activities
         /// Field to indicate the measurement of an ingredient
         /// </summary>
         public TextView MeasurementTextView;
+
+        public RecipeIngredientsViewHolder(View itemView, Action<RecyclerClickEventArgs> clickListener,
+                            Action<RecyclerClickEventArgs> longClickListener) : base(itemView)
+        {
+            IngredientTextView = itemView.FindViewById<TextView>(Resource.Id.ingredientTextView_addRecipe);
+            QuantityTextView = itemView.FindViewById<TextView>(Resource.Id.quantityTextView_addRecipe);
+            MeasurementTextView = itemView.FindViewById<TextView>(Resource.Id.measurementTextView_addRecipe);
+            itemView.Click += (sender, e) => clickListener(new RecyclerClickEventArgs { View = itemView, Position = AdapterPosition });
+            itemView.LongClick += (sender, e) => longClickListener(new RecyclerClickEventArgs { View = itemView, Position = AdapterPosition });
+        }
+
     }
 }

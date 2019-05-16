@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/ingredientsCell_addRecipe"
             android:padding="15dp">
-            
+
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,17 +94,26 @@
             </LinearLayout>
         </LinearLayout>
         <TextView
-                android:text="@string/addrecipe_ingredientList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/ingredientLabel_addRecipe"/>
-        <ListView
+            android:text="@string/addrecipe_ingredientList"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/listviewAddIngredients_addRecipe"
-            android:padding="15dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/ingredientLabel_addRecipe"/>
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout_addRecipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        >
+
+            <android.support.v7.widget.RecyclerView
+                android:scrollbars="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                app:layoutManager="GridLayoutManager"
+                android:id="@+id/recyclerviewAddIngredients_addRecipe"
+                android:padding="15dp"
         />
+        </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton

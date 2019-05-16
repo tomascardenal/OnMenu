@@ -27,6 +27,10 @@ namespace OnMenu.Droid
         /// </summary>
         BrowseIngredientsAdapter adapter;
         /// <summary>
+        /// The recyclerview with the ingredients
+        /// </summary>
+        RecyclerView recyclerView;
+        /// <summary>
         /// The refresher.
         /// </summary>
         SwipeRefreshLayout refresher;
@@ -71,8 +75,7 @@ namespace OnMenu.Droid
             ViewModel = new IngredientsViewModel();
 
             View view = inflater.Inflate(Resource.Layout.fragment_browse, container, false);
-            var recyclerView =
-                view.FindViewById<RecyclerView>(Resource.Id.recyclerView);
+            recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView);
 
             recyclerView.HasFixedSize = true;
             recyclerView.SetAdapter(adapter = new BrowseIngredientsAdapter(Activity, ViewModel));
