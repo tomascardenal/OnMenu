@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using OnMenu.Models;
 using OnMenu.Models.Items;
@@ -23,6 +24,15 @@ namespace OnMenu.Droid
         /// </summary>
         IngredientDetailViewModel viewModel;
         /// <summary>
+        /// The ingredient to show
+        /// </summary>
+        Ingredient ingredient;
+        TextView foodGroupView;
+        TextView allergenView;
+        TextView unitView;
+        TextView priceView;
+
+        /// <summary>
         /// Handles the actions to do when this activity is created
         /// </summary>
         /// <param name="savedInstanceState">Saved instance state.</param>
@@ -31,14 +41,55 @@ namespace OnMenu.Droid
             base.OnCreate(savedInstanceState);
 
             var data = Intent.GetStringExtra("data");
-
-            Ingredient ingredient = Newtonsoft.Json.JsonConvert.DeserializeObject<Ingredient>(data);
+            ingredient = Newtonsoft.Json.JsonConvert.DeserializeObject<Ingredient>(data);
             viewModel = new IngredientDetailViewModel(ingredient);
-            FindViewById<TextView>(Resource.Id.foodgroup_ingredientDetail).Text = ingredient.Group;
-            FindViewById<TextView>(Resource.Id.allergen_ingredientDetail).Text = ingredient.Allergen ? GetString(Resource.String.yes) : GetString(Resource.String.no);
-            FindViewById<TextView>(Resource.Id.unit_ingredientDetail).Text = ingredient.Measure;
-            FindViewById<TextView>(Resource.Id.price_ingredientDetail).Text = ingredient.EstimatedPrice.ToString();
+            foodGroupView = FindViewById<TextView>(Resource.Id.foodgroup_ingredientDetail);
+            allergenView = FindViewById<TextView>(Resource.Id.allergen_ingredientDetail);
+            unitView = FindViewById<TextView>(Resource.Id.unit_ingredientDetail);
+            priceView = FindViewById<TextView>(Resource.Id.price_ingredientDetail);
+
+            
+        }
+
+        protected void updateValues()
+        {
+            foodGroupView.Text = ingredient.Group;
+            allergenView.Text = ingredient.Allergen ? GetString(Resource.String.yes) : GetString(Resource.String.no);
+            unitView.Text = ingredient.Measure;
+            priceView.Text = ingredient.EstimatedPrice.ToString();
             SupportActionBar.Title = ingredient.Name;
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.browse_context_menus, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.menu_deleteItem:
+                    if (ingredient.CanDelete)
+                    {
+                        BrowseIngredientFragment.ViewModel.DeleteIngredientsCommand.Execute(ingredient);
+                        SetResult(Result.Ok);
+                        this.Finish();
+                    }
+                    else
+                    {
+                        Toast.MakeText(this.ApplicationContext, Resource.String.cantDelete_toast, ToastLength.Long).Show();
+                    }
+                    break;
+                case Resource.Id.menu_editItem:
+                    Intent intent = new Intent(this, typeof(AddIngredientsActivity));
+                    intent.PutExtra("ingredient", Newtonsoft.Json.JsonConvert.SerializeObject(ingredient));
+                    this.StartActivity(intent);
+                    updateValues();
+                    break;
+            }
+            return base.OnOptionsItemSelected(item);
         }
 
         /// <summary>
@@ -47,6 +98,7 @@ namespace OnMenu.Droid
         protected override void OnStart()
         {
             base.OnStart();
+            updateValues();
         }
 
         /// <summary>

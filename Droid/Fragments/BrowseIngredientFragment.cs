@@ -8,6 +8,7 @@ using Android.App;
 using Android.Content;
 using PopupMenu = Android.Support.V7.Widget.PopupMenu;
 using Android.Util;
+using OnMenu.Droid.Helpers;
 
 namespace OnMenu.Droid
 {
@@ -125,7 +126,13 @@ namespace OnMenu.Droid
             var intent = new Intent(Activity, typeof(BrowseIngredientDetailActivity));
 
             intent.PutExtra("data", Newtonsoft.Json.JsonConvert.SerializeObject(item));
-            Activity.StartActivity(intent);
+            Activity.StartActivityForResult(intent,0);
+        }
+
+        public override void OnActivityResult(int requestCode, int resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            Utils.ForceRefreshLayout(refresher, recyclerView);
         }
 
         /// <summary>
@@ -155,7 +162,7 @@ namespace OnMenu.Droid
                     if (ViewModel.Ingredients[selectedItem].CanDelete)
                     {
                         ViewModel.DeleteIngredientsCommand.Execute(ViewModel.Ingredients[selectedItem]);
-                        adapter.NotifyItemRemoved(selectedItem);
+                        Utils.ForceRefreshLayout(refresher, recyclerView);
                     }
                     else
                     {
@@ -166,6 +173,7 @@ namespace OnMenu.Droid
                     Intent intent = new Intent(Activity, typeof(AddIngredientsActivity));
                     intent.PutExtra("ingredient", Newtonsoft.Json.JsonConvert.SerializeObject(ViewModel.Ingredients[selectedItem]));
                     Activity.StartActivity(intent);
+                    Utils.ForceRefreshLayout(refresher, recyclerView);
                     break;
             }
 
