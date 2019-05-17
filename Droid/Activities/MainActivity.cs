@@ -53,7 +53,7 @@ namespace OnMenu.Droid
             pager.Adapter = adapter;
             tabs.SetupWithViewPager(pager);
             pager.OffscreenPageLimit = 3;
-
+            
             pager.PageSelected += (sender, args) =>
             {
                 var fragment = adapter.InstantiateItem(pager, args.Position) as IFragmentVisible;

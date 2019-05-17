@@ -179,13 +179,9 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_save.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_save.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_save.png" />
-    <AndroidResource Include="Resources\layout\activity_item_details.axml" />
     <AndroidResource Include="Resources\layout\activity_main.axml" />
-    <AndroidResource Include="Resources\layout\activity_myitem_details.axml" />
     <AndroidResource Include="Resources\layout\fragment_about.axml" />
     <AndroidResource Include="Resources\layout\fragment_browse.axml" />
-    <AndroidResource Include="Resources\layout\fragment_myitems.axml" />
-    <AndroidResource Include="Resources\layout\item_my_item.axml" />
     <AndroidResource Include="Resources\layout\tabs.axml" />
     <AndroidResource Include="Resources\layout\toolbar.axml" />
     <AndroidResource Include="Resources\menu\top_menus.xml" />
@@ -201,7 +197,6 @@
     <AndroidResource Include="Resources\values\styles.xml" />
     <AndroidResource Include="Resources\values-v19\styles.xml" />
     <AndroidResource Include="Resources\values-v21\styles.xml" />
-    <AndroidResource Include="Resources\layout\activity_add_item.axml" />
     <AndroidResource Include="Resources\values-en\Strings.xml" />
     <AndroidResource Include="Resources\layout\activity_add_ingredient.axml" />
     <AndroidResource Include="Resources\layout\ingredient_browse.axml" />
