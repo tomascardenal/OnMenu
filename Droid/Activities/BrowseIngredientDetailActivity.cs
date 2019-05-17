@@ -47,8 +47,6 @@ namespace OnMenu.Droid
             allergenView = FindViewById<TextView>(Resource.Id.allergen_ingredientDetail);
             unitView = FindViewById<TextView>(Resource.Id.unit_ingredientDetail);
             priceView = FindViewById<TextView>(Resource.Id.price_ingredientDetail);
-
-            
         }
 
         protected void updateValues()
@@ -89,6 +87,7 @@ namespace OnMenu.Droid
                     updateValues();
                     break;
             }
+
             return base.OnOptionsItemSelected(item);
         }
 

@@ -11,12 +11,14 @@ using Android.Runtime;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+using OnMenu.Droid.Helpers;
 using OnMenu.Helpers;
 using OnMenu.Models.Items;
 using OnMenu.ViewModels;
 
 namespace OnMenu.Droid.Activities
 {
+    //TODO rating system
     /// <summary>
     /// Activity to browse recipe details
     /// </summary>
@@ -64,7 +66,6 @@ namespace OnMenu.Droid.Activities
 
         protected void updateValues()
         {
-            
             List <Ingredient> placeholderL = ItemParser.IdCSVToIngredientList(recipe.Ingredients, BrowseIngredientFragment.ViewModel);
             ObservableCollection<Ingredient> ingList = new ObservableCollection<Ingredient>();
             placeholderL.ForEach(i => ingList.Add(i));
@@ -83,6 +84,34 @@ namespace OnMenu.Droid.Activities
             });
             recipePrice.Text = price.ToString();
             SupportActionBar.Title = recipe.Name;
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.browse_context_menus, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.menu_deleteItem:
+                    List<Ingredient> ingList = ItemParser.IdCSVToIngredientList(recipe.Ingredients, BrowseIngredientFragment.ViewModel);
+                    ingList.ForEach(i => i.CanDelete = true);
+                    BrowseRecipeFragment.ViewModel.DeleteRecipesCommand.Execute(recipe);
+                    SetResult(Result.Ok);
+                    this.Finish();
+                    break;
+                case Resource.Id.menu_editItem:
+                    Intent intent = new Intent(this, typeof(AddRecipeActivity));
+                    intent.PutExtra("recipe", Newtonsoft.Json.JsonConvert.SerializeObject(recipe));
+                    StartActivity(intent);
+                    updateValues();
+                    break;
+            }
+
+            return base.OnOptionsItemSelected(item);
         }
 
         /// <summary>

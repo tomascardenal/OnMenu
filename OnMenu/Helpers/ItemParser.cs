@@ -1,4 +1,5 @@
-﻿using OnMenu.Models.Items;
+﻿using Android.Util;
+using OnMenu.Models.Items;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,6 +22,7 @@ namespace OnMenu.Helpers
             string parsedList = "";
             foreach(Ingredient i in ingredients)
             {
+                Log.Debug("saveIngredient", i.Name + i.Id);
                 parsedList += i.Id + ",";
             }
             return parsedList;
@@ -46,9 +48,9 @@ namespace OnMenu.Helpers
             }
             foreach(string id in separatedValues)
             {
-                if (int.TryParse(id,out parsedId)&&parsedId>=0&&parsedId<viewModelReference.Ingredients.Count)
+                if (int.TryParse(id,out parsedId)&&parsedId-1>=0&&parsedId-1<viewModelReference.Ingredients.Count)
                 {
-                    ingredientList.Add(viewModelReference.Ingredients[parsedId]);
+                    ingredientList.Add(viewModelReference.Ingredients[parsedId-1]);
                 }
             }
             return ingredientList;

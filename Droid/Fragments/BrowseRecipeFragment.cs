@@ -8,6 +8,10 @@ using Android.App;
 using Android.Content;
 using OnMenu.Droid.Activities;
 using PopupMenu = Android.Support.V7.Widget.PopupMenu;
+using OnMenu.Helpers;
+using System.Collections.Generic;
+using OnMenu.Models.Items;
+using OnMenu.Droid.Helpers;
 
 namespace OnMenu.Droid
 {
@@ -30,6 +34,10 @@ namespace OnMenu.Droid
         /// The refresher.
         /// </summary>
         SwipeRefreshLayout refresher;
+        /// <summary>
+        /// Recipes recyclerView
+        /// </summary>
+        RecyclerView recyclerView;
         /// <summary>
         /// The context menu.
         /// </summary>
@@ -71,7 +79,7 @@ namespace OnMenu.Droid
             ViewModel = new RecipeViewModel();
 
             View view = inflater.Inflate(Resource.Layout.fragment_browse, container, false);
-            var recyclerView =
+            recyclerView =
                 view.FindViewById<RecyclerView>(Resource.Id.recyclerView);
 
             recyclerView.HasFixedSize = true;
@@ -150,6 +158,8 @@ namespace OnMenu.Droid
             switch (e.Item.ItemId)
             {
                 case Resource.Id.menu_deleteItem:
+                    List<Ingredient> ingList = ItemParser.IdCSVToIngredientList(ViewModel.Recipes[selectedItem].Ingredients, BrowseIngredientFragment.ViewModel);
+                    ingList.ForEach(i => i.CanDelete = true);
                     ViewModel.DeleteRecipesCommand.Execute(ViewModel.Recipes[selectedItem]);
                     adapter.NotifyItemRemoved(selectedItem);
                     break;
@@ -159,7 +169,7 @@ namespace OnMenu.Droid
                     Activity.StartActivity(intent);
                     break;
             }
-
+            Utils.ForceRefreshLayout(refresher, recyclerView);
         }
 
         /// <summary>
