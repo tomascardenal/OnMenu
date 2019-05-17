@@ -34,9 +34,10 @@ namespace OnMenu.Droid
 
             Ingredient ingredient = Newtonsoft.Json.JsonConvert.DeserializeObject<Ingredient>(data);
             viewModel = new IngredientDetailViewModel(ingredient);
-
-            FindViewById<TextView>(Resource.Id.description).Text = ingredient.Name;
-
+            FindViewById<TextView>(Resource.Id.foodgroup_ingredientDetail).Text = ingredient.Group;
+            FindViewById<TextView>(Resource.Id.allergen_ingredientDetail).Text = ingredient.Allergen ? GetString(Resource.String.yes) : GetString(Resource.String.no);
+            FindViewById<TextView>(Resource.Id.unit_ingredientDetail).Text = ingredient.Measure;
+            FindViewById<TextView>(Resource.Id.price_ingredientDetail).Text = ingredient.EstimatedPrice.ToString();
             SupportActionBar.Title = ingredient.Name;
         }
 
