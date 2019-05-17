@@ -44,6 +44,10 @@
         /// </summary>
         /// <value>The estimated price of this ingredient.</value>
         public float EstimatedPrice { get => estimatedPrice; set => estimatedPrice = value; }
+        /// <summary>
+        /// Indicates if this ingredient can be deleted or not (if it's on a recipe, it shouldn't)
+        /// </summary>
+        public bool CanDelete { get; set; }
 
         /// <summary>
         /// Initializes a new ingredient to it's parameters
@@ -59,6 +63,7 @@
             Measure = measure;
             Allergen = allergen;
             EstimatedPrice = estimatedPrice;
+            CanDelete = true;
         }
 
         /// <summary>

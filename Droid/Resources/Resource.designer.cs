@@ -3590,8 +3590,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b0010
 			public const int abc_toolbar_collapse_description = 2131427344;
 			
-			// aapt resource value: 0x7f0b0059
-			public const int accept = 2131427417;
+			// aapt resource value: 0x7f0b005a
+			public const int accept = 2131427418;
 			
 			// aapt resource value: 0x7f0b0047
 			public const int addingredient_allergen = 2131427399;
@@ -3665,8 +3665,11 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b001f
 			public const int bottom_sheet_behavior = 2131427359;
 			
+			// aapt resource value: 0x7f0b0059
+			public const int cancel = 2131427417;
+			
 			// aapt resource value: 0x7f0b0058
-			public const int cancel = 2131427416;
+			public const int cantDelete_toast = 2131427416;
 			
 			// aapt resource value: 0x7f0b0020
 			public const int character_counter_pattern = 2131427360;
@@ -3710,8 +3713,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b0042
 			public const int menu_item_save = 2131427394;
 			
-			// aapt resource value: 0x7f0b005b
-			public const int no = 2131427419;
+			// aapt resource value: 0x7f0b005c
+			public const int no = 2131427420;
 			
 			// aapt resource value: 0x7f0b002e
 			public const int notnow = 2131427374;
@@ -3776,8 +3779,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b0030
 			public const int version_number = 2131427376;
 			
-			// aapt resource value: 0x7f0b005a
-			public const int yes = 2131427418;
+			// aapt resource value: 0x7f0b005b
+			public const int yes = 2131427419;
 			
 			static String()
 			{

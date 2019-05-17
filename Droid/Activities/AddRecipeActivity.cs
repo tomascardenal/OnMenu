@@ -257,6 +257,10 @@ namespace OnMenu.Droid.Activities
             ItemParser.IdCSVToIngredientList(editRecipe.Ingredients, IngViewModel).ForEach(item => addedIngredients.Add(item));
             ItemParser.QuantityValuesToFloatList(editRecipe.Quantities).ForEach(q => quantityStore.Add(q));
             adapter.QuantityStore = quantityStore;
+            for(int i = 0; i < addedIngredients.Count(); i++)
+            {
+                addedIngredients[i].CanDelete = true;
+            }
         }
 
         /// <summary>
@@ -266,6 +270,10 @@ namespace OnMenu.Droid.Activities
         /// <param name="e">The event args.</param>
         void SaveButton_Click(object sender, EventArgs e)
         {
+            for (int i = 0; i < addedIngredients.Count(); i++)
+            {
+                addedIngredients[i].CanDelete = false;
+            }
             if (editMode)
             {
                 editRecipe.Name = nameField.Text;

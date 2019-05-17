@@ -152,8 +152,15 @@ namespace OnMenu.Droid
             switch (e.Item.ItemId)
             {
                 case Resource.Id.menu_deleteItem:
-                    ViewModel.DeleteIngredientsCommand.Execute(ViewModel.Ingredients[selectedItem]);
-                    adapter.NotifyItemRemoved(selectedItem);
+                    if (ViewModel.Ingredients[selectedItem].CanDelete)
+                    {
+                        ViewModel.DeleteIngredientsCommand.Execute(ViewModel.Ingredients[selectedItem]);
+                        adapter.NotifyItemRemoved(selectedItem);
+                    }
+                    else
+                    {
+                        Toast.MakeText(this.Context, Resource.String.cantDelete_toast, ToastLength.Long).Show();
+                    }
                     break;
                 case Resource.Id.menu_editItem:
                     Intent intent = new Intent(Activity, typeof(AddIngredientsActivity));

@@ -19,6 +19,10 @@ namespace OnMenu.ViewModels
         /// List of ingredients for this recipe
         /// </summary>
         public List<Ingredient> IngredientList { get; set; }
+        /// <summary>
+        /// List of quantities for this recipe
+        /// </summary>
+        public List<float> QuantityList { get; set; }
 
         /// <summary>
         /// Instantiates a new view model
@@ -32,6 +36,7 @@ namespace OnMenu.ViewModels
                 Title = recipe.Name;
                 Recipe = recipe;
                 IngredientList = ItemParser.IdCSVToIngredientList(recipe.Ingredients,ingredientReference);
+                QuantityList = ItemParser.QuantityValuesToFloatList(recipe.Quantities);
             }
         }
     }
