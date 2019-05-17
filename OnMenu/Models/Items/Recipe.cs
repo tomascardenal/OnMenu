@@ -51,6 +51,11 @@ namespace OnMenu.Models.Items
             }
         }
 
+        /// <summary>
+        /// CSV string with quantity references
+        /// </summary>
+        public string Quantities { get; set; }
+
 
         /// <summary>
         /// Initializes a new recipe to it's parameters/>
@@ -59,11 +64,12 @@ namespace OnMenu.Models.Items
         /// <param name="instructions">The instructions to follow on this recipe.</param>
         /// <param name="ingredients">List of ingredients.</param>
         /// <param name="rating">The recipe's name.</param>
-        public Recipe(string name, string instructions, List<Ingredient> ingredients, int rating):base(name)
+        public Recipe(string name, string instructions, List<Ingredient> ingredients, List<float> quantities, int rating):base(name)
         {
             Instructions = instructions;
             Ingredients = ItemParser.IngredientsToIdCSV(ingredients);
             Rating = rating;
+            Quantities = ItemParser.FloatListToQuantityValues(quantities);
         }
 
         /// <summary>

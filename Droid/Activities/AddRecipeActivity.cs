@@ -28,6 +28,17 @@ namespace OnMenu.Droid.Activities
     [Activity(Label = "AddRecipeActivity")]
     public class AddRecipeActivity : Activity
     {
+
+        /// <summary>
+        /// Gets or sets the recipes view model.
+        /// </summary>
+        /// <value>The view model.</value>
+        public RecipeViewModel RecViewModel { get; set; }
+        /// <summary>
+        /// Gets or sets the ingredients view model.
+        /// </summary>
+        /// <value>The view model.</value>
+        public IngredientsViewModel IngViewModel { get; set; }
         /// <summary>
         /// The save button.
         /// </summary>
@@ -57,24 +68,6 @@ namespace OnMenu.Droid.Activities
         /// </summary>
         SwipeRefreshLayout swipeRefreshLayout;
         /// <summary>
-        /// Whether this activity is on editmode or not
-        /// </summary>
-        bool editMode = false;
-        /// <summary>
-        /// The recipe to edit
-        /// </summary>
-        Recipe editRecipe = null;
-        /// <summary>
-        /// Gets or sets the recipes view model.
-        /// </summary>
-        /// <value>The view model.</value>
-        public RecipeViewModel RecViewModel { get; set; }
-        /// <summary>
-        /// Gets or sets the ingredients view model.
-        /// </summary>
-        /// <value>The view model.</value>
-        public IngredientsViewModel IngViewModel { get; set; }
-        /// <summary>
         /// The recyclerview adapter.
         /// </summary>
         RecipeIngredientsAdapter adapter;
@@ -85,15 +78,29 @@ namespace OnMenu.Droid.Activities
         /// <summary>
         /// List of arrays for the RecyclerView
         /// </summary>
-        ObservableCollection<Ingredient> AddedIngredients;
+        ObservableCollection<Ingredient> addedIngredients;
         /// <summary>
         /// Dialog builder for asking ingredient quantities
         /// </summary>
         AlertDialog.Builder alertIngredientBuilder;
         /// <summary>
+        /// Whether this activity is on editmode or not
+        /// </summary>
+        bool editMode;
+        /// <summary>
+        /// The recipe to edit
+        /// </summary>
+        Recipe editRecipe;
+        /// <summary>
         /// Show the hint to delete an ingredient
         /// </summary>
-        bool toastAlert = true;
+        bool toastAlert;
+        /// <summary>
+        /// Stores the ingredient quantities
+        /// </summary>
+        List<float> quantityStore;
+        
+
 
         /// <summary>
         /// Handles the actions to do when this activity is created
@@ -102,15 +109,15 @@ namespace OnMenu.Droid.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            toastAlert = true;
+            editRecipe = null;
+            editMode = false;
 
             IngViewModel = BrowseIngredientFragment.ViewModel;
             RecViewModel = BrowseRecipeFragment.ViewModel;
             ingredientNames = IngViewModel.Ingredients.Select(ingredient => ingredient.Name).ToArray();
-            AddedIngredients = new ObservableCollection<Ingredient>();
-            if (IngViewModel.Ingredients != null && IngViewModel.Ingredients.Count > 0)
-            {
-                AddedIngredients.Add(IngViewModel.Ingredients[0]);
-            }
+            addedIngredients = new ObservableCollection<Ingredient>();
+           
             SetContentView(Resource.Layout.activity_add_recipe);
             saveButton = FindViewById<FloatingActionButton>(Resource.Id.save_button_addRecipe);
             nameField = FindViewById<EditText>(Resource.Id.nameField_addRecipe);
@@ -120,8 +127,10 @@ namespace OnMenu.Droid.Activities
             ingredientSpinner = FindViewById<Spinner>(Resource.Id.ingredientSpinner_addRecipe);
             swipeRefreshLayout = FindViewById<SwipeRefreshLayout>(Resource.Id.swipeRefreshLayout_addRecipe);
 
-            ingredientRecyclerView.SetAdapter(adapter = new RecipeIngredientsAdapter(this, AddedIngredients));
+            ingredientRecyclerView.SetAdapter(adapter = new RecipeIngredientsAdapter(this, addedIngredients,quantityStore));
             ingredientSpinner.Adapter = new ArrayAdapter(this.ApplicationContext, Android.Resource.Layout.SimpleListItem1, ingredientNames);
+
+            quantityStore = new List<float>();
 
             var data = Intent.GetStringExtra("recipe") ?? null;
             if (data != null)
@@ -145,11 +154,11 @@ namespace OnMenu.Droid.Activities
         private void IngredientRecyclerView_ItemLongClick(object sender, RecyclerClickEventArgs e)
         {
             AlertDialog.Builder confirmAlert = new AlertDialog.Builder(this);
-            confirmAlert.SetTitle(AddedIngredients[e.Position].Name);
+            confirmAlert.SetTitle(addedIngredients[e.Position].Name);
             confirmAlert.SetMessage(GetString(Resource.String.addrecipe_confirmDeleteIngredient));
             confirmAlert.SetPositiveButton(GetString(Resource.String.yes), (senderFromAlert, args) =>
              {
-                 AddedIngredients.RemoveAt(e.Position);
+                 addedIngredients.RemoveAt(e.Position);
              });
             Dialog dialog = confirmAlert.Create();
             dialog.Show();
@@ -169,7 +178,11 @@ namespace OnMenu.Droid.Activities
             TextView unitAlert = alertView.FindViewById<TextView>(Resource.Id.ingredientUnit_dialog);
             ingredientAlert.Text = i.Name;
             unitAlert.Text = i.Measure;
-            quantityInput.Text = i.Quantity.ToString();
+            if (addedIngredients.Contains(i))
+            {
+                quantityInput.Text = quantityStore[addedIngredients.IndexOf(i)].ToString();
+            }
+
             alertIngredientBuilder = new AlertDialog.Builder(this);
             alertIngredientBuilder.SetView(alertView);
             alertIngredientBuilder.SetCancelable(false)
@@ -180,10 +193,16 @@ namespace OnMenu.Droid.Activities
                     {
                         q = 1;
                     }
-                    i.Quantity = q;
-                    if (!AddedIngredients.Contains(i))
+                    if (!addedIngredients.Contains(i))
                     {
-                        AddedIngredients.Add(i);
+                        quantityStore.Add(q);
+                        adapter.QuantityStore = quantityStore;
+                        addedIngredients.Add(i);
+                    }
+                    else
+                    {
+                        quantityStore[addedIngredients.IndexOf(i)] = q;
+                        adapter.QuantityStore = quantityStore;
                     }
                     //FORCE KEYBOARD TO HIDE, PLEASE
                     Utils.HideKeyboardFromInput(this, quantityInput);
@@ -231,9 +250,13 @@ namespace OnMenu.Droid.Activities
         {
             nameField.Text = editRecipe.Name;
             instructionsField.Text = editRecipe.Instructions;
-            AddedIngredients.Clear();
+            addedIngredients.Clear();
+            quantityStore.Clear();
+
             //Don't want to have a reference to different objects on the RecyclerView
-            ItemParser.IdCSVToIngredientList(editRecipe.Ingredients, IngViewModel).ForEach(item => AddedIngredients.Add(item));
+            ItemParser.IdCSVToIngredientList(editRecipe.Ingredients, IngViewModel).ForEach(item => addedIngredients.Add(item));
+            ItemParser.QuantityValuesToFloatList(editRecipe.Quantities).ForEach(q => quantityStore.Add(q));
+            adapter.QuantityStore = quantityStore;
         }
 
         /// <summary>
@@ -247,7 +270,8 @@ namespace OnMenu.Droid.Activities
             {
                 editRecipe.Name = nameField.Text;
                 editRecipe.Instructions = instructionsField.Text;
-                editRecipe.Ingredients = ItemParser.IngredientsToIdCSV(AddedIngredients.ToList());
+                editRecipe.Ingredients = ItemParser.IngredientsToIdCSV(addedIngredients.ToList());
+                editRecipe.Quantities = ItemParser.FloatListToQuantityValues(quantityStore);
                 RecViewModel.UpdateRecipesCommand.Execute(editRecipe);
             }
             else
@@ -256,7 +280,8 @@ namespace OnMenu.Droid.Activities
                 (
                     nameField.Text,
                     instructionsField.Text,
-                    AddedIngredients.ToList(),
+                    addedIngredients.ToList(),
+                    quantityStore,
                     0
                 );
                 RecViewModel.AddRecipesCommand.Execute(recipe);
@@ -275,13 +300,16 @@ namespace OnMenu.Droid.Activities
         /// List of ingredients 
         /// </summary>
         public ObservableCollection<Ingredient> IngredientList;
+        public List<float> QuantityStore { get; set; }
         AddRecipeActivity activity;
         RecipeIngredientsViewHolder holder;
+        
 
-        public RecipeIngredientsAdapter(AddRecipeActivity activity, ObservableCollection<Ingredient> ingredientList)
+        public RecipeIngredientsAdapter(AddRecipeActivity activity, ObservableCollection<Ingredient> ingredientList, List<float> quantityStore)
         {
             this.activity = activity;
             IngredientList = ingredientList;
+            this.QuantityStore = quantityStore;
             IngredientList.CollectionChanged += (sender, args) =>
             {
                 this.activity.RunOnUiThread(NotifyDataSetChanged);
@@ -302,7 +330,7 @@ namespace OnMenu.Droid.Activities
             Ingredient ingredient = IngredientList[position];
             RecipeIngredientsViewHolder aHolder = holder as RecipeIngredientsViewHolder;
             aHolder.IngredientTextView.Text = IngredientList[position].Name;
-            aHolder.QuantityTextView.Text = IngredientList[position].Quantity.ToString();
+            aHolder.QuantityTextView.Text = QuantityStore[position].ToString();
             aHolder.MeasurementTextView.Text = IngredientList[position].Measure;
         }
 

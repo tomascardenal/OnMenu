@@ -40,7 +40,7 @@ namespace OnMenu.Droid.Activities
             var data = Intent.GetStringExtra("data");
 
             Recipe recipe = Newtonsoft.Json.JsonConvert.DeserializeObject<Recipe>(data);
-            viewModel = new RecipeDetailViewModel(recipe);
+            viewModel = new RecipeDetailViewModel(recipe, BrowseIngredientFragment.ViewModel);
 
             FindViewById<TextView>(Resource.Id.description).Text = recipe.Name;
 

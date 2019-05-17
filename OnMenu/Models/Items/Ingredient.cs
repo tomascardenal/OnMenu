@@ -46,16 +46,6 @@
         public float EstimatedPrice { get => estimatedPrice; set => estimatedPrice = value; }
 
         /// <summary>
-        /// The quantity to use of this ingredient.
-        /// </summary>
-        float quantity;
-        /// <summary>
-        /// Gets or sets the quantity of this ingredient.
-        /// </summary>
-        /// <value>The quantity to use, can be zero if the ingredient is to be stored but not used.</value>
-        public float Quantity { get => quantity; set => quantity = value; }
-
-        /// <summary>
         /// Initializes a new ingredient to it's parameters
         /// </summary>
         /// <param name="name">The ingredient's name.</param>
@@ -69,7 +59,6 @@
             Measure = measure;
             Allergen = allergen;
             EstimatedPrice = estimatedPrice;
-            Quantity = 0;
         }
 
         /// <summary>

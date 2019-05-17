@@ -53,5 +53,30 @@ namespace OnMenu.Helpers
             }
             return ingredientList;
         }
+
+        public static string FloatListToQuantityValues(List<float> floatList)
+        {
+            string ssv = "";
+            foreach(float f in floatList)
+            {
+                ssv += f.ToString() + "/";
+            }
+
+            return ssv;
+        }
+
+        public static List<float> QuantityValuesToFloatList(string floatSSV)
+        {
+            List<float> floatList = new List<float>();
+            string[] ssValues = floatSSV.Split("/");
+            foreach(string s in ssValues)
+            {
+                float f = 0;
+                float.TryParse(s, out f);
+                floatList.Add(f);
+            }
+
+            return floatList;
+        }
     }
 }
