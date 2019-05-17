@@ -200,7 +200,7 @@
     <AndroidResource Include="Resources\values-v19\styles.xml" />
     <AndroidResource Include="Resources\values-v21\styles.xml" />
     <AndroidResource Include="Resources\layout\activity_add_item.axml" />
-    <AndroidResource Include="Resources\values-es\Strings.xml" />
+    <AndroidResource Include="Resources\values-en\Strings.xml" />
     <AndroidResource Include="Resources\layout\activity_add_ingredient.axml" />
     <AndroidResource Include="Resources\layout\ingredient_browse.axml" />
     <AndroidResource Include="Resources\layout\activity_ingredient_details.axml" />

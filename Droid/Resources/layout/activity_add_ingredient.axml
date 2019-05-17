@@ -130,6 +130,38 @@
                     android:layout_height="match_parent"
                     android:id="@+id/estimatedPriceField_addIngredient" />
             </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/estimatedPerCell_addIngredient"
+                android:padding="10dp">
+                <TextView
+                    android:text="@string/estimatedPricePer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/estimatedPerLabel_addIngredient"
+                    android:textAlignment="gravity"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+                <EditText
+                    android:inputType="numberDecimal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:id="@+id/estimatedPerField_addIngredient" />
+                <TextView
+                    android:text="@string/units"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/estimatedPerLabel_addIngredient"
+                    android:textAlignment="gravity"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+
+            </LinearLayout>
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/save_button_addIngredient"
                 android:layout_width="wrap_content"

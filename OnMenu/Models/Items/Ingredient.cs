@@ -48,6 +48,10 @@
         /// Indicates if this ingredient can be deleted or not (if it's on a recipe, it shouldn't)
         /// </summary>
         public bool CanDelete { get; set; }
+        /// <summary>
+        /// Indicates per how much of the quantity the ingredient price is estimated
+        /// </summary>
+        public float EstimatedPer { get; set; }
 
         /// <summary>
         /// Initializes a new ingredient to it's parameters
@@ -57,12 +61,14 @@
         /// <param name="measure">The measuring unit for the ingredient.</param>
         /// <param name="allergen">If set to <c>true</c>, the ingredient is an allergen.</param>
         /// <param name="estimatedPrice">Estimated price for the ingredient.</param>
-        public Ingredient(string name, string group, string measure, bool allergen, float estimatedPrice):base(name)
+        /// <param name="estimatedPer">Factor for the price of the ingredient.</param>
+        public Ingredient(string name, string group, string measure, bool allergen, float estimatedPrice, float estimatedPer):base(name)
         {
             Group = group;
             Measure = measure;
             Allergen = allergen;
             EstimatedPrice = estimatedPrice;
+            EstimatedPer = estimatedPer;
             CanDelete = true;
         }
 

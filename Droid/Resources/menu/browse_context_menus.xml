@@ -3,8 +3,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-  <item android:id="@+id/menu_editItem" android:showAsAction="ifRoom" android:title="Edit"/>
-  <item android:id="@+id/menu_deleteItem" android:showAsAction="ifRoom" android:title="Delete"/>
+  <item android:id="@+id/menu_editItem" android:showAsAction="ifRoom" android:title="@string/edit"/>
+  <item android:id="@+id/menu_deleteItem" android:showAsAction="ifRoom" android:title="@string/delete"/>
   
 </menu>
 

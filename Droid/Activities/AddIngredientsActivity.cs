@@ -35,9 +35,14 @@ namespace OnMenu.Droid
         /// </summary>
         EditText priceField;
         /// <summary>
+        /// The estimated per price field.
+        /// </summary>
+        EditText estimatedPerField;
+        /// <summary>
         /// The allergen button.
         /// </summary>
         ToggleButton allergenButton;
+        
         /// <summary>
         /// Whether this activity is on edit mode or not
         /// </summary>
@@ -69,7 +74,9 @@ namespace OnMenu.Droid
             groupField = FindViewById<EditText>(Resource.Id.groupField_addIngredient);
             measureField = FindViewById<EditText>(Resource.Id.measureField_addIngredient);
             priceField = FindViewById<EditText>(Resource.Id.estimatedPriceField_addIngredient);
+            estimatedPerField = FindViewById<EditText>(Resource.Id.estimatedPerField_addIngredient);
             allergenButton = FindViewById<ToggleButton>(Resource.Id.toggleAllergen_addIngredient);
+
 
             var data = Intent.GetStringExtra("ingredient") ?? null;
             if (data != null)
@@ -92,6 +99,7 @@ namespace OnMenu.Droid
             measureField.Text = editIngredient.Measure;
             allergenButton.Checked = editIngredient.Allergen;
             priceField.Text = editIngredient.EstimatedPrice.ToString();
+            estimatedPerField.Text = editIngredient.EstimatedPer.ToString();
         }
 
         /// <summary>
@@ -129,6 +137,7 @@ namespace OnMenu.Droid
                 editIngredient.Measure = measureField.Text;
                 editIngredient.Allergen = allergenButton.Checked;
                 editIngredient.EstimatedPrice = float.Parse(priceField.Text);
+                editIngredient.EstimatedPer = float.Parse(estimatedPerField.Text);
                 ViewModel.UpdateIngredientsCommand.Execute(editIngredient);
             }
             else
@@ -139,7 +148,8 @@ namespace OnMenu.Droid
                     groupField.Text,
                     measureField.Text,
                     allergenButton.Checked,
-                    float.Parse(priceField.Text)
+                    float.Parse(priceField.Text),
+                    float.Parse(estimatedPerField.Text)
                 );
                 ViewModel.AddIngredientsCommand.Execute(ingredient);
             }
