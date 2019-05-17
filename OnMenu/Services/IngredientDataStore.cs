@@ -35,8 +35,8 @@ namespace OnMenu
                 ingredients = new List<Ingredient>();
                 var _ingredients = new List<Ingredient>
                 {
-                        new Ingredient ( "Rice", "Cereals", "g",  true, 0.50f),
-                        new Ingredient ( "Egg", "Protein", "units",  true, 1.0f),
+                        new Ingredient ( "Rice", "Cereals", "g",  true, 0.50f, 100),
+                        new Ingredient ( "Egg", "Protein", "units",  true, 1.0f, 6),
                 };
                 foreach (Ingredient ingredient in _ingredients)
                 {

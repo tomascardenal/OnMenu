@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <string name="hello">Hello World, Click Me!</string>
-  <string name="app_name" translatable="false">OnMenu</string>
   <string name="tab1">Ingredients</string>
   <string name="tab2">Recipes</string>
   <string name="tab3">Calendar</string>
@@ -52,8 +51,6 @@
   <string name="cantDelete_toast">This ingredient is being used on a recipe and cannot be deleted</string>
   <string name="cancel">Cancel</string>
   <string name="accept">Accept</string>
-  <string name="hasAllergens">Has allergens</string>
-  <string name="totalEstimatedPrice">Total estimated price</string>
   <string name="estimatedPricePer">Price for</string>
   <string name="units">units</string>
   <string name="edit">Edit</string>

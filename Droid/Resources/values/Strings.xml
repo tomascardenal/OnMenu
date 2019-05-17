@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="app_name" translatable="false">OnMenu</string>
   <string name="hello">Hola mundo, Haz click!</string>
   <string name="tab1">Ingredientes</string>
   <string name="tab2">Recetas</string>

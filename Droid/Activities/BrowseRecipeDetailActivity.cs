@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -7,8 +8,10 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+using OnMenu.Helpers;
 using OnMenu.Models.Items;
 using OnMenu.ViewModels;
 
@@ -29,6 +32,15 @@ namespace OnMenu.Droid.Activities
         /// The view model.
         /// </summary>
         RecipeDetailViewModel viewModel;
+        TextView recipeDetails;
+        TextView recipeAllergen;
+        TextView recipePrice;
+        RecyclerView ingredientList;
+        RecipeIngredientsAdapter adapter;
+        /// <summary>
+        /// The recipe to show
+        /// </summary>
+        Recipe recipe;
         /// <summary>
         /// Handles the actions to do when this activity is created
         /// </summary>
@@ -39,11 +51,37 @@ namespace OnMenu.Droid.Activities
 
             var data = Intent.GetStringExtra("data");
 
-            Recipe recipe = Newtonsoft.Json.JsonConvert.DeserializeObject<Recipe>(data);
+            recipe = Newtonsoft.Json.JsonConvert.DeserializeObject<Recipe>(data);
             viewModel = new RecipeDetailViewModel(recipe, BrowseIngredientFragment.ViewModel);
 
-            FindViewById<TextView>(Resource.Id.description).Text = recipe.Name;
+            recipeDetails = FindViewById<TextView>(Resource.Id.instructions_recipeDetail);
+            recipeAllergen = FindViewById<TextView>(Resource.Id.allergen_recipeDetail);
+            recipePrice = FindViewById<TextView>(Resource.Id.price_recipeDetail); ;
+            ingredientList = FindViewById<RecyclerView>(Resource.Id.recyclerList_recipeDetail); ;
 
+            updateValues();
+        }
+
+        protected void updateValues()
+        {
+            
+            List <Ingredient> placeholderL = ItemParser.IdCSVToIngredientList(recipe.Ingredients, BrowseIngredientFragment.ViewModel);
+            ObservableCollection<Ingredient> ingList = new ObservableCollection<Ingredient>();
+            placeholderL.ForEach(i => ingList.Add(i));
+            List<float> qList = ItemParser.QuantityValuesToFloatList(recipe.Quantities);
+            ingredientList.SetAdapter(adapter = new RecipeIngredientsAdapter(this, ingList, qList));
+            recipeDetails.Text = recipe.Instructions;
+            recipeAllergen.Text = GetString(Resource.String.no);
+            double price = 0;
+            placeholderL.ForEach(i =>
+            {
+                if (i.Allergen)
+                {
+                    recipeAllergen.Text = GetString(Resource.String.yes);
+                }
+                price += (i.EstimatedPrice / i.EstimatedPer) * qList[placeholderL.IndexOf(i)];
+            });
+            recipePrice.Text = price.ToString();
             SupportActionBar.Title = recipe.Name;
         }
 
