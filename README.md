@@ -8,7 +8,7 @@ https://conveyor.cloud/
 ## Objetivos / Roadmap
 - Interfaz Android, general [X]
 - Interfaz Android, ingredientes [X]
-- Interfaz Android, recetas [ ]
+- Interfaz Android, recetas [X]
 - Interfaz Android, calendario [ ]
 - Conexión a base local [X]
 - Conexión a API [ ]
