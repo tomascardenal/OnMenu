@@ -10,15 +10,16 @@ https://conveyor.cloud/
 - Interfaz Android, ingredientes [X]
 - Interfaz Android, recetas [X]
 - Interfaz Android, calendario [ ]
+- Menús en calendario [ ]
 - Conexión a base local [X]
 - Conexión a API [ ]
-- Generación automática de menús [ ]
 - Traducciones [X]
 
 ## Futuros objetivos
 - Interfaz completa iOS (necesidad de un mac en disponibilidad para su creación).
 - Soporte multiidioma de los datos introducidos en la app (distintas recetas e ingredientes para distintos idiomas).
 - Sistema de login de usuarios
+- Generación automática de menús
 
 ## Tecnologías utilizadas
 - Xamarin Android 8.1
