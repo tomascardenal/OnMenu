@@ -63,7 +63,7 @@ namespace OnMenu
             try
             {
                 Recipes.Clear();
-                var recipes = await RecipeDataStore.GetItemsAsync(true);
+                var recipes = await RecipeDataStore.GetItemsAsync();
                 foreach (var recipe in recipes)
                 {
                     Recipes.Add(recipe);

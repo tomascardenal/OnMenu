@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Android.Util;
 using OnMenu.Models.Items;
 
 namespace OnMenu
@@ -63,15 +64,20 @@ namespace OnMenu
             try
             {
                 Ingredients.Clear();
+               
                 var ingredients = await IngredientDataStore.GetItemsAsync(true);
                 foreach (var ingredient in ingredients)
                 {
                     Ingredients.Add(ingredient);
                 }
+                foreach (Ingredient i in App.DB.IngredientList)
+                {
+                    Log.Debug("DB ya parece cachondeo", "name " + i.Name + " id " + i.Id + " measure " + i.Measure + " price " + i.EstimatedPrice);
+                }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                Log.Debug("DB", " exception : "+ex.Message);
             }
             finally
             {

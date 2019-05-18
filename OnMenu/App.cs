@@ -46,21 +46,16 @@ namespace OnMenu
             string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ItemDB.db3");
             if (!File.Exists(dbPath))
             {
-                Log.Debug("DB","creating file");
+                Log.Debug("DB", "creating file");
                 File.Create(dbPath);
             }
-            else
+            else if (OnMenu.Models.Constants.ResetDB)
             {
-                Log.Debug("DB", "file exists! "+ File.GetAttributes(dbPath).ToString() + "drives ");
-                foreach(string s in Environment.GetLogicalDrives())
-                {
-                    Log.Debug("DB", s);
-                }
-                //File.Copy(dbPath, Environment.GetLogicalDrives);
+                File.Create(dbPath);
+                File.Delete(dbPath);
             }
-
             _db = new ItemDatabase(dbPath);
-            
+
         }
     }
 }

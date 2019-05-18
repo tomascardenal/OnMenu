@@ -116,7 +116,7 @@ namespace OnMenu
         /// <returns>The list of ingredients</returns>
         public async Task<IEnumerable<Ingredient>> GetItemsAsync(bool forceRefresh = false)
         {
-            return await Task.FromResult(ingredients);
+            return await App.DB.GetIngredientsAsync();
         }
 
         /// <summary>

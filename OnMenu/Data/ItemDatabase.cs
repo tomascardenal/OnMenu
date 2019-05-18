@@ -1,4 +1,5 @@
-﻿using OnMenu.Models.Items;
+﻿using Android.Util;
+using OnMenu.Models.Items;
 using SQLite;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace OnMenu.Data
     /// <summary>
     /// Database controller for CRUD operations on local SQLite database
     /// </summary>
+    /// TODO properly set async calls, check for readded data properly
     public class ItemDatabase
     {
         /// <summary>
@@ -49,12 +51,12 @@ namespace OnMenu.Data
         /// List of recipes
         /// </summary>
         private List<Recipe> recipeList;
-        public List<Recipe> RecipeList { get; }
+        public List<Recipe> RecipeList { get { return recipeList; } }
         /// <summary>
         /// List of ingredients
         /// </summary>
         private List<Ingredient> ingredientList;
-        public List<Ingredient> IngredientList { get; }
+        public List<Ingredient> IngredientList { get { return ingredientList; } }
 
         /// <summary>
         /// Default constructor for this controller
@@ -81,13 +83,18 @@ namespace OnMenu.Data
         /// <summary>
         /// Fetches the ingredients asyncronously into the list
         /// </summary>
-        public async Task GetIngredientsAsync()
+        public async Task<List<Ingredient>> GetIngredientsAsync()
         {
             if (ingredientList != null)
             {
                 ingredientList.Clear();
             }
             ingredientList = await _database.Table<Ingredient>().ToListAsync();
+            foreach (Ingredient i in ingredientList)
+            {
+                Log.Debug("DB", "name " + i.Name + " id " + i.Id + " measure " + i.Measure + " price " + i.EstimatedPrice);
+            }
+            return ingredientList;
         }
 
         /// <summary>
