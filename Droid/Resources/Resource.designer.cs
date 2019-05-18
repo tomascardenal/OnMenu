@@ -2673,6 +2673,9 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f08009c
 			public const int estimatedPriceLabel_addIngredient = 2131230876;
 			
+			// aapt resource value: 0x7f0800ee
+			public const int estimatedPrice_browseRecipe = 2131230958;
+			
 			// aapt resource value: 0x7f080041
 			public const int exitUntilCollapsed = 2131230785;
 			
@@ -2739,8 +2742,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0800ad
 			public const int ingredientSpinner_addRecipe = 2131230893;
 			
-			// aapt resource value: 0x7f0800ed
-			public const int ingredientTextView_addRecipe = 2131230957;
+			// aapt resource value: 0x7f0800ef
+			public const int ingredientTextView_addRecipe = 2131230959;
 			
 			// aapt resource value: 0x7f0800d7
 			public const int ingredientTitle_dialog = 2131230935;
@@ -2796,8 +2799,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0800b3
 			public const int main_content = 2131230899;
 			
-			// aapt resource value: 0x7f0800f3
-			public const int masked = 2131230963;
+			// aapt resource value: 0x7f0800f5
+			public const int masked = 2131230965;
 			
 			// aapt resource value: 0x7f080095
 			public const int measureCell_addIngredient = 2131230869;
@@ -2808,26 +2811,26 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f080096
 			public const int measureLabel_addIngredient = 2131230870;
 			
-			// aapt resource value: 0x7f0800ef
-			public const int measurementTextView_addRecipe = 2131230959;
+			// aapt resource value: 0x7f0800f1
+			public const int measurementTextView_addRecipe = 2131230961;
 			
 			// aapt resource value: 0x7f0800e0
 			public const int media_actions = 2131230944;
 			
-			// aapt resource value: 0x7f0800f6
-			public const int menu_addIngredient = 2131230966;
+			// aapt resource value: 0x7f0800f8
+			public const int menu_addIngredient = 2131230968;
+			
+			// aapt resource value: 0x7f0800f9
+			public const int menu_addRecipe = 2131230969;
 			
 			// aapt resource value: 0x7f0800f7
-			public const int menu_addRecipe = 2131230967;
+			public const int menu_deleteItem = 2131230967;
 			
-			// aapt resource value: 0x7f0800f5
-			public const int menu_deleteItem = 2131230965;
+			// aapt resource value: 0x7f0800f6
+			public const int menu_editItem = 2131230966;
 			
-			// aapt resource value: 0x7f0800f4
-			public const int menu_editItem = 2131230964;
-			
-			// aapt resource value: 0x7f0800f1
-			public const int message = 2131230961;
+			// aapt resource value: 0x7f0800f3
+			public const int message = 2131230963;
 			
 			// aapt resource value: 0x7f080031
 			public const int middle = 2131230769;
@@ -2904,11 +2907,14 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0800d5
 			public const int progressbar_loading = 2131230933;
 			
-			// aapt resource value: 0x7f0800ee
-			public const int quantityTextView_addRecipe = 2131230958;
+			// aapt resource value: 0x7f0800f0
+			public const int quantityTextView_addRecipe = 2131230960;
 			
 			// aapt resource value: 0x7f080075
 			public const int radio = 2131230837;
+			
+			// aapt resource value: 0x7f0800ed
+			public const int recipeName_browseRecipe = 2131230957;
 			
 			// aapt resource value: 0x7f0800c2
 			public const int recyclerList_recipeDetail = 2131230914;
@@ -3018,8 +3024,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f080025
 			public const int showTitle = 2131230757;
 			
-			// aapt resource value: 0x7f0800f0
-			public const int sliding_tabs = 2131230960;
+			// aapt resource value: 0x7f0800f2
+			public const int sliding_tabs = 2131230962;
 			
 			// aapt resource value: 0x7f0800c3
 			public const int smallLabel = 2131230915;
@@ -3165,8 +3171,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0800bc
 			public const int viewpager = 2131230908;
 			
-			// aapt resource value: 0x7f0800f2
-			public const int visible = 2131230962;
+			// aapt resource value: 0x7f0800f4
+			public const int visible = 2131230964;
 			
 			// aapt resource value: 0x7f08003c
 			public const int withText = 2131230780;
@@ -3426,28 +3432,31 @@ namespace OnMenu.Droid
 			public const int notification_template_part_time = 2130968640;
 			
 			// aapt resource value: 0x7f040041
-			public const int recyclerviewrow_add_ingredient_to_recipe = 2130968641;
+			public const int recipe_browse = 2130968641;
 			
 			// aapt resource value: 0x7f040042
-			public const int select_dialog_item_material = 2130968642;
+			public const int recyclerviewrow_add_ingredient_to_recipe = 2130968642;
 			
 			// aapt resource value: 0x7f040043
-			public const int select_dialog_multichoice_material = 2130968643;
+			public const int select_dialog_item_material = 2130968643;
 			
 			// aapt resource value: 0x7f040044
-			public const int select_dialog_singlechoice_material = 2130968644;
+			public const int select_dialog_multichoice_material = 2130968644;
 			
 			// aapt resource value: 0x7f040045
-			public const int support_simple_spinner_dropdown_item = 2130968645;
+			public const int select_dialog_singlechoice_material = 2130968645;
 			
 			// aapt resource value: 0x7f040046
-			public const int tabs = 2130968646;
+			public const int support_simple_spinner_dropdown_item = 2130968646;
 			
 			// aapt resource value: 0x7f040047
-			public const int toolbar = 2130968647;
+			public const int tabs = 2130968647;
 			
 			// aapt resource value: 0x7f040048
-			public const int tooltip = 2130968648;
+			public const int toolbar = 2130968648;
+			
+			// aapt resource value: 0x7f040049
+			public const int tooltip = 2130968649;
 			
 			static Layout()
 			{

@@ -28,10 +28,11 @@
         /// </summary>
         /// <param name="name">the name</param>
         /// <param name="password">the password</param>
-        public User(string name, string password)
+        public User(int id, string name, string password)
         {
+            Id = id;
             Name = name;
             Password = password;
         }
-    } 
+    }
 }

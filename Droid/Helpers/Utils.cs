@@ -54,5 +54,20 @@ namespace OnMenu.Droid.Helpers
                 view.Clickable = true;
             });
         }
+
+        /// <summary>
+        /// Formats a price string
+        /// </summary>
+        /// <param name="price">The double with the price</param>
+        /// <returns>The parsed string</returns>
+        public static string ParsePrice(double price)
+        {
+            string priceFormatted = string.Format("{0:0.00}", price);
+            if (priceFormatted.EndsWith("00"))
+            {
+                return ((int)price).ToString();
+            }
+            return priceFormatted;
+        }
     }
 }

@@ -7,6 +7,7 @@ using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+using OnMenu.Droid.Helpers;
 using OnMenu.Helpers;
 using OnMenu.Models.Items;
 using OnMenu.ViewModels;
@@ -79,23 +80,17 @@ namespace OnMenu.Droid.Activities
         /// </summary>
         protected void updateValues()
         {
-            List<Ingredient> placeholderL = ItemParser.IdCSVToIngredientList(recipe.Ingredients, BrowseIngredientFragment.ViewModel);
+            List<Ingredient> placeholderL = recipe.GetIngredientsAsList(BrowseIngredientFragment.ViewModel);
             ObservableCollection<Ingredient> ingList = new ObservableCollection<Ingredient>();
+            List<float> qList = recipe.GetQuantitiesAsList();
+            double price = recipe.GetEstimatedPrice(BrowseIngredientFragment.ViewModel);
+
             placeholderL.ForEach(i => ingList.Add(i));
-            List<float> qList = ItemParser.QuantityValuesToFloatList(recipe.Quantities);
             ingredientList.SetAdapter(adapter = new RecipeIngredientsAdapter(this, ingList, qList));
+
             recipeDetails.Text = recipe.Instructions;
             recipeAllergen.Text = GetString(Resource.String.no);
-            double price = 0;
-            placeholderL.ForEach(i =>
-            {
-                if (i.Allergen)
-                {
-                    recipeAllergen.Text = GetString(Resource.String.yes);
-                }
-                price += (i.EstimatedPrice / i.EstimatedPer) * qList[placeholderL.IndexOf(i)];
-            });
-            recipePrice.Text = price.ToString();
+            recipePrice.Text = Utils.ParsePrice(price);
             SupportActionBar.Title = recipe.Name;
         }
 

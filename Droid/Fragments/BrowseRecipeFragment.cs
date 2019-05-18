@@ -210,6 +210,8 @@ namespace OnMenu.Droid
         /// </summary>
         RecipesViewHolder recipesViewHolder;
 
+
+
         /// <summary>
         /// Instantiates a new adapter
         /// </summary>
@@ -236,7 +238,7 @@ namespace OnMenu.Droid
         {
             //Setup your layout here
             View recipeView = null;
-            var id = Resource.Layout.ingredient_browse;
+            var id = Resource.Layout.recipe_browse;
             recipeView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
 
             recipesViewHolder = new RecipesViewHolder(recipeView, OnClick, OnLongClick);
@@ -254,7 +256,8 @@ namespace OnMenu.Droid
 
             // Replace the contents of the view with that element
             var myHolder = holder as RecipesViewHolder;
-            myHolder.TextView.Text = recipe.Name;
+            myHolder.RecipeTitle.Text = recipe.Name;
+            myHolder.EstimatedPrice.Text = Utils.ParsePrice(recipe.GetEstimatedPrice(BrowseIngredientFragment.ViewModel)) + " €";
         }
         /// <summary>
         /// Gets the item count
@@ -270,11 +273,11 @@ namespace OnMenu.Droid
         /// <summary>
         /// Textfield for the rows on the recycler view
         /// </summary>
-        public TextView TextView { get; set; }
+        public TextView RecipeTitle { get; set; }
         /// <summary>
-        /// Detail textfield for the rows on the recycler view
+        /// EstimatedPrice textview
         /// </summary>
-        public TextView DetailTextView { get; set; }
+        public TextView EstimatedPrice { get; set; }
 
         /// <summary>
         /// Instantiates a new viewholder
@@ -285,8 +288,8 @@ namespace OnMenu.Droid
         public RecipesViewHolder(View itemView, Action<RecyclerClickEventArgs> clickListener,
                             Action<RecyclerClickEventArgs> longClickListener) : base(itemView)
         {
-            TextView = itemView.FindViewById<TextView>(Android.Resource.Id.Text1);
-            DetailTextView = itemView.FindViewById<TextView>(Android.Resource.Id.Text2);
+            RecipeTitle = itemView.FindViewById<TextView>(Resource.Id.recipeName_browseRecipe);
+            EstimatedPrice = itemView.FindViewById<TextView>(Resource.Id.estimatedPrice_browseRecipe);
             itemView.Click += (sender, e) => clickListener(new RecyclerClickEventArgs { View = itemView, Position = AdapterPosition });
             itemView.LongClick += (sender, e) => longClickListener(new RecyclerClickEventArgs { View = itemView, Position = AdapterPosition });
         }
