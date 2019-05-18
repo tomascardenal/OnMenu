@@ -142,8 +142,8 @@
   <ItemGroup>
     <Compile Include="Activities\BrowseRecipeDetailActivity.cs" />
     <Compile Include="Activities\AddRecipeActivity.cs" />
-    <Compile Include="Activities\RecipeIngredientsAdapter.cs" />
-    <Compile Include="Activities\RecipeIngredientsViewHolder.cs" />
+    <Compile Include="Helpers\RecipeIngredientsAdapter.cs" />
+    <Compile Include="Helpers\RecipeIngredientsViewHolder.cs" />
     <Compile Include="Fragments\CalendarFragment.cs">
       <SubType>Code</SubType>
     </Compile>

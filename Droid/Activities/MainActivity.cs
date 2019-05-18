@@ -7,7 +7,6 @@ using Android.Widget;
 using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Android.Support.Design.Widget;
-using Android.Util;
 using OnMenu.Droid.Activities;
 
 namespace OnMenu.Droid
@@ -53,7 +52,7 @@ namespace OnMenu.Droid
             pager.Adapter = adapter;
             tabs.SetupWithViewPager(pager);
             pager.OffscreenPageLimit = 3;
-            
+
             pager.PageSelected += (sender, args) =>
             {
                 var fragment = adapter.InstantiateItem(pager, args.Position) as IFragmentVisible;
@@ -132,8 +131,8 @@ namespace OnMenu.Droid
         {
             switch (position)
             {
-                case 0: return BrowseIngredientFragment.NewInstance();
-                case 1: return BrowseRecipeFragment.NewInstance();
+                case 0: return BrowseRecipeFragment.NewInstance();
+                case 1: return BrowseIngredientFragment.NewInstance();
                 case 2: return CalendarFragment.NewInstance();
                 case 3: return AboutFragment.NewInstance();
             }

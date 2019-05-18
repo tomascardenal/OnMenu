@@ -1,9 +1,7 @@
 ﻿using OnMenu.Models.Items;
 using SQLite;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OnMenu.Data
@@ -34,6 +32,18 @@ namespace OnMenu.Data
         /// Command to delete recipes
         /// </summary>
         public Command DeleteRecipesCommand { get; set; }
+        /// <summary>
+        /// Command to stop the connection
+        /// </summary>
+        public Command StopConnectionCommand { get; set; }
+        /// <summary>
+        /// Command to get the ingredients
+        /// </summary>
+        public Command GetIngredientsCommand { get; set; }
+        /// <summary>
+        /// Command to get the recipes
+        /// </summary>
+        public Command GetRecipesCommand { get; set; }
 
         /// <summary>
         /// List of recipes
@@ -61,12 +71,17 @@ namespace OnMenu.Data
 
             AddIngredientsCommand = new Command<Ingredient>(async (Ingredient ingredient) => await SaveIngredientAsync(ingredient));
             DeleteIngredientsCommand = new Command<Ingredient>(async (Ingredient ingredient) => await DeleteIngredientAsync(ingredient));
+
+            StopConnectionCommand = new Command(async () => await StopConnectionAsync());
+
+            GetIngredientsCommand = new Command(async () => await GetIngredientsAsync());
+            GetRecipesCommand = new Command(async () => await GetRecipesAsync());
         }
 
         /// <summary>
         /// Fetches the ingredients asyncronously into the list
         /// </summary>
-        public async void GetIngredientsAsync()
+        public async Task GetIngredientsAsync()
         {
             if (ingredientList != null)
             {
@@ -122,7 +137,7 @@ namespace OnMenu.Data
         /// <summary>
         /// Fetches the recipes asyncronously into the list
         /// </summary>
-        public async void GetRecipesAsync()
+        public async Task GetRecipesAsync()
         {
             recipeList = await _database.Table<Recipe>().ToListAsync();
         }
@@ -171,6 +186,10 @@ namespace OnMenu.Data
             return _database.DeleteAsync<Recipe>(recipe);
         }
 
+        /// <summary>
+        /// Stops the database connections
+        /// </summary>
+        /// <returns></returns>
         public async Task StopConnectionAsync()
         {
             await _database.CloseAsync();

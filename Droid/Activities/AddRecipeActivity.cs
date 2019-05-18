@@ -2,20 +2,15 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
-using Android.Util;
 using Android.Views;
-using Android.Views.InputMethods;
 using Android.Widget;
-using Java.Lang;
 using OnMenu.Droid.Helpers;
 using OnMenu.Helpers;
 using OnMenu.Models.Items;
@@ -145,12 +140,22 @@ namespace OnMenu.Droid.Activities
             swipeRefreshLayout.Refresh += SwipeRefreshLayout_Refresh;
         }
 
+        /// <summary>
+        /// Handles the events when the refresher is swiped
+        /// </summary>
+        /// <param name="sender">the refresher</param>
+        /// <param name="e">the event args</param>
         private void SwipeRefreshLayout_Refresh(object sender, EventArgs e)
         {
             this.RunOnUiThread(adapter.NotifyDataSetChanged);
             swipeRefreshLayout.Refreshing = false;
         }
 
+        /// <summary>
+        /// Handles the events when an item on the list is longclicked
+        /// </summary>
+        /// <param name="sender">The row</param>
+        /// <param name="e">The event args</param>
         private void IngredientRecyclerView_ItemLongClick(object sender, RecyclerClickEventArgs e)
         {
             AlertDialog.Builder confirmAlert = new AlertDialog.Builder(this);

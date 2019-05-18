@@ -3,7 +3,6 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using OnMenu.Models;
 using OnMenu.Models.Items;
 
 namespace OnMenu.Droid
@@ -27,9 +26,21 @@ namespace OnMenu.Droid
         /// The ingredient to show
         /// </summary>
         Ingredient ingredient;
+        /// <summary>
+        /// Textview to show the food group
+        /// </summary>
         TextView foodGroupView;
+        /// <summary>
+        /// Textview to show if the ingredient is an allergen
+        /// </summary>
         TextView allergenView;
+        /// <summary>
+        /// Textview to show the units
+        /// </summary>
         TextView unitView;
+        /// <summary>
+        /// Textview to show the price
+        /// </summary>
         TextView priceView;
 
         /// <summary>
@@ -49,6 +60,9 @@ namespace OnMenu.Droid
             priceView = FindViewById<TextView>(Resource.Id.price_ingredientDetail);
         }
 
+        /// <summary>
+        /// Updates the values on the view
+        /// </summary>
         protected void updateValues()
         {
             foodGroupView.Text = ingredient.Group;
@@ -58,12 +72,22 @@ namespace OnMenu.Droid
             SupportActionBar.Title = ingredient.Name;
         }
 
+        /// <summary>
+        /// Handles the creation of the menu
+        /// </summary>
+        /// <param name="menu">The menu</param>
+        /// <returns>true when the menu is created</returns>
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.browse_context_menus, menu);
             return base.OnCreateOptionsMenu(menu);
         }
 
+        /// <summary>
+        /// Handles the actions when a menu item is selected
+        /// </summary>
+        /// <param name="item">The selected item</param>
+        /// <returns>true when the task is finished</returns>
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)

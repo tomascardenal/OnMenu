@@ -1,8 +1,6 @@
 ﻿using OnMenu.Helpers;
 using OnMenu.Models.Items;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace OnMenu.ViewModels
 {

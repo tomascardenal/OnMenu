@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using OnMenu.Models;
+using Android.Util;
 using OnMenu.Models.Items;
 
 namespace OnMenu
@@ -25,7 +24,7 @@ namespace OnMenu
         public IngredientDataStore()
         {
 
-            App.DB.GetIngredientsAsync();
+            App.DB.GetIngredientsCommand.Execute(null);
             if (App.DB.IngredientList != null && App.DB.IngredientList.Count != 0)
             {
                 ingredients = App.DB.IngredientList;
@@ -54,7 +53,8 @@ namespace OnMenu
         public async Task<bool> AddItemAsync(Ingredient ingredient)
         {
             ingredients.Add(ingredient);
-            App.DB.AddIngredientsCommand.Execute(ingredient);
+            int i = await App.DB.SaveIngredientAsync(ingredient);
+            Log.Debug("DB", "Adding ingredient " + i);
             return await Task.FromResult(true);
         }
 
@@ -119,6 +119,10 @@ namespace OnMenu
             return await Task.FromResult(ingredients);
         }
 
+        /// <summary>
+        /// Edits all the items in the db
+        /// </summary>
+        /// <returns></returns>
         public async Task<bool> EditItemsAsync()
         {
             foreach (Ingredient i in ingredients)

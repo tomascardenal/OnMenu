@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <string name="hello">Hello World, Click Me!</string>
-  <string name="tab1">Ingredients</string>
-  <string name="tab2">Recipes</string>
+  <string name="tab1">Recipes</string>
+  <string name="tab2">Ingredients</string>
   <string name="tab3">Calendar</string>
   <string name="tab4">About this app</string>
   <string name="signin">Sign In</string>

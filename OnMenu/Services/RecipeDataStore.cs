@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using OnMenu.Models;
 using OnMenu.Models.Items;
 
 namespace OnMenu
@@ -23,7 +21,7 @@ namespace OnMenu
         /// </summary>
         public RecipeDataStore()
         {
-            App.DB.GetRecipesAsync();
+            App.DB.GetRecipesCommand.Execute(null);
             if (App.DB.RecipeList != null && App.DB.RecipeList.Count != 0)
             {
                 recipes = App.DB.RecipeList;
@@ -113,6 +111,10 @@ namespace OnMenu
             return await Task.FromResult(recipes);
         }
 
+        /// <summary>
+        /// Edits all the items in the db
+        /// </summary>
+        /// <returns></returns>
         public async Task<bool> EditItemsAsync()
         {
             foreach (Recipe r in recipes)

@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using OnMenu.Droid.Helpers;
 using OnMenu.Helpers;
 using OnMenu.Models.Items;
 using OnMenu.ViewModels;
@@ -34,10 +29,25 @@ namespace OnMenu.Droid.Activities
         /// The view model.
         /// </summary>
         RecipeDetailViewModel viewModel;
+        /// <summary>
+        /// Textview to show the recipe details
+        /// </summary>
         TextView recipeDetails;
+        /// <summary>
+        /// Textview to show if the recipe has allergens
+        /// </summary>
         TextView recipeAllergen;
+        /// <summary>
+        /// Textview to show the calculated price
+        /// </summary>
         TextView recipePrice;
+        /// <summary>
+        /// List to display the ingredients
+        /// </summary>
         RecyclerView ingredientList;
+        /// <summary>
+        /// The adapter of the recyclerview
+        /// </summary>
         RecipeIngredientsAdapter adapter;
         /// <summary>
         /// The recipe to show
@@ -64,9 +74,12 @@ namespace OnMenu.Droid.Activities
             updateValues();
         }
 
+        /// <summary>
+        /// Updates the values on the view
+        /// </summary>
         protected void updateValues()
         {
-            List <Ingredient> placeholderL = ItemParser.IdCSVToIngredientList(recipe.Ingredients, BrowseIngredientFragment.ViewModel);
+            List<Ingredient> placeholderL = ItemParser.IdCSVToIngredientList(recipe.Ingredients, BrowseIngredientFragment.ViewModel);
             ObservableCollection<Ingredient> ingList = new ObservableCollection<Ingredient>();
             placeholderL.ForEach(i => ingList.Add(i));
             List<float> qList = ItemParser.QuantityValuesToFloatList(recipe.Quantities);
@@ -86,12 +99,22 @@ namespace OnMenu.Droid.Activities
             SupportActionBar.Title = recipe.Name;
         }
 
+        /// <summary>
+        /// Handles the creation of the menu
+        /// </summary>
+        /// <param name="menu">The menu</param>
+        /// <returns>true when the menu is created</returns>
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.browse_context_menus, menu);
             return base.OnCreateOptionsMenu(menu);
         }
 
+        /// <summary>
+        /// Handles the actions when a menu item is selected
+        /// </summary>
+        /// <param name="item">The selected item</param>
+        /// <returns>true when the task is finished</returns>
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)

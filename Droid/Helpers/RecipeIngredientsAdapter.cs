@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Android;
 using Android.App;
 using Android.Support.V7.Widget;
 using Android.Views;
-using OnMenu.Droid;
 using OnMenu.Droid.Activities;
 using OnMenu.Models.Items;
 namespace OnMenu.Droid
@@ -19,10 +16,18 @@ namespace OnMenu.Droid
         /// List of ingredients 
         /// </summary>
         public ObservableCollection<Ingredient> IngredientList;
+        /// <summary>
+        /// The list of quantities
+        /// </summary>
         public List<float> QuantityStore { get; set; }
+        /// <summary>
+        /// The activity for this adapter
+        /// </summary>
         Activity activity;
+        /// <summary>
+        /// The viewholder for this adapter
+        /// </summary>
         RecipeIngredientsViewHolder holder;
-
 
         public RecipeIngredientsAdapter(Activity activity, ObservableCollection<Ingredient> ingredientList, List<float> quantityStore)
         {

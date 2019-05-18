@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OnMenu.Models.Login
+﻿namespace OnMenu.Models.Login
 {
     /// <summary>
     /// User register (to be implemented on the future)

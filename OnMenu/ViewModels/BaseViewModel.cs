@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using OnMenu.Models;
 
 namespace OnMenu
 {
@@ -53,8 +52,15 @@ namespace OnMenu
             return true;
         }
 
+        /// <summary>
+        /// Handler for property changes
+        /// </summary>
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// Gets called when a property is changed
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;

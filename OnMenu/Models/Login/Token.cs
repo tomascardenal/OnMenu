@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnMenu.Models.Login
 {
@@ -9,11 +7,26 @@ namespace OnMenu.Models.Login
     /// </summary>
     public class Token
     {
+        /// <summary>
+        /// The token's id on the DB
+        /// </summary>
         public int Id;
+        /// <summary>
+        /// The access token string
+        /// </summary>
         public string AccessToken;
+        /// <summary>
+        /// Description of an error, if ocurred
+        /// </summary>
         public string ErrorDescription;
-        public DateTime Expiration; 
+        /// <summary>
+        /// Expiration date of the token
+        /// </summary>
+        public DateTime Expiration;
 
-        public Token(){}
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public Token() { }
     }
 }

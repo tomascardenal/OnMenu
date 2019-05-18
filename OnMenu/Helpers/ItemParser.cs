@@ -1,9 +1,6 @@
 ﻿using Android.Util;
 using OnMenu.Models.Items;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
 
 namespace OnMenu.Helpers
 {
@@ -20,7 +17,7 @@ namespace OnMenu.Helpers
         public static string IngredientsToIdCSV(List<Ingredient> ingredients)
         {
             string parsedList = "";
-            foreach(Ingredient i in ingredients)
+            foreach (Ingredient i in ingredients)
             {
                 Log.Debug("saveIngredient", i.Name + i.Id);
                 parsedList += i.Id + ",";
@@ -39,18 +36,19 @@ namespace OnMenu.Helpers
             List<Ingredient> ingredientList = new List<Ingredient>();
             string[] separatedValues = idValues.Split(',');
             int parsedId;
-            if(viewModelReference.Ingredients==null )
+            if (viewModelReference.Ingredients == null)
             {
                 return ingredientList;
-            }else if(viewModelReference.Ingredients.Count == 0)
+            }
+            else if (viewModelReference.Ingredients.Count == 0)
             {
                 viewModelReference.LoadIngredientsCommand.Execute(null);
             }
-            foreach(string id in separatedValues)
+            foreach (string id in separatedValues)
             {
-                if (int.TryParse(id,out parsedId)&&parsedId-1>=0&&parsedId-1<viewModelReference.Ingredients.Count)
+                if (int.TryParse(id, out parsedId) && parsedId - 1 >= 0 && parsedId - 1 < viewModelReference.Ingredients.Count)
                 {
-                    ingredientList.Add(viewModelReference.Ingredients[parsedId-1]);
+                    ingredientList.Add(viewModelReference.Ingredients[parsedId - 1]);
                 }
             }
             return ingredientList;
@@ -59,7 +57,7 @@ namespace OnMenu.Helpers
         public static string FloatListToQuantityValues(List<float> floatList)
         {
             string ssv = "";
-            foreach(float f in floatList)
+            foreach (float f in floatList)
             {
                 ssv += f.ToString() + "/";
             }
@@ -71,7 +69,7 @@ namespace OnMenu.Helpers
         {
             List<float> floatList = new List<float>();
             string[] ssValues = floatSSV.Split("/");
-            foreach(string s in ssValues)
+            foreach (string s in ssValues)
             {
                 float f = 0;
                 float.TryParse(s, out f);
