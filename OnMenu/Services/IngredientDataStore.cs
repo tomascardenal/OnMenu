@@ -44,7 +44,6 @@ namespace OnMenu
                     ingredients.Add(ingredient);
                 }
             }
-
         }
 
         /// <summary>
@@ -54,9 +53,8 @@ namespace OnMenu
         /// <returns>A boolean indicating if the ingredient was added</returns>
         public async Task<bool> AddItemAsync(Ingredient ingredient)
         {
-            //TODO control same name or id
             ingredients.Add(ingredient);
-
+            App.DB.AddIngredientsCommand.Execute(ingredient);
             return await Task.FromResult(true);
         }
 
@@ -70,8 +68,16 @@ namespace OnMenu
             var _ingredient = ingredients.Where((Ingredient arg) => arg.Id == ingredient.Id).FirstOrDefault();
             ingredients.Remove(_ingredient);
             ingredients.Add(ingredient);
+            await App.DB.DeleteIngredientAsync(_ingredient);
+            if (await App.DB.SaveIngredientAsync(ingredient) > 0)
+            {
+                return await Task.FromResult(true);
+            }
+            else
+            {
+                return await Task.FromResult(false);
+            }
 
-            return await Task.FromResult(true);
         }
 
         /// <summary>
@@ -83,8 +89,14 @@ namespace OnMenu
         {
             var _ingredient = ingredients.Where((Ingredient arg) => arg.Id == id).FirstOrDefault();
             ingredients.Remove(_ingredient);
-
-            return await Task.FromResult(true);
+            if (await App.DB.DeleteIngredientAsync(_ingredient) > 0)
+            {
+                return await Task.FromResult(true);
+            }
+            else
+            {
+                return await Task.FromResult(false);
+            }
         }
 
         /// <summary>
@@ -105,6 +117,16 @@ namespace OnMenu
         public async Task<IEnumerable<Ingredient>> GetItemsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(ingredients);
+        }
+
+        public async Task<bool> EditItemsAsync()
+        {
+            foreach (Ingredient i in ingredients)
+            {
+                await App.DB.DeleteIngredientAsync(i);
+                await App.DB.SaveIngredientAsync(i);
+            }
+            return await Task.FromResult(true);
         }
     }
 }

@@ -23,14 +23,21 @@ namespace OnMenu
         /// </summary>
         public RecipeDataStore()
         {
-            recipes = new List<Recipe>();
-            var _recipes = new List<Recipe>
+            App.DB.GetRecipesAsync();
+            if (App.DB.RecipeList != null && App.DB.RecipeList.Count != 0)
             {
-            };
+                recipes = App.DB.RecipeList;
+            }
+            else
+            {
+                recipes = new List<Recipe>();
+                List<Recipe> _recipes = new List<Recipe>();
 
-            foreach (Recipe recipe in _recipes)
-            {
-                recipes.Add(recipe);
+                foreach (Recipe recipe in _recipes)
+                {
+                    App.DB.SaveRecipeAsync(recipe);
+                    recipes.Add(recipe);
+                }
             }
         }
 
@@ -42,7 +49,7 @@ namespace OnMenu
         public async Task<bool> AddItemAsync(Recipe recipe)
         {
             recipes.Add(recipe);
-
+            await App.DB.SaveRecipeAsync(recipe);
             return await Task.FromResult(true);
         }
 
@@ -56,8 +63,15 @@ namespace OnMenu
             var _recipe = recipes.Where((Recipe arg) => arg.Id == recipe.Id).FirstOrDefault();
             recipes.Remove(_recipe);
             recipes.Add(recipe);
-
-            return await Task.FromResult(true);
+            await App.DB.DeleteRecipeAsync(_recipe);
+            if (await App.DB.SaveRecipeAsync(recipe) > 0)
+            {
+                return await Task.FromResult(true);
+            }
+            else
+            {
+                return await Task.FromResult(false);
+            }
         }
 
         /// <summary>
@@ -69,8 +83,14 @@ namespace OnMenu
         {
             var _recipe = recipes.Where((Recipe arg) => arg.Id == id).FirstOrDefault();
             recipes.Remove(_recipe);
-
-            return await Task.FromResult(true);
+            if (await App.DB.DeleteRecipeAsync(_recipe) > 0)
+            {
+                return await Task.FromResult(true);
+            }
+            else
+            {
+                return await Task.FromResult(false);
+            }
         }
 
         /// <summary>
@@ -91,6 +111,16 @@ namespace OnMenu
         public async Task<IEnumerable<Recipe>> GetItemsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(recipes);
+        }
+
+        public async Task<bool> EditItemsAsync()
+        {
+            foreach (Recipe r in recipes)
+            {
+                await App.DB.DeleteRecipeAsync(r);
+                await App.DB.SaveRecipeAsync(r);
+            }
+            return await Task.FromResult(true);
         }
     }
 }

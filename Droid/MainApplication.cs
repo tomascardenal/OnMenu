@@ -43,7 +43,7 @@ namespace OnMenu.Droid
 
         public void OnActivityPaused(Activity activity)
         {
-
+            App.DB.
         }
 
         public void OnActivityResumed(Activity activity)

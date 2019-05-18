@@ -91,16 +91,16 @@ namespace OnMenu.Data
         /// Saves an ingredient to the database asyncronously
         /// </summary>
         /// <param name="ingredient">The ingredient to store</param>
-        /// <returns>An integer indicating the number of affected rows</returns>
+        /// <returns>An integer indicating the primary key of the ingredient</returns>
         public Task<int> SaveIngredientAsync(Ingredient ingredient)
         {
-            if (IngredientList!=null && IngredientList.Any(i => i.Id == ingredient.Id || i.Name == ingredient.Name))
+            if (IngredientList != null && IngredientList.Any(i => i.Id == ingredient.Id || i.Name == ingredient.Name))
             {
-                return _database.InsertOrReplaceAsync(ingredient);
+                return _database.UpdateAsync(ingredient);
             }
             else if (ingredient.Id != 0)
             {
-                return _database.UpdateAsync(ingredient);
+                return _database.InsertOrReplaceAsync(ingredient);
             }
             else
             {
@@ -112,9 +112,10 @@ namespace OnMenu.Data
         /// Deletes an ingredient from the database asyncronously
         /// </summary>
         /// <param name="ingredient">The ingredient to delete</param>
-        /// <returns>An integer indicating the number of affected rows</returns>
+        /// <returns>An integer indicating the deleted id</returns>
         public Task<int> DeleteIngredientAsync(Ingredient ingredient)
         {
+            IngredientList.Remove(ingredient);
             return _database.DeleteAsync<Ingredient>(ingredient);
         }
 
@@ -142,16 +143,16 @@ namespace OnMenu.Data
         /// Saves a recipe to the database asyncronously
         /// </summary>
         /// <param name="recipe">The recipe to store</param>
-        /// <returns>An integer indicating the number of affected rows</returns>
+        /// <returns>An integer indicating the key of the recipe or the affected rows (if updating)</returns>
         public Task<int> SaveRecipeAsync(Recipe recipe)
         {
-            if (RecipeList!=null && RecipeList.Any(r => r.Id == recipe.Id || r.Name == recipe.Name))
+            if (RecipeList != null && RecipeList.Any(r => r.Id == recipe.Id || r.Name == recipe.Name))
             {
-                return _database.InsertOrReplaceAsync(recipe);
+                return _database.UpdateAsync(recipe);
             }
             else if (recipe.Id != 0)
             {
-                return _database.UpdateAsync(recipe);
+                return _database.InsertOrReplaceAsync(recipe);
             }
             else
             {
@@ -166,7 +167,13 @@ namespace OnMenu.Data
         /// <returns>An integer indicating the number of affected rows</returns>
         public Task<int> DeleteRecipeAsync(Recipe recipe)
         {
+            recipeList.Remove(recipe);
             return _database.DeleteAsync<Recipe>(recipe);
+        }
+
+        public async Task StopConnectionAsync()
+        {
+            await _database.CloseAsync();
         }
     }
 }
