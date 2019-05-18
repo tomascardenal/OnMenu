@@ -24,12 +24,12 @@ namespace OnMenu.Models.Items
         /// <summary>
         /// This recipe's rating
         /// </summary>
-        private float rating;
+        private int rating;
         /// <summary>
         /// Gets or sets the rating.
         /// </summary>
         /// <value>The rating, between 0 and 5, both included.</value>
-        public float Rating
+        public int Rating
         {
             get => rating;
             set
@@ -38,9 +38,9 @@ namespace OnMenu.Models.Items
                 {
                     rating = 0;
                 }
-                else if (value > 5)
+                else if (value > 100)
                 {
-                    rating = 5;
+                    rating = 100;
                 }
                 else
                 {
@@ -75,38 +75,5 @@ namespace OnMenu.Models.Items
         /// </summary>
         public Recipe() : base() { }
 
-        /// <summary>
-        /// Gets the estimated total price of this recipe
-        /// </summary>
-        /// <returns>The total price</returns>
-        public double GetEstimatedPrice(IngredientsViewModel viewModel)
-        {
-            double price = 0;
-            List<float> qList = this.GetQuantitiesAsList();
-            List<Ingredient> ingList = this.GetIngredientsAsList(viewModel);
-            ingList.ForEach(i =>
-            {
-                price += (i.EstimatedPrice / i.EstimatedPer) * qList[ingList.IndexOf(i)];
-            });
-            return price;
-        }
-
-        /// <summary>
-        /// Gets the quantities as a float list
-        /// </summary>
-        /// <returns>The float list</returns>
-        public List<float> GetQuantitiesAsList()
-        {
-            return ItemParser.QuantityValuesToFloatList(Quantities);
-        }
-
-        /// <summary>
-        /// Gets the ingredients as a list
-        /// </summary>
-        /// <returns>The ingredient list</returns>
-        public List<Ingredient> GetIngredientsAsList(IngredientsViewModel viewModel)
-        {
-            return ItemParser.IdCSVToIngredientList(Ingredients, viewModel);
-        }
     }
 }

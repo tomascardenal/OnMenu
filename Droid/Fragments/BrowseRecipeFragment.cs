@@ -257,7 +257,7 @@ namespace OnMenu.Droid
             // Replace the contents of the view with that element
             var myHolder = holder as RecipesViewHolder;
             myHolder.RecipeTitle.Text = recipe.Name;
-            myHolder.EstimatedPrice.Text = Utils.ParsePrice(recipe.GetEstimatedPrice(BrowseIngredientFragment.ViewModel)) + " €";
+            myHolder.EstimatedPrice.Text = Utils.ParsePrice(ItemParser.GetEstimatedPrice(recipe,BrowseIngredientFragment.ViewModel)) + " €";
         }
         /// <summary>
         /// Gets the item count

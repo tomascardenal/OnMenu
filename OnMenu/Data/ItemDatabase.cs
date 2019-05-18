@@ -99,7 +99,7 @@ namespace OnMenu.Data
         public async Task<int> DeleteIngredientAsync(Ingredient ingredient)
         {
             IngredientList.Remove(ingredient);
-            return await _database.DeleteAsync<Ingredient>(ingredient);
+            return await _database.DeleteAsync<Ingredient>(ingredient.Id);
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace OnMenu.Data
         public async Task<int> DeleteRecipeAsync(Recipe recipe)
         {
             recipeList.Remove(recipe);
-            return await _database.DeleteAsync<Recipe>(recipe);
+            return await _database.DeleteAsync<Recipe>(recipe.Id);
         }
 
         /// <summary>

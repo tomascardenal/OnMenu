@@ -47,6 +47,8 @@ namespace OnMenu
                 };
                     foreach (Ingredient ingredient in _ingredients)
                     {
+                        //Prevent default ingredients from being deleted
+                        ingredient.CanDelete = false;
                         ingredients.Add(ingredient);
                         await App.DB.SaveIngredientAsync(ingredient);
                     }

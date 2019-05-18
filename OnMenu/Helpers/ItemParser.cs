@@ -85,5 +85,24 @@ namespace OnMenu.Helpers
 
             return floatList;
         }
+
+        /// <summary>
+        /// Gets the estimated total price of this recipe
+        /// </summary>
+        /// <param name="recipe">The recipe</param>
+        /// <param name="viewModel">The viewmodel</param>
+        /// <returns>The total price</returns>
+        public static double GetEstimatedPrice(Recipe recipe , IngredientsViewModel viewModel)
+        {
+            double price = 0;
+            List<float> qList = QuantityValuesToFloatList(recipe.Quantities);
+            List<Ingredient> ingList = IdCSVToIngredientList(recipe.Ingredients,viewModel);
+            ingList.ForEach(i =>
+            {
+                price += (i.EstimatedPrice / i.EstimatedPer) * qList[ingList.IndexOf(i)];
+            });
+            return price;
+        }
+
     }
 }

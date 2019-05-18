@@ -5,6 +5,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Support.V7.Widget;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using OnMenu.Droid.Helpers;
@@ -31,9 +32,9 @@ namespace OnMenu.Droid.Activities
         /// </summary>
         protected RecipeDetailViewModel viewModel;
         /// <summary>
-        /// Textview to show the recipe details
+        /// EditText to show the recipe details
         /// </summary>
-        protected TextView recipeDetails;
+        protected EditText recipeDetails;
         /// <summary>
         /// Textview to show if the recipe has allergens
         /// </summary>
@@ -46,6 +47,14 @@ namespace OnMenu.Droid.Activities
         /// List to display the ingredients
         /// </summary>
         protected RecyclerView ingredientList;
+        /// <summary>
+        /// Seekbar to rate ingredients
+        /// </summary>
+        protected SeekBar ratingSeekBar;
+        /// <summary>
+        /// Displays the value of the seekbar
+        /// </summary>
+        protected TextView seekBarValue;
         /// <summary>
         /// The adapter of the recyclerview
         /// </summary>
@@ -67,12 +76,46 @@ namespace OnMenu.Droid.Activities
             recipe = Newtonsoft.Json.JsonConvert.DeserializeObject<Recipe>(data);
             viewModel = new RecipeDetailViewModel(recipe, BrowseIngredientFragment.ViewModel);
 
-            recipeDetails = FindViewById<TextView>(Resource.Id.instructions_recipeDetail);
+            recipeDetails = FindViewById<EditText>(Resource.Id.instructions_recipeDetail);
             recipeAllergen = FindViewById<TextView>(Resource.Id.allergen_recipeDetail);
             recipePrice = FindViewById<TextView>(Resource.Id.price_recipeDetail); ;
-            ingredientList = FindViewById<RecyclerView>(Resource.Id.recyclerList_recipeDetail); ;
+            ingredientList = FindViewById<RecyclerView>(Resource.Id.recyclerList_recipeDetail);
+            ratingSeekBar = FindViewById<SeekBar>(Resource.Id.seekBar_recipeDetail);
+            seekBarValue = FindViewById<TextView>(Resource.Id.seekBarValue_recipeDetail);
+
+            ratingSeekBar.ProgressChanged += RatingSeekBar_ProgressChanged;
+            
 
             updateValues();
+        }
+
+        private void RatingSeekBar_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
+        {
+            int progress = e.Progress;
+            if (progress >= 0 && progress < 25)
+            {
+                ratingSeekBar.ThumbTintList = GetColorStateList(Android.Resource.Color.HoloRedDark);
+                ratingSeekBar.ProgressTintList = GetColorStateList(Android.Resource.Color.HoloRedLight);
+            }
+            else if (progress >= 25 && progress < 50)
+            {
+                ratingSeekBar.ThumbTintList = GetColorStateList(Android.Resource.Color.HoloOrangeDark);
+                ratingSeekBar.ProgressTintList = GetColorStateList(Android.Resource.Color.HoloOrangeLight);
+            }
+            else if (progress >= 50 && progress < 75)
+            {
+                ratingSeekBar.ThumbTintList = GetColorStateList(Android.Resource.Color.HoloBlueDark);
+                ratingSeekBar.ProgressTintList = GetColorStateList(Android.Resource.Color.HoloBlueLight);
+            }
+            else if (progress >= 75)
+            {
+                ratingSeekBar.ThumbTintList = GetColorStateList(Android.Resource.Color.HoloGreenDark);
+                ratingSeekBar.ProgressTintList = GetColorStateList(Android.Resource.Color.HoloGreenLight);
+            }
+            recipe.Rating = progress;
+            Log.Debug("progress", progress.ToString() + ratingSeekBar.ProgressTintList.ToString());
+
+            seekBarValue.Text = progress.ToString();
         }
 
         /// <summary>
@@ -80,10 +123,11 @@ namespace OnMenu.Droid.Activities
         /// </summary>
         protected void updateValues()
         {
-            List<Ingredient> placeholderL = recipe.GetIngredientsAsList(BrowseIngredientFragment.ViewModel);
+            List<Ingredient> placeholderL = ItemParser.IdCSVToIngredientList(recipe.Ingredients,BrowseIngredientFragment.ViewModel);
             ObservableCollection<Ingredient> ingList = new ObservableCollection<Ingredient>();
-            List<float> qList = recipe.GetQuantitiesAsList();
-            double price = recipe.GetEstimatedPrice(BrowseIngredientFragment.ViewModel);
+            List<float> qList = ItemParser.QuantityValuesToFloatList(recipe.Quantities);
+            double price = ItemParser.GetEstimatedPrice(recipe, BrowseIngredientFragment.ViewModel);
+            ratingSeekBar.Progress = recipe.Rating;
 
             placeholderL.ForEach(i => ingList.Add(i));
             ingredientList.SetAdapter(adapter = new RecipeIngredientsAdapter(this, ingList, qList));
@@ -138,6 +182,16 @@ namespace OnMenu.Droid.Activities
         protected override void OnStart()
         {
             base.OnStart();
+            updateValues();
+        }
+
+        /// <summary>
+        /// Handles the actions when this activity is resumed
+        /// </summary>
+        protected override void OnResume()
+        {
+            base.OnResume();
+            updateValues();
         }
 
         /// <summary>
@@ -145,6 +199,7 @@ namespace OnMenu.Droid.Activities
         /// </summary>
         protected override void OnStop()
         {
+            BrowseRecipeFragment.ViewModel.UpdateRecipesCommand.Execute(recipe);
             base.OnStop();
         }
     }

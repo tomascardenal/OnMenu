@@ -26,7 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:layout_collapseMode="pin" />
+                app:layout_collapseMode="pin" >
+            </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
     <android.support.v4.widget.NestedScrollView
@@ -41,6 +42,7 @@
                 style="@style/Widget.CardContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -49,16 +51,54 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/addrecipe_instructions"
+                        android:text="@string/rating"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        android:id="@+id/instructionsTitle_recipeDetail"
+                        android:id="@+id/ratingTitle_recipeDetail"
                         android:layout_alignParentTop="true"
                     />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/seekBarLayout_recipeDetail"
+                        android:layout_below="@+id/ratingTitle_recipeDetail">
+                        <SeekBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:isIndicator="false"
+                            android:minHeight="69px"
+                            android:max="100"
+                            android:min="0"
+                            android:progress="50"
+                            android:progressTint="@android:color/holo_orange_light"
+                            android:thumbTint="@android:color/holo_orange_dark"
+                            android:progressBackgroundTint="@android:color/black"
+                            android:layout_weight="4"
+                            android:id="@+id/seekBar_recipeDetail" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" 
+                            android:text = "50"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:id="@+id/seekBarValue_recipeDetail"
+                        />
+                    </LinearLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/addrecipe_instructions"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:id="@+id/instructionsTitle_recipeDetail"
+                        android:layout_below="@+id/seekBarLayout_recipeDetail"
+                    />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
                         android:scrollbars="vertical"
                         android:lines="3"
+                        android:textSize="12dp"
                         android:id="@+id/instructions_recipeDetail"
                         android:text = "Un plato de lentejas, con leche, sirope de caramelo, un monton de ajo crudo, con un buena gelatina royal mezcladito hay todo, luego ponle 1 kg de sal y 1 kg de azucar, agua para que quede caldoso y un monton de chorizo del fuerte ese que pica tanto, con pimienta y pimenton"
                         android:layout_below="@+id/instructionsTitle_recipeDetail"    

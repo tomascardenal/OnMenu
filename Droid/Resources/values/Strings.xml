@@ -50,6 +50,7 @@
   <string name="addrecipe_confirmDeleteIngredient">¿Está seguro de querer eliminar este ingrediente de la receta?</string>
   <string name="addrecipe_removeInfoToast">Mantén pulsado un ingrediente para eliminarlo de la receta</string>
   <string name="cantDelete_toast">Este ingrediente está en una receta y no puede ser borrado</string>
+  <string name="rating">Valoración</string>
   <string name="cancel">Cancelar</string>
   <string name="accept">Aceptar</string>
   <string name="hasAllergens">Has allergens</string>
