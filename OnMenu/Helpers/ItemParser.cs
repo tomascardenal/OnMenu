@@ -1,5 +1,4 @@
-﻿using Android.Util;
-using OnMenu.Models.Items;
+﻿using OnMenu.Models.Items;
 using System.Collections.Generic;
 
 namespace OnMenu.Helpers
@@ -7,7 +6,7 @@ namespace OnMenu.Helpers
     /// <summary>
     /// Functions to parse items into SQLite valid datatypes
     /// </summary>
-    class ItemParser
+    public class ItemParser
     {
         /// <summary>
         /// Parses a List of ingredients into a string with their ids separated by commas
@@ -19,7 +18,6 @@ namespace OnMenu.Helpers
             string parsedList = "";
             foreach (Ingredient i in ingredients)
             {
-                Log.Debug("saveIngredient", i.Name + i.Id);
                 parsedList += i.Id + ",";
             }
             return parsedList;
@@ -53,7 +51,11 @@ namespace OnMenu.Helpers
             }
             return ingredientList;
         }
-
+        /// <summary>
+        /// Parses a float list to the quantities separated by front slashes
+        /// </summary>
+        /// <param name="floatList">The float list to parse</param>
+        /// <returns>The slash separated string with the quantities</returns>
         public static string FloatListToQuantityValues(List<float> floatList)
         {
             string ssv = "";
@@ -65,6 +67,11 @@ namespace OnMenu.Helpers
             return ssv;
         }
 
+        /// <summary>
+        /// Parses a string with the quantities separated by slashes into a float list
+        /// </summary>
+        /// <param name="floatSSV">The slash separated string with the quantities to parse</param>
+        /// <returns>The resulting float list</returns>
         public static List<float> QuantityValuesToFloatList(string floatSSV)
         {
             List<float> floatList = new List<float>();

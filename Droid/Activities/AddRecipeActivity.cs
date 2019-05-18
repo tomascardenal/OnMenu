@@ -37,35 +37,35 @@ namespace OnMenu.Droid.Activities
         /// <summary>
         /// The save button.
         /// </summary>
-        FloatingActionButton saveButton;
+        protected FloatingActionButton saveButton;
         /// <summary>
         /// The name field.
         /// </summary>
-        EditText nameField;
+        protected EditText nameField;
         /// <summary>
         /// The instructions field.
         /// </summary>
-        EditText instructionsField;
+        protected EditText instructionsField;
         /// <summary>
         /// The add ingredient button.
         /// </summary>
-        Button addIngredientButton;
+        protected Button addIngredientButton;
         /// <summary>
         /// The ingredient RecyclerView.
         /// </summary>
-        RecyclerView ingredientRecyclerView;
+        protected RecyclerView ingredientRecyclerView;
         /// <summary>
         /// Spinner with the ingredients
         /// </summary>
-        Spinner ingredientSpinner;
+        protected Spinner ingredientSpinner;
         /// <summary>
         /// Refresh layout for the RecyclerView
         /// </summary>
-        SwipeRefreshLayout swipeRefreshLayout;
+        protected SwipeRefreshLayout swipeRefreshLayout;
         /// <summary>
         /// The recyclerview adapter.
         /// </summary>
-        RecipeIngredientsAdapter adapter;
+        protected RecipeIngredientsAdapter adapter;
         /// <summary>
         /// The ingredient names.
         /// </summary>
@@ -73,28 +73,28 @@ namespace OnMenu.Droid.Activities
         /// <summary>
         /// List of arrays for the RecyclerView
         /// </summary>
-        ObservableCollection<Ingredient> addedIngredients;
+        protected ObservableCollection<Ingredient> addedIngredients;
         /// <summary>
         /// Dialog builder for asking ingredient quantities
         /// </summary>
-        AlertDialog.Builder alertIngredientBuilder;
+        protected AlertDialog.Builder alertIngredientBuilder;
         /// <summary>
         /// Whether this activity is on editmode or not
         /// </summary>
-        bool editMode;
+        protected bool editMode;
         /// <summary>
         /// The recipe to edit
         /// </summary>
-        Recipe editRecipe;
+        protected Recipe editRecipe;
         /// <summary>
         /// Show the hint to delete an ingredient
         /// </summary>
-        bool toastAlert;
+        protected bool toastAlert;
         /// <summary>
         /// Stores the ingredient quantities
         /// </summary>
-        List<float> quantityStore;
-        
+        protected List<float> quantityStore;
+
 
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace OnMenu.Droid.Activities
             RecViewModel = BrowseRecipeFragment.ViewModel;
             ingredientNames = IngViewModel.Ingredients.Select(ingredient => ingredient.Name).ToArray();
             addedIngredients = new ObservableCollection<Ingredient>();
-           
+
             SetContentView(Resource.Layout.activity_add_recipe);
             saveButton = FindViewById<FloatingActionButton>(Resource.Id.save_button_addRecipe);
             nameField = FindViewById<EditText>(Resource.Id.nameField_addRecipe);
@@ -122,7 +122,7 @@ namespace OnMenu.Droid.Activities
             ingredientSpinner = FindViewById<Spinner>(Resource.Id.ingredientSpinner_addRecipe);
             swipeRefreshLayout = FindViewById<SwipeRefreshLayout>(Resource.Id.swipeRefreshLayout_addRecipe);
 
-            ingredientRecyclerView.SetAdapter(adapter = new RecipeIngredientsAdapter(this, addedIngredients,quantityStore));
+            ingredientRecyclerView.SetAdapter(adapter = new RecipeIngredientsAdapter(this, addedIngredients, quantityStore));
             ingredientSpinner.Adapter = new ArrayAdapter(this.ApplicationContext, Android.Resource.Layout.SimpleListItem1, ingredientNames);
 
             quantityStore = new List<float>();
@@ -262,7 +262,7 @@ namespace OnMenu.Droid.Activities
             ItemParser.IdCSVToIngredientList(editRecipe.Ingredients, IngViewModel).ForEach(item => addedIngredients.Add(item));
             ItemParser.QuantityValuesToFloatList(editRecipe.Quantities).ForEach(q => quantityStore.Add(q));
             adapter.QuantityStore = quantityStore;
-            for(int i = 0; i < addedIngredients.Count(); i++)
+            for (int i = 0; i < addedIngredients.Count(); i++)
             {
                 addedIngredients[i].CanDelete = true;
             }
@@ -273,7 +273,7 @@ namespace OnMenu.Droid.Activities
         /// </summary>
         /// <param name="sender">The event sender.</param>
         /// <param name="e">The event args.</param>
-        void SaveButton_Click(object sender, EventArgs e)
+        public void SaveButton_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < addedIngredients.Count(); i++)
             {

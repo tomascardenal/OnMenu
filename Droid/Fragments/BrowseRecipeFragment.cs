@@ -29,27 +29,27 @@ namespace OnMenu.Droid
         /// <summary>
         /// The adapter.
         /// </summary>
-        BrowseRecipesAdapter adapter;
+        private BrowseRecipesAdapter adapter;
         /// <summary>
         /// The refresher.
         /// </summary>
-        SwipeRefreshLayout refresher;
+        protected SwipeRefreshLayout refresher;
         /// <summary>
         /// Recipes recyclerView
         /// </summary>
-        RecyclerView recyclerView;
+        protected RecyclerView recyclerView;
         /// <summary>
         /// The context menu.
         /// </summary>
-        PopupMenu contextMenu;
+        protected PopupMenu contextMenu;
         /// <summary>
         /// The selected item.
         /// </summary>
-        int selectedItem;
+        protected int selectedItem;
         /// <summary>
         /// The progress bar.
         /// </summary>
-        ProgressBar progress;
+        protected ProgressBar progress;
         /// <summary>
         /// Gets or sets the view model.
         /// </summary>

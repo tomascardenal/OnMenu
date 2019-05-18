@@ -7,7 +7,7 @@ namespace OnMenu.ViewModels
     /// <summary>
     /// Viewmodel for the recipe details
     /// </summary>
-    class RecipeDetailViewModel : BaseViewModel
+    public class RecipeDetailViewModel : BaseViewModel
     {
         /// <summary>
         /// The recipe to show
@@ -33,7 +33,7 @@ namespace OnMenu.ViewModels
             {
                 Title = recipe.Name;
                 Recipe = recipe;
-                IngredientList = ItemParser.IdCSVToIngredientList(recipe.Ingredients,ingredientReference);
+                IngredientList = ItemParser.IdCSVToIngredientList(recipe.Ingredients, ingredientReference);
                 QuantityList = ItemParser.QuantityValuesToFloatList(recipe.Quantities);
             }
         }

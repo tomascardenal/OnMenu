@@ -62,6 +62,7 @@ namespace OnMenu
 
             try
             {
+                await RecipeDataStore.InitializeDataStore();
                 Recipes.Clear();
                 var recipes = await RecipeDataStore.GetItemsAsync();
                 foreach (var recipe in recipes)
@@ -109,9 +110,9 @@ namespace OnMenu
         async Task UpdateRecipe(Recipe recipe)
         {
             Recipe _recipe = null;
-            foreach(Recipe rec in Recipes)
+            foreach (Recipe rec in Recipes)
             {
-                if(rec.Id == recipe.Id)
+                if (rec.Id == recipe.Id)
                 {
                     _recipe = rec;
                     break;

@@ -32,11 +32,11 @@ namespace OnMenu.Droid
         /// <summary>
         /// The pager.
         /// </summary>
-        ViewPager pager;
+        protected ViewPager pager;
         /// <summary>
         /// The adapter.
         /// </summary>
-        TabsAdapter adapter;
+        private TabsAdapter adapter;
 
         /// <summary>
         /// Handles the actions to do when this activity is created

@@ -7,7 +7,6 @@ using Android.Support.V4.Widget;
 using Android.App;
 using Android.Content;
 using PopupMenu = Android.Support.V7.Widget.PopupMenu;
-using Android.Util;
 using OnMenu.Droid.Helpers;
 
 namespace OnMenu.Droid
@@ -26,27 +25,27 @@ namespace OnMenu.Droid
         /// <summary>
         /// The adapter.
         /// </summary>
-        BrowseIngredientsAdapter adapter;
+        private BrowseIngredientsAdapter adapter;
         /// <summary>
         /// The recyclerview with the ingredients
         /// </summary>
-        RecyclerView recyclerView;
+        protected RecyclerView recyclerView;
         /// <summary>
         /// The refresher.
         /// </summary>
-        SwipeRefreshLayout refresher;
+        protected SwipeRefreshLayout refresher;
         /// <summary>
         /// The context menu.
         /// </summary>
-        PopupMenu contextMenu;
+        protected PopupMenu contextMenu;
         /// <summary>
         /// The selected item.
         /// </summary>
-        int selectedItem;
+        protected int selectedItem;
         /// <summary>
         /// The progress bar.
         /// </summary>
-        ProgressBar progress;
+        protected ProgressBar progress;
         /// <summary>
         /// Gets or sets the view model.
         /// </summary>
@@ -126,9 +125,15 @@ namespace OnMenu.Droid
             var intent = new Intent(Activity, typeof(BrowseIngredientDetailActivity));
 
             intent.PutExtra("data", Newtonsoft.Json.JsonConvert.SerializeObject(item));
-            Activity.StartActivityForResult(intent,0);
+            Activity.StartActivityForResult(intent, 0);
         }
 
+        /// <summary>
+        /// Handles the actions when an activity returns a result to this fragment
+        /// </summary>
+        /// <param name="requestCode">The request code</param>
+        /// <param name="resultCode">The result code</param>
+        /// <param name="data">The Intent with embedded data</param>
         public override void OnActivityResult(int requestCode, int resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
@@ -176,7 +181,6 @@ namespace OnMenu.Droid
                     Utils.ForceRefreshLayout(refresher, recyclerView);
                     break;
             }
-
         }
 
         /// <summary>
@@ -190,13 +194,11 @@ namespace OnMenu.Droid
             refresher.Refreshing = false;
         }
 
-
         /// <summary>
         /// Informs that the fragment became visible and executes the actions inside
         /// </summary>
         public void BecameVisible()
         {
-
         }
     }
 
@@ -228,7 +230,6 @@ namespace OnMenu.Droid
             this.viewModel = viewModel;
             this.activity = activity;
 
-    
             this.viewModel.Ingredients.CollectionChanged += (sender, args) =>
             {
                 this.activity.RunOnUiThread(NotifyDataSetChanged);
@@ -284,7 +285,7 @@ namespace OnMenu.Droid
         /// Detail textfield for the rows on the recycler view
         /// </summary>
         public TextView DetailTextView { get; set; }
-        
+
         /// <summary>
         /// Instantiates a new viewholder
         /// </summary>

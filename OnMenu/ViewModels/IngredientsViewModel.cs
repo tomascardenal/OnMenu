@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Android.Util;
 using OnMenu.Models.Items;
@@ -63,21 +62,18 @@ namespace OnMenu
 
             try
             {
+                await IngredientDataStore.InitializeDataStore();
                 Ingredients.Clear();
-               
+
                 var ingredients = await IngredientDataStore.GetItemsAsync(true);
                 foreach (var ingredient in ingredients)
                 {
                     Ingredients.Add(ingredient);
                 }
-                foreach (Ingredient i in App.DB.IngredientList)
-                {
-                    Log.Debug("DB ya parece cachondeo", "name " + i.Name + " id " + i.Id + " measure " + i.Measure + " price " + i.EstimatedPrice);
-                }
             }
             catch (Exception ex)
             {
-                Log.Debug("DB", " exception : "+ex.Message);
+                Log.Error("DB", " exception : " + ex.Message);
             }
             finally
             {
@@ -115,8 +111,9 @@ namespace OnMenu
         async Task UpdateIngredient(Ingredient ingredient)
         {
             Ingredient _ingredient = null;
-            foreach(Ingredient ing in Ingredients){
-                if(ing.Id == ingredient.Id)
+            foreach (Ingredient ing in Ingredients)
+            {
+                if (ing.Id == ingredient.Id)
                 {
                     _ingredient = ing;
                     break;

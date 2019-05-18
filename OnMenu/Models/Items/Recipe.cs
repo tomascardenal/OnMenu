@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using OnMenu.Helpers;
-using SQLite;
 
 namespace OnMenu.Models.Items
 {
@@ -11,7 +9,7 @@ namespace OnMenu.Models.Items
     /// </summary>
     public class Recipe : Item
     {
-      
+
         /// <summary>
         /// List of ingredients on this recipe, represented as the ingredient ID's separated by commas
         /// <see cref="Helpers.ItemParser"/>
@@ -26,7 +24,7 @@ namespace OnMenu.Models.Items
         /// <summary>
         /// This recipe's rating
         /// </summary>
-        int rating;
+        private int rating;
         /// <summary>
         /// Gets or sets the rating.
         /// </summary>
@@ -64,7 +62,7 @@ namespace OnMenu.Models.Items
         /// <param name="instructions">The instructions to follow on this recipe.</param>
         /// <param name="ingredients">List of ingredients.</param>
         /// <param name="rating">The recipe's name.</param>
-        public Recipe(string name, string instructions, List<Ingredient> ingredients, List<float> quantities, int rating):base(name)
+        public Recipe(string name, string instructions, List<Ingredient> ingredients, List<float> quantities, int rating) : base(name)
         {
             Instructions = instructions;
             Ingredients = ItemParser.IngredientsToIdCSV(ingredients);
@@ -75,6 +73,6 @@ namespace OnMenu.Models.Items
         /// <summary>
         /// Empty constructor (Used by sqlite-net-pcl)
         /// </summary>
-        public Recipe():base() { }
+        public Recipe() : base() { }
     }
 }

@@ -5,6 +5,7 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using OnMenu.Droid.Activities;
 using OnMenu.Models.Items;
+
 namespace OnMenu.Droid
 {
     /// <summary>
@@ -23,12 +24,18 @@ namespace OnMenu.Droid
         /// <summary>
         /// The activity for this adapter
         /// </summary>
-        Activity activity;
+        protected Activity activity;
         /// <summary>
         /// The viewholder for this adapter
         /// </summary>
-        RecipeIngredientsViewHolder holder;
+        protected RecipeIngredientsViewHolder holder;
 
+        /// <summary>
+        /// Constructor for this adapter
+        /// </summary>
+        /// <param name="activity">The calling activity</param>
+        /// <param name="ingredientList">The list to display</param>
+        /// <param name="quantityStore">The quantities to display</param>
         public RecipeIngredientsAdapter(Activity activity, ObservableCollection<Ingredient> ingredientList, List<float> quantityStore)
         {
             this.activity = activity;
@@ -40,7 +47,12 @@ namespace OnMenu.Droid
             };
         }
 
-
+        /// <summary>
+        /// Handles the creation of the viewholders
+        /// </summary>
+        /// <param name="parent">The parent viewgroup</param>
+        /// <param name="viewType">The type of view</param>
+        /// <returns></returns>
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             View ingRecView =
@@ -49,6 +61,11 @@ namespace OnMenu.Droid
             return holder;
         }
 
+        /// <summary>
+        /// Handles the binding of data into the viewholders
+        /// </summary>
+        /// <param name="holder">The current viewholder</param>
+        /// <param name="position">The position to bind</param>
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             Ingredient ingredient = IngredientList[position];

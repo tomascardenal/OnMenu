@@ -28,31 +28,31 @@ namespace OnMenu.Droid.Activities
         /// <summary>
         /// The view model.
         /// </summary>
-        RecipeDetailViewModel viewModel;
+        protected RecipeDetailViewModel viewModel;
         /// <summary>
         /// Textview to show the recipe details
         /// </summary>
-        TextView recipeDetails;
+        protected TextView recipeDetails;
         /// <summary>
         /// Textview to show if the recipe has allergens
         /// </summary>
-        TextView recipeAllergen;
+        protected TextView recipeAllergen;
         /// <summary>
         /// Textview to show the calculated price
         /// </summary>
-        TextView recipePrice;
+        protected TextView recipePrice;
         /// <summary>
         /// List to display the ingredients
         /// </summary>
-        RecyclerView ingredientList;
+        protected RecyclerView ingredientList;
         /// <summary>
         /// The adapter of the recyclerview
         /// </summary>
-        RecipeIngredientsAdapter adapter;
+        protected RecipeIngredientsAdapter adapter;
         /// <summary>
         /// The recipe to show
         /// </summary>
-        Recipe recipe;
+        protected Recipe recipe;
         /// <summary>
         /// Handles the actions to do when this activity is created
         /// </summary>

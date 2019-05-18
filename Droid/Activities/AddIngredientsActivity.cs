@@ -17,40 +17,40 @@ namespace OnMenu.Droid
         /// <summary>
         /// The save button.
         /// </summary>
-        FloatingActionButton saveButton;
+        protected FloatingActionButton saveButton;
         /// <summary>
         /// The name field.
         /// </summary>
-        EditText nameField;
+        protected EditText nameField;
         /// <summary>
         /// The group field.
         /// </summary>
-        EditText groupField;
+        protected EditText groupField;
         /// <summary>
         /// The measure field.
         /// </summary>
-        EditText measureField;
+        protected EditText measureField;
         /// <summary>
         /// The price field.
         /// </summary>
-        EditText priceField;
+        protected EditText priceField;
         /// <summary>
         /// The estimated per price field.
         /// </summary>
-        EditText estimatedPerField;
+        protected EditText estimatedPerField;
         /// <summary>
         /// The allergen button.
         /// </summary>
-        ToggleButton allergenButton;
-        
+        protected ToggleButton allergenButton;
+
         /// <summary>
         /// Whether this activity is on edit mode or not
         /// </summary>
-        bool editMode = false;
+        protected bool editMode = false;
         /// <summary>
         /// The ingredient to edit
         /// </summary>
-        Ingredient editIngredient = null;
+        protected Ingredient editIngredient = null;
         /// <summary>
         /// Gets or sets the view model.
         /// </summary>

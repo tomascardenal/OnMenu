@@ -6,35 +6,52 @@ using OnMenu.Models.Items;
 namespace OnMenu
 {
     /// <summary>
-    /// Datastore for recipoes
+    /// Datastore for recipes
     /// </summary>
-    //TODO add DB connection
     public class RecipeDataStore : IDataStore<Recipe>
     {
         /// <summary>
         /// List of recipes
         /// </summary>
-        List<Recipe> recipes;
+        protected List<Recipe> recipes;
+        /// <summary>
+        /// Whether the data store was initialized or not
+        /// </summary>
+        private bool initialized;
 
         /// <summary>
         /// Instantiates a new data store for recipes
         /// </summary>
         public RecipeDataStore()
         {
-            App.DB.GetRecipesCommand.Execute(null);
-            if (App.DB.RecipeList != null && App.DB.RecipeList.Count != 0)
-            {
-                recipes = App.DB.RecipeList;
-            }
-            else
-            {
-                recipes = new List<Recipe>();
-                List<Recipe> _recipes = new List<Recipe>();
+            initialized = false;
+        }
 
-                foreach (Recipe recipe in _recipes)
+        /// <summary>
+        /// Initializes the datastore
+        /// </summary>
+        /// <returns>An async task</returns>
+        public async Task InitializeDataStore()
+        {
+            if (!initialized)
+            {
+                initialized = true;
+                recipes = await App.DB.GetRecipesAsync();
+                if (App.DB.RecipeList != null && App.DB.RecipeList.Count != 0)
                 {
-                    App.DB.SaveRecipeAsync(recipe);
-                    recipes.Add(recipe);
+                    recipes = App.DB.RecipeList;
+                }
+                else
+                {
+                    recipes = new List<Recipe>();
+                    List<Recipe> _recipes = new List<Recipe>();
+
+                    foreach (Recipe recipe in _recipes)
+                    {
+                        recipes.Add(recipe);
+                        await App.DB.SaveRecipeAsync(recipe);
+
+                    }
                 }
             }
         }
@@ -124,5 +141,6 @@ namespace OnMenu
             }
             return await Task.FromResult(true);
         }
+
     }
 }

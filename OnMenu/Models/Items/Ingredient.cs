@@ -8,7 +8,7 @@
         /// <summary>
         /// The ingredient's group
         /// </summary>
-        string group;
+        private string group;
         /// <summary>
         /// Gets or sets the food group for this ingredient.
         /// </summary>
@@ -18,7 +18,7 @@
         /// <summary>
         /// The ingredient's measuring unit
         /// </summary>
-        string measure;
+        private string measure;
         /// <summary>
         /// Gets or sets the measure to use with this ingredient.
         /// </summary>
@@ -28,7 +28,7 @@
         /// <summary>
         /// Whether this ingredient can be an allergen
         /// </summary>
-        bool allergen;
+        private bool allergen;
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:OnMenu.Models.Ingredient"/> is an allergen.
         /// </summary>
@@ -38,7 +38,7 @@
         /// <summary>
         /// This ingredient's estimated market price
         /// </summary>
-        float estimatedPrice;
+        private float estimatedPrice;
         /// <summary>
         /// Gets or sets the estimated price of the ingredient.
         /// </summary>
@@ -62,7 +62,7 @@
         /// <param name="allergen">If set to <c>true</c>, the ingredient is an allergen.</param>
         /// <param name="estimatedPrice">Estimated price for the ingredient.</param>
         /// <param name="estimatedPer">Factor for the price of the ingredient.</param>
-        public Ingredient(string name, string group, string measure, bool allergen, float estimatedPrice, float estimatedPer):base(name)
+        public Ingredient(string name, string group, string measure, bool allergen, float estimatedPrice, float estimatedPer) : base(name)
         {
             Group = group;
             Measure = measure;
@@ -75,7 +75,7 @@
         /// <summary>
         /// Empty constructor (Used by sqlite-net-pcl)
         /// </summary>
-        public Ingredient():base() { }
+        public Ingredient() : base() { }
 
     }
 }

@@ -10,7 +10,7 @@ namespace OnMenu
         /// <summary>
         /// The ingredient to show
         /// </summary>
-        public Ingredient Ingredient{ get; set; }
+        public Ingredient Ingredient { get; set; }
 
         /// <summary>
         /// Instantiates a new view model

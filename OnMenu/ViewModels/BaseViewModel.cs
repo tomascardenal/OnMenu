@@ -13,7 +13,7 @@ namespace OnMenu
         /// <summary>
         /// Whether the viewmodel is busy
         /// </summary>
-        bool isBusy = false;
+        private bool isBusy = false;
         public bool IsBusy
         {
             get { return isBusy; }
@@ -23,7 +23,7 @@ namespace OnMenu
         /// <summary>
         /// The viewmodel's title
         /// </summary>
-        string title = string.Empty;
+        private string title = string.Empty;
         public string Title
         {
             get { return title; }

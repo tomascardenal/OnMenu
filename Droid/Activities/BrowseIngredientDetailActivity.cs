@@ -21,27 +21,27 @@ namespace OnMenu.Droid
         /// <summary>
         /// The view model.
         /// </summary>
-        IngredientDetailViewModel viewModel;
+        protected IngredientDetailViewModel viewModel;
         /// <summary>
         /// The ingredient to show
         /// </summary>
-        Ingredient ingredient;
+        protected Ingredient ingredient;
         /// <summary>
         /// Textview to show the food group
         /// </summary>
-        TextView foodGroupView;
+        protected TextView foodGroupView;
         /// <summary>
         /// Textview to show if the ingredient is an allergen
         /// </summary>
-        TextView allergenView;
+        protected TextView allergenView;
         /// <summary>
         /// Textview to show the units
         /// </summary>
-        TextView unitView;
+        protected TextView unitView;
         /// <summary>
         /// Textview to show the price
         /// </summary>
-        TextView priceView;
+        protected TextView priceView;
 
         /// <summary>
         /// Handles the actions to do when this activity is created

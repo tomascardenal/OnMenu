@@ -1,25 +1,22 @@
 ﻿using SQLite;
-using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Threading.Tasks;
 
 namespace OnMenu.Models.Items
-{   
+{
     /// <summary>
     /// Model for an Item
     /// </summary>
-    public class Item 
+    public class Item
     {
         /// <summary>
         /// The item's ID, autoincremented by SQLite
         /// </summary>
-        [PrimaryKey,AutoIncrement]
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
         /// <summary>
         /// The item's name
         /// </summary>
-        string name;
+        private string name;
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
@@ -38,6 +35,6 @@ namespace OnMenu.Models.Items
         /// <summary>
         /// Empty constructor (Used by sqlite-net-pcl)
         /// </summary>
-        public Item() {}
+        public Item() { }
     }
 }

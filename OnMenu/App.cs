@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Android.Util;
 using OnMenu.Data;
 using OnMenu.Models.Items;
 
@@ -42,11 +41,9 @@ namespace OnMenu
         {
             ServiceLocator.Instance.Register<IDataStore<Ingredient>, IngredientDataStore>();
             ServiceLocator.Instance.Register<IDataStore<Recipe>, RecipeDataStore>();
-            Log.Debug("DB", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ItemDB.db3");
             string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ItemDB.db3");
             if (!File.Exists(dbPath))
             {
-                Log.Debug("DB", "creating file");
                 File.Create(dbPath);
             }
             else if (OnMenu.Models.Constants.ResetDB)

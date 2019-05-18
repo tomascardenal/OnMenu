@@ -1,5 +1,4 @@
-﻿using Android.Util;
-using OnMenu.Models.Items;
+﻿using OnMenu.Models.Items;
 using SQLite;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,6 @@ namespace OnMenu.Data
     /// <summary>
     /// Database controller for CRUD operations on local SQLite database
     /// </summary>
-    /// TODO properly set async calls, check for readded data properly
     public class ItemDatabase
     {
         /// <summary>
@@ -19,33 +17,9 @@ namespace OnMenu.Data
         readonly SQLiteAsyncConnection _database;
 
         /// <summary>
-        /// Command to add ingredients
-        /// </summary>
-        public Command AddIngredientsCommand { get; set; }
-        /// <summary>
-        /// Command to delete ingredients
-        /// </summary>
-        public Command DeleteIngredientsCommand { get; set; }
-        /// <summary>
-        /// Command to add recipoes
-        /// </summary>
-        public Command AddRecipesCommand { get; set; }
-        /// <summary>
-        /// Command to delete recipes
-        /// </summary>
-        public Command DeleteRecipesCommand { get; set; }
-        /// <summary>
         /// Command to stop the connection
         /// </summary>
         public Command StopConnectionCommand { get; set; }
-        /// <summary>
-        /// Command to get the ingredients
-        /// </summary>
-        public Command GetIngredientsCommand { get; set; }
-        /// <summary>
-        /// Command to get the recipes
-        /// </summary>
-        public Command GetRecipesCommand { get; set; }
 
         /// <summary>
         /// List of recipes
@@ -68,16 +42,7 @@ namespace OnMenu.Data
             _database.CreateTableAsync<Ingredient>().Wait();
             _database.CreateTableAsync<Recipe>().Wait();
 
-            AddRecipesCommand = new Command<Recipe>(async (Recipe recipe) => await SaveRecipeAsync(recipe));
-            DeleteRecipesCommand = new Command<Recipe>(async (Recipe recipe) => await DeleteRecipeAsync(recipe));
-
-            AddIngredientsCommand = new Command<Ingredient>(async (Ingredient ingredient) => await SaveIngredientAsync(ingredient));
-            DeleteIngredientsCommand = new Command<Ingredient>(async (Ingredient ingredient) => await DeleteIngredientAsync(ingredient));
-
             StopConnectionCommand = new Command(async () => await StopConnectionAsync());
-
-            GetIngredientsCommand = new Command(async () => await GetIngredientsAsync());
-            GetRecipesCommand = new Command(async () => await GetRecipesAsync());
         }
 
         /// <summary>
@@ -90,10 +55,6 @@ namespace OnMenu.Data
                 ingredientList.Clear();
             }
             ingredientList = await _database.Table<Ingredient>().ToListAsync();
-            foreach (Ingredient i in ingredientList)
-            {
-                Log.Debug("DB", "name " + i.Name + " id " + i.Id + " measure " + i.Measure + " price " + i.EstimatedPrice);
-            }
             return ingredientList;
         }
 
@@ -102,9 +63,9 @@ namespace OnMenu.Data
         /// </summary>
         /// <param name="id">The id of the ingredient to retrieve</param>
         /// <returns>The ingredient with the given id</returns>
-        public Task<Ingredient> GetIngredientAsync(int id)
+        public async Task<Ingredient> GetIngredientAsync(int id)
         {
-            return _database.Table<Ingredient>()
+            return await _database.Table<Ingredient>()
                 .Where(i => i.Id == id)
                 .FirstOrDefaultAsync();
         }
@@ -114,19 +75,19 @@ namespace OnMenu.Data
         /// </summary>
         /// <param name="ingredient">The ingredient to store</param>
         /// <returns>An integer indicating the primary key of the ingredient</returns>
-        public Task<int> SaveIngredientAsync(Ingredient ingredient)
+        public async Task<int> SaveIngredientAsync(Ingredient ingredient)
         {
             if (IngredientList != null && IngredientList.Any(i => i.Id == ingredient.Id || i.Name == ingredient.Name))
             {
-                return _database.UpdateAsync(ingredient);
+                return await _database.UpdateAsync(ingredient);
             }
             else if (ingredient.Id != 0)
             {
-                return _database.InsertOrReplaceAsync(ingredient);
+                return await _database.InsertOrReplaceAsync(ingredient);
             }
             else
             {
-                return _database.InsertAsync(ingredient);
+                return await _database.InsertAsync(ingredient);
             }
         }
 
@@ -135,18 +96,24 @@ namespace OnMenu.Data
         /// </summary>
         /// <param name="ingredient">The ingredient to delete</param>
         /// <returns>An integer indicating the deleted id</returns>
-        public Task<int> DeleteIngredientAsync(Ingredient ingredient)
+        public async Task<int> DeleteIngredientAsync(Ingredient ingredient)
         {
             IngredientList.Remove(ingredient);
-            return _database.DeleteAsync<Ingredient>(ingredient);
+            return await _database.DeleteAsync<Ingredient>(ingredient);
         }
 
         /// <summary>
         /// Fetches the recipes asyncronously into the list
         /// </summary>
-        public async Task GetRecipesAsync()
+        /// <returns>A list with the recipes</returns>
+        public async Task<List<Recipe>> GetRecipesAsync()
         {
+            if (recipeList != null)
+            {
+                recipeList.Clear();
+            }
             recipeList = await _database.Table<Recipe>().ToListAsync();
+            return recipeList;
         }
 
         /// <summary>
@@ -154,9 +121,9 @@ namespace OnMenu.Data
         /// </summary>
         /// <param name="id">The id of the recipe to retrieve</param>
         /// <returns>The recipe with the given id</returns>
-        public Task<Recipe> GetRecipeAsync(int id)
+        public async Task<Recipe> GetRecipeAsync(int id)
         {
-            return _database.Table<Recipe>()
+            return await _database.Table<Recipe>()
                 .Where(i => i.Id == id)
                 .FirstOrDefaultAsync();
         }
@@ -166,19 +133,19 @@ namespace OnMenu.Data
         /// </summary>
         /// <param name="recipe">The recipe to store</param>
         /// <returns>An integer indicating the key of the recipe or the affected rows (if updating)</returns>
-        public Task<int> SaveRecipeAsync(Recipe recipe)
+        public async Task<int> SaveRecipeAsync(Recipe recipe)
         {
             if (RecipeList != null && RecipeList.Any(r => r.Id == recipe.Id || r.Name == recipe.Name))
             {
-                return _database.UpdateAsync(recipe);
+                return await _database.UpdateAsync(recipe);
             }
             else if (recipe.Id != 0)
             {
-                return _database.InsertOrReplaceAsync(recipe);
+                return await _database.InsertOrReplaceAsync(recipe);
             }
             else
             {
-                return _database.InsertAsync(recipe);
+                return await _database.InsertAsync(recipe);
             }
         }
 
@@ -187,10 +154,10 @@ namespace OnMenu.Data
         /// </summary>
         /// <param name="recipe">The recipe to delete</param>
         /// <returns>An integer indicating the number of affected rows</returns>
-        public Task<int> DeleteRecipeAsync(Recipe recipe)
+        public async Task<int> DeleteRecipeAsync(Recipe recipe)
         {
             recipeList.Remove(recipe);
-            return _database.DeleteAsync<Recipe>(recipe);
+            return await _database.DeleteAsync<Recipe>(recipe);
         }
 
         /// <summary>

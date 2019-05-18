@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Android.Util;
 using OnMenu.Models.Items;
 
 namespace OnMenu
@@ -9,38 +8,48 @@ namespace OnMenu
     /// <summary>
     /// Datastore for ingredients
     /// </summary>
-    //TODO add DB connection
     public class IngredientDataStore : IDataStore<Ingredient>
     {
         /// <summary>
         /// List of ingredients
         /// </summary>
-        List<Ingredient> ingredients;
-
+        protected List<Ingredient> ingredients;
+        /// <summary>
+        /// Whether the data store was initialized or not
+        /// </summary>
+        private bool initialized;
 
         /// <summary>
         /// Instantiates a new data store for ingredients
         /// </summary>
         public IngredientDataStore()
         {
+            initialized = false;
+        }
 
-            App.DB.GetIngredientsCommand.Execute(null);
-            if (App.DB.IngredientList != null && App.DB.IngredientList.Count != 0)
+        /// <summary>
+        /// Initializes the datastore
+        /// </summary>
+        /// <returns>An async task</returns>
+        public async Task InitializeDataStore()
+        {
+            if (!initialized)
             {
-                ingredients = App.DB.IngredientList;
-            }
-            else
-            {
-                ingredients = new List<Ingredient>();
-                var _ingredients = new List<Ingredient>
+                initialized = true;
+                ingredients = await App.DB.GetIngredientsAsync();
+                if (ingredients == null || ingredients.Count == 0)
+                {
+                    ingredients = new List<Ingredient>();
+                    var _ingredients = new List<Ingredient>
                 {
                         new Ingredient ( "Rice", "Cereals", "g",  true, 0.50f, 100),
                         new Ingredient ( "Egg", "Protein", "units",  true, 1.0f, 6),
                 };
-                foreach (Ingredient ingredient in _ingredients)
-                {
-                    App.DB.SaveIngredientAsync(ingredient);
-                    ingredients.Add(ingredient);
+                    foreach (Ingredient ingredient in _ingredients)
+                    {
+                        ingredients.Add(ingredient);
+                        await App.DB.SaveIngredientAsync(ingredient);
+                    }
                 }
             }
         }
@@ -54,7 +63,6 @@ namespace OnMenu
         {
             ingredients.Add(ingredient);
             int i = await App.DB.SaveIngredientAsync(ingredient);
-            Log.Debug("DB", "Adding ingredient " + i);
             return await Task.FromResult(true);
         }
 

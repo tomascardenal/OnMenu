@@ -1,5 +1,4 @@
-﻿using System;
-using Android.OS;
+﻿using Android.OS;
 using Android.Views;
 using Android.Widget;
 
@@ -36,7 +35,7 @@ namespace OnMenu.Droid
         /// <summary>
         /// Button to learn more about this app
         /// </summary>
-        Button learnMoreButton;
+        protected Button learnMoreButton;
 
         /// <summary>
         /// Handles the actions when this fragment view is created
