@@ -1,4 +1,5 @@
-﻿using OnMenu.Models.Calendar;
+﻿using Android.Util;
+using OnMenu.Models.Calendar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,10 @@ namespace OnMenu.Services
                 if (calendarEntries == null || calendarEntries.Count == 0)
                 {
                     calendarEntries = new List<RecipeCalendarEntry>();
+                }
+                foreach(RecipeCalendarEntry entry in calendarEntries)
+                {
+                    Log.Debug("Calendar ", entry.RecipeId + " " + entry.Time + " " + entry.Date);
                 }
             }
         }

@@ -51,6 +51,7 @@
   <string name="cantDelete_toast">This ingredient is being used on a recipe and cannot be deleted</string>
   <string name="addIngredient_menu">New ingredient</string>
   <string name="addRecipe_menu">New recipe</string>
+  <string name="addToCalendar">Add to calendar</string>
   <string name="searchEngine_menu">Search...</string>
   <string name="rating">Rating</string>
   <string name="cancel">Cancel</string>
@@ -61,4 +62,6 @@
   <string name="delete">Delete</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
+  <string name="pickdate_text">Pick a date and time for this recipe</string>
+  <string name="deletecalendar_toast">Do a long click to delete this entry</string>
 </resources>

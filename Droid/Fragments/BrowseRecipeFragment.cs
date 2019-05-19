@@ -12,6 +12,7 @@ using OnMenu.Helpers;
 using System.Collections.Generic;
 using OnMenu.Models.Items;
 using OnMenu.Droid.Helpers;
+using OnMenu.Models.Calendar;
 
 namespace OnMenu.Droid
 {
@@ -50,6 +51,11 @@ namespace OnMenu.Droid
         /// The progress bar.
         /// </summary>
         protected ProgressBar progress;
+
+        /// <summary>
+        /// Dialog builder for asking calendar entries
+        /// </summary>
+        protected AlertDialog.Builder calendarEntryBuilder;
         /// <summary>
         /// Gets or sets the view model.
         /// </summary>
@@ -143,7 +149,7 @@ namespace OnMenu.Droid
         {
             selectedItem = e.Position;
             contextMenu = new PopupMenu(this.Context, e.View);
-            contextMenu.Inflate(Resource.Menu.browse_context_menus);
+            contextMenu.Inflate(Resource.Menu.browse_recipe_context_menus);
             contextMenu.MenuItemClick += OnContextMenuItemClick;
             contextMenu.Show();
         }
@@ -168,8 +174,47 @@ namespace OnMenu.Droid
                     intent.PutExtra("recipe", Newtonsoft.Json.JsonConvert.SerializeObject(ViewModel.Recipes[selectedItem]));
                     Activity.StartActivity(intent);
                     break;
+                case Resource.Id.menu_addCalendar:
+                    buildDateAlert(ViewModel.Recipes[selectedItem]);
+                    break;
             }
             Utils.ForceRefreshLayout(refresher, recyclerView);
+        }
+
+        /// <summary>
+        /// Date alert build for adding entries to the calendar
+        /// </summary>
+        /// <param name="r">The recipe to add</param>
+        protected void buildDateAlert(Recipe r)
+        {
+            View dateView = LayoutInflater.From(this.Activity).Inflate(Resource.Layout.input_calendar_layout, null);
+            DatePicker datePicker = dateView.FindViewById<DatePicker>(Resource.Id.datepicker_Input);
+            TimePicker timePicker = dateView.FindViewById<TimePicker>(Resource.Id.timepicker_Input);
+            string date = "", time = "";
+
+            calendarEntryBuilder = new AlertDialog.Builder(this.Activity);
+            calendarEntryBuilder.SetView(dateView);
+            calendarEntryBuilder.SetCancelable(false)
+                .SetPositiveButton(Activity.ApplicationContext.GetString(Resource.String.accept), delegate
+                {
+                    string[] datetime = ItemParser.ParseDateTimeForEntry(datePicker, timePicker);
+                    date = datetime[0];
+                    time = datetime[1];
+                    if (!string.IsNullOrWhiteSpace(time) && !string.IsNullOrWhiteSpace(date))
+                    {
+                        RecipeCalendarEntry entry = new RecipeCalendarEntry();
+                        entry.RecipeId = r.Id;
+                        entry.Time = time;
+                        entry.Date = date;
+                        CalendarFragment.ViewModel.AddCalendarEntryCommand.Execute(entry);
+                    }
+                })
+                .SetNegativeButton(Activity.ApplicationContext.GetString(Resource.String.cancel), delegate
+                {
+                    calendarEntryBuilder.Dispose();
+                });
+            AlertDialog dialog = calendarEntryBuilder.Create();
+            dialog.Show();
         }
 
         /// <summary>
@@ -256,8 +301,11 @@ namespace OnMenu.Droid
 
             // Replace the contents of the view with that element
             var myHolder = holder as RecipesViewHolder;
-            myHolder.RecipeTitle.Text = recipe.Name;
-            myHolder.EstimatedPrice.Text = Utils.ParsePrice(ItemParser.GetEstimatedPrice(recipe,BrowseIngredientFragment.ViewModel)) + " €";
+            if (myHolder.RecipeTitle != null && myHolder.EstimatedPrice != null)
+            {
+                myHolder.RecipeTitle.Text = recipe.Name;
+                myHolder.EstimatedPrice.Text = Utils.ParsePrice(ItemParser.GetEstimatedPrice(recipe, BrowseIngredientFragment.ViewModel)) + " €";
+            }
         }
         /// <summary>
         /// Gets the item count

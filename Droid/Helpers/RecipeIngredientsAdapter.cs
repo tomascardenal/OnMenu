@@ -70,9 +70,12 @@ namespace OnMenu.Droid
         {
             Ingredient ingredient = IngredientList[position];
             RecipeIngredientsViewHolder aHolder = holder as RecipeIngredientsViewHolder;
-            aHolder.IngredientTextView.Text = IngredientList[position].Name;
-            aHolder.QuantityTextView.Text = QuantityStore[position].ToString();
-            aHolder.MeasurementTextView.Text = IngredientList[position].Measure;
+            if (aHolder.IngredientTextView != null && aHolder.QuantityTextView != null && aHolder.MeasurementTextView != null)
+            {
+                aHolder.IngredientTextView.Text = IngredientList[position].Name;
+                aHolder.QuantityTextView.Text = QuantityStore[position].ToString();
+                aHolder.MeasurementTextView.Text = IngredientList[position].Measure;
+            }
         }
 
         /// <summary>

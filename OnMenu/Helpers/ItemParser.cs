@@ -1,4 +1,6 @@
-﻿using OnMenu.Models.Items;
+﻿using Android.Widget;
+using OnMenu.Models.Items;
+using System;
 using System.Collections.Generic;
 
 namespace OnMenu.Helpers
@@ -92,11 +94,11 @@ namespace OnMenu.Helpers
         /// <param name="recipe">The recipe</param>
         /// <param name="viewModel">The viewmodel</param>
         /// <returns>The total price</returns>
-        public static double GetEstimatedPrice(Recipe recipe , IngredientsViewModel viewModel)
+        public static double GetEstimatedPrice(Recipe recipe, IngredientsViewModel viewModel)
         {
             double price = 0;
             List<float> qList = QuantityValuesToFloatList(recipe.Quantities);
-            List<Ingredient> ingList = IdCSVToIngredientList(recipe.Ingredients,viewModel);
+            List<Ingredient> ingList = IdCSVToIngredientList(recipe.Ingredients, viewModel);
             ingList.ForEach(i =>
             {
                 price += (i.EstimatedPrice / i.EstimatedPer) * qList[ingList.IndexOf(i)];
@@ -104,5 +106,31 @@ namespace OnMenu.Helpers
             return price;
         }
 
+        /// <summary>
+        /// Parse entries for RecipeCalendarEntry
+        /// </summary>
+        /// <param name="datePicker">The DatePicker</param>
+        /// <param name="timePicker">The TimePicker</param>
+        /// <returns>An array with position 0 being the date and position 1 being the time</returns>
+        public static string[] ParseDateTimeForEntry(DatePicker datePicker, TimePicker timePicker)
+        {
+            return new string[]
+            {
+                string.Format("{0:D2}/{1:D2}/{2:D4}", datePicker.DayOfMonth, datePicker.Month, datePicker.Year),
+                string.Format("{0:D2}:{1:D2}", timePicker.Hour, timePicker.Minute)
+            };
+        }
+
+        /// <summary>
+        /// Parse dates for RecipeCalendarEntry comparations
+        /// </summary>
+        /// <param name="day">The day</param>
+        /// <param name="month">The month</param>
+        /// <param name="year">The year</param>
+        /// <returns>The date string</returns>
+        public static string ParseDateToCompare(int day, int month, int year)
+        {
+            return string.Format("{0:D2}/{1:D2}/{2:D4}", day, month, year);
+        }
     }
 }

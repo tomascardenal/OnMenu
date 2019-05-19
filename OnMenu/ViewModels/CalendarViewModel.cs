@@ -19,7 +19,7 @@ namespace OnMenu.ViewModels
         /// <summary>
         /// Command to load calendar entries
         /// </summary>
-        public Command LoadCalendarEntryCommand { get; set; }
+        public Command LoadCalendarEntriesCommand { get; set; }
         /// <summary>
         /// Command to add  calendar entries
         /// </summary>
@@ -44,7 +44,7 @@ namespace OnMenu.ViewModels
         {
             Title = "Calendar";
             Calendar = new ObservableCollection<RecipeCalendarEntry>();
-            LoadCalendarEntryCommand = new Command(async () => await ExecuteLoadCalendarCommand());
+            LoadCalendarEntriesCommand = new Command(async () => await ExecuteLoadCalendarCommand());
             AddCalendarEntryCommand = new Command<RecipeCalendarEntry>(async (RecipeCalendarEntry entry) => await AddCalendarEntry(entry));
             DeleteCalendarEntryCommand = new Command<RecipeCalendarEntry>(async (RecipeCalendarEntry entry) => await DeleteCalendarEntry(entry));
             UpdateCalendarEntryCommand = new Command<RecipeCalendarEntry>(async (RecipeCalendarEntry entry) => await UpdateCalendarEntry(entry));

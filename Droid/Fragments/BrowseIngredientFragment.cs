@@ -261,8 +261,11 @@ namespace OnMenu.Droid
 
             // Replace the contents of the view with that element
             var myHolder = holder as IngredientsViewHolder;
-            myHolder.TextView.Text = ingredient.Name;
-            myHolder.DetailTextView.Text = ingredient.Group;
+            if (myHolder.TextView != null && myHolder.DetailTextView != null)
+            {
+                myHolder.TextView.Text = ingredient.Name;
+                myHolder.DetailTextView.Text = ingredient.Group;
+            }
         }
         /// <summary>
         /// Gets the item count

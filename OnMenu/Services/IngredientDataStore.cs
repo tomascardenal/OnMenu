@@ -42,8 +42,13 @@ namespace OnMenu
                     ingredients = new List<Ingredient>();
                     var _ingredients = new List<Ingredient>
                 {
-                        new Ingredient ( "Rice", "Cereals", "g",  true, 0.50f, 100),
-                        new Ingredient ( "Egg", "Protein", "units",  true, 1.0f, 6),
+                        new Ingredient ( "Arroz", "Cereales", "g",  true, 0.50f, 100),
+                        new Ingredient ( "Huevo", "Proteína", "unidades",  true, 1.0f, 6),
+                        new Ingredient ( "Sal", "General", "g", false, 0.30f, 1000),
+                        new Ingredient ( "Carne de ternera", "Carne", "g", false, 14.9f, 1000),
+                        new Ingredient ( "Espaguetis", "Pasta", "g", true, 0.77f, 1000),
+                        new Ingredient ( "Lechuga", "Verdura", "unidades", false, 0.75f, 1),
+                        new Ingredient ("Tomate frito", "Preparados", "g", true, 0.40f, 200)
                 };
                     foreach (Ingredient ingredient in _ingredients)
                     {

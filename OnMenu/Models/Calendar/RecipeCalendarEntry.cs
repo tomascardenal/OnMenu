@@ -21,13 +21,18 @@ namespace OnMenu.Models.Calendar
         /// </summary>
         public int RecipeId { get; set; }
         /// <summary>
-        /// The datetime
+        /// The date
         /// </summary>
+        public string Date { get; set; }
+        /// <summary>
+        /// The time
+        /// </summary>
+        public string Time { get; set; }
 
         /// <summary>
         /// Empty constructor (Used by sqlite-net-pcl)
         /// </summary>
-        public DateTime DTime { get; set; }
+        public RecipeCalendarEntry() { }
 
         
     }

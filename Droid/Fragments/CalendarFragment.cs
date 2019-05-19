@@ -2,11 +2,16 @@
 using Android.OS;
 using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
+using OnMenu.Droid.Helpers;
+using OnMenu.Helpers;
+using OnMenu.Models.Calendar;
 using OnMenu.Models.Items;
 using OnMenu.ViewModels;
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace OnMenu.Droid
@@ -69,15 +74,101 @@ namespace OnMenu.Droid
             ViewModel = new CalendarViewModel();
             View view = inflater.Inflate(Resource.Layout.fragment_calendar, container, false);
             recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recycler_calendarFragment);
+
             recyclerView.HasFixedSize = true;
-            recyclerView.SetAdapter(adapter = new BrowseCalendarAdapter(Activity, ViewModel));
+            recyclerView.SetAdapter(adapter = new BrowseCalendarAdapter(Activity, ViewModel.Calendar));
+            //recyclerView.SetLayoutManager(
 
             refresher = view.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher_calendarFragment);
             refresher.SetColorSchemeColors(Resource.Color.accent);
 
-
+            calendar = view.FindViewById<CalendarView>(Resource.Id.calendar_calendarFragment);
+            calendar.DateChange += Calendar_DateChange;
 
             return view;
+        }
+
+        /// <summary>
+        /// Handles the actions when this fragment is started
+        /// </summary>
+        public override void OnStart()
+        {
+            base.OnStart();
+
+            refresher.Refresh += Refresher_Refresh;
+            adapter.ItemClick += Adapter_ItemClick;
+            adapter.ItemLongClick += Adapter_ItemLongClick;
+
+            if (ViewModel.Calendar.Count == 0)
+                ViewModel.LoadCalendarEntriesCommand.Execute(null);
+        }
+
+        /// <summary>
+        /// Handles the actions when this fragment stops
+        /// </summary>
+        public override void OnStop()
+        {
+            base.OnStop();
+            refresher.Refresh -= Refresher_Refresh;
+            adapter.ItemClick -= Adapter_ItemClick;
+            adapter.ItemLongClick -= Adapter_ItemLongClick;
+        }
+
+
+        /// <summary>
+        /// Handles the actions when an adapter item is clicked
+        /// </summary>
+        /// <param name="sender">the adapter item</param>
+        /// <param name="e">the event args</param>
+        private void Adapter_ItemClick(object sender, RecyclerClickEventArgs e)
+        {
+            Toast.MakeText(Activity.ApplicationContext, Resource.String.deletecalendar_toast, ToastLength.Short).Show();
+        }
+
+        /// <summary>
+        /// Handles the actions when an adapter item is longclicked
+        /// </summary>
+        /// <param name="sender">the adapter item</param>
+        /// <param name="e">the event args</param>
+        private void Adapter_ItemLongClick(object sender, RecyclerClickEventArgs e)
+        {
+            selectedItem = e.Position;
+            ViewModel.DeleteCalendarEntryCommand.Execute(ViewModel.Calendar[selectedItem]);
+            Utils.ForceRefreshLayout(refresher, recyclerView);
+        }
+
+        /// <summary>
+        /// Handles the actions when the refresher is triggered
+        /// </summary>
+        /// <param name="sender">The refresher</param>
+        /// <param name="e">the event args</param>
+        private void Refresher_Refresh(object sender, EventArgs e)
+        {
+            ViewModel.LoadCalendarEntriesCommand.Execute(null);
+            adapter.NotifyDataSetChanged();
+            refresher.Refreshing = false;
+        }
+
+        /// <summary>
+        /// Handles the events when the date of the calendar changes
+        /// </summary>
+        /// <param name="sender">The sender</param>
+        /// <param name="e">The args</param>
+        private void Calendar_DateChange(object sender, CalendarView.DateChangeEventArgs e)
+        {
+            string date = ItemParser.ParseDateToCompare(e.DayOfMonth, e.Month, e.Year);
+            adapter.ShownEntries.Clear();
+            foreach (RecipeCalendarEntry entry in ViewModel.Calendar)
+            {
+                Log.Debug("CALENDAR ADD", "Comparing entry date "+ entry.Date + "to " + date);
+                if (entry.Date == date)
+                {
+                    Log.Debug("CALENDAR ADD", entry.Date);
+                    adapter.ShownEntries.Add(entry);
+                }
+            }
+            adapter.NotifyDataSetChanged();
+
         }
 
         /// <summary>
@@ -94,9 +185,9 @@ namespace OnMenu.Droid
     class BrowseCalendarAdapter : BaseRecycleViewAdapter
     {
         /// <summary>
-        /// The view model
+        /// The collection to show
         /// </summary>
-        CalendarViewModel viewModel;
+        public ObservableCollection<RecipeCalendarEntry> ShownEntries;
         /// <summary>
         /// The activity
         /// </summary>
@@ -110,13 +201,14 @@ namespace OnMenu.Droid
         /// Instantiates a new adapter
         /// </summary>
         /// <param name="activity">The activity for this adapter</param>
-        /// <param name="viewModel">The view model for this adapter</param>
-        public BrowseCalendarAdapter(Activity activity, CalendarViewModel viewModel)
+        /// <param name="shownEntries">The list for this adapter</param>
+        public BrowseCalendarAdapter(Activity activity, ObservableCollection<RecipeCalendarEntry> shownEntries)
         {
-            this.viewModel = viewModel;
+            this.ShownEntries = new ObservableCollection<RecipeCalendarEntry>();
+            shownEntries.ToList().ForEach(e => ShownEntries.Add(e));
             this.activity = activity;
 
-            this.viewModel.Calendar.CollectionChanged += (sender, args) =>
+            this.ShownEntries.CollectionChanged += (sender, args) =>
             {
                 this.activity.RunOnUiThread(NotifyDataSetChanged);
             };
@@ -145,7 +237,7 @@ namespace OnMenu.Droid
         /// <param name="position">The position</param>        
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            var entry = viewModel.Calendar[position];
+            var entry = ShownEntries[position];
 
             // Replace the contents of the view with that element
             var myHolder = holder as CalendarViewHolder;
@@ -157,17 +249,19 @@ namespace OnMenu.Droid
                     rec = r;
                 }
             });
-            if (rec != null)
+            if (rec != null && myHolder.RecipeTitle != null)
             {
                 myHolder.RecipeTitle.Text = rec.Name;
             }
-
-            myHolder.CalendarTime.Text = entry.DTime.ToShortTimeString();
+            if (myHolder.CalendarTime != null)
+            {
+                myHolder.CalendarTime.Text = entry.Time;
+            }
         }
         /// <summary>
         /// Gets the item count
         /// </summary>
-        public override int ItemCount => viewModel.Calendar.Count;
+        public override int ItemCount => ShownEntries.Count;
     }
 
     /// <summary>
