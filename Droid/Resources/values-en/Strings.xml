@@ -49,6 +49,9 @@
   <string name="addrecipe_confirmDeleteIngredient">Are you sure you want to delete this ingredient from the recipe?</string>
   <string name="addrecipe_removeInfoToast">Long click an ingredient to remove it from the recipe</string>
   <string name="cantDelete_toast">This ingredient is being used on a recipe and cannot be deleted</string>
+  <string name="addIngredient_menu">New ingredient</string>
+  <string name="addRecipe_menu">New recipe</string>
+  <string name="searchEngine_menu">Search...</string>
   <string name="rating">Rating</string>
   <string name="cancel">Cancel</string>
   <string name="accept">Accept</string>

@@ -2499,6 +2499,9 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f08005c
 			public const int action_mode_close_button = 2131230812;
 			
+			// aapt resource value: 0x7f0800fc
+			public const int action_search = 2131230972;
+			
 			// aapt resource value: 0x7f0800e0
 			public const int action_text = 2131230944;
 			
@@ -2817,11 +2820,11 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0800e4
 			public const int media_actions = 2131230948;
 			
-			// aapt resource value: 0x7f0800fc
-			public const int menu_addIngredient = 2131230972;
-			
 			// aapt resource value: 0x7f0800fd
-			public const int menu_addRecipe = 2131230973;
+			public const int menu_addIngredient = 2131230973;
+			
+			// aapt resource value: 0x7f0800fe
+			public const int menu_addRecipe = 2131230974;
 			
 			// aapt resource value: 0x7f0800fb
 			public const int menu_deleteItem = 2131230971;
@@ -3605,8 +3608,14 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b0010
 			public const int abc_toolbar_collapse_description = 2131427344;
 			
-			// aapt resource value: 0x7f0b005b
-			public const int accept = 2131427419;
+			// aapt resource value: 0x7f0b005e
+			public const int accept = 2131427422;
+			
+			// aapt resource value: 0x7f0b0059
+			public const int addIngredient_menu = 2131427417;
+			
+			// aapt resource value: 0x7f0b005a
+			public const int addRecipe_menu = 2131427418;
 			
 			// aapt resource value: 0x7f0b0047
 			public const int addingredient_allergen = 2131427399;
@@ -3680,8 +3689,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b001f
 			public const int bottom_sheet_behavior = 2131427359;
 			
-			// aapt resource value: 0x7f0b005a
-			public const int cancel = 2131427418;
+			// aapt resource value: 0x7f0b005d
+			public const int cancel = 2131427421;
 			
 			// aapt resource value: 0x7f0b0058
 			public const int cantDelete_toast = 2131427416;
@@ -3689,20 +3698,20 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b0020
 			public const int character_counter_pattern = 2131427360;
 			
-			// aapt resource value: 0x7f0b0061
-			public const int delete = 2131427425;
+			// aapt resource value: 0x7f0b0064
+			public const int delete = 2131427428;
 			
 			// aapt resource value: 0x7f0b0033
 			public const int description = 2131427379;
 			
-			// aapt resource value: 0x7f0b0060
-			public const int edit = 2131427424;
+			// aapt resource value: 0x7f0b0063
+			public const int edit = 2131427427;
 			
-			// aapt resource value: 0x7f0b005e
-			public const int estimatedPricePer = 2131427422;
+			// aapt resource value: 0x7f0b0061
+			public const int estimatedPricePer = 2131427425;
 			
-			// aapt resource value: 0x7f0b005c
-			public const int hasAllergens = 2131427420;
+			// aapt resource value: 0x7f0b005f
+			public const int hasAllergens = 2131427423;
 			
 			// aapt resource value: 0x7f0b0028
 			public const int hello = 2131427368;
@@ -3740,8 +3749,8 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b0042
 			public const int menu_item_save = 2131427394;
 			
-			// aapt resource value: 0x7f0b0063
-			public const int no = 2131427427;
+			// aapt resource value: 0x7f0b0066
+			public const int no = 2131427430;
 			
 			// aapt resource value: 0x7f0b002e
 			public const int notnow = 2131427374;
@@ -3764,8 +3773,11 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b003a
 			public const int quantity = 2131427386;
 			
-			// aapt resource value: 0x7f0b0059
-			public const int rating = 2131427417;
+			// aapt resource value: 0x7f0b005c
+			public const int rating = 2131427420;
+			
+			// aapt resource value: 0x7f0b005b
+			public const int searchEngine_menu = 2131427419;
 			
 			// aapt resource value: 0x7f0b0011
 			public const int search_menu_title = 2131427345;
@@ -3806,17 +3818,17 @@ namespace OnMenu.Droid
 			// aapt resource value: 0x7f0b0041
 			public const int title_add_recipe = 2131427393;
 			
-			// aapt resource value: 0x7f0b005d
-			public const int totalEstimatedPrice = 2131427421;
+			// aapt resource value: 0x7f0b0060
+			public const int totalEstimatedPrice = 2131427424;
 			
-			// aapt resource value: 0x7f0b005f
-			public const int units = 2131427423;
+			// aapt resource value: 0x7f0b0062
+			public const int units = 2131427426;
 			
 			// aapt resource value: 0x7f0b0030
 			public const int version_number = 2131427376;
 			
-			// aapt resource value: 0x7f0b0062
-			public const int yes = 2131427426;
+			// aapt resource value: 0x7f0b0065
+			public const int yes = 2131427429;
 			
 			static String()
 			{
