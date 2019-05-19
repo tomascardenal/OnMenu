@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using OnMenu.Data;
+using OnMenu.Models.Calendar;
 using OnMenu.Models.Items;
+using OnMenu.Services;
 
 namespace OnMenu
 {
@@ -41,6 +43,7 @@ namespace OnMenu
         {
             ServiceLocator.Instance.Register<IDataStore<Ingredient>, IngredientDataStore>();
             ServiceLocator.Instance.Register<IDataStore<Recipe>, RecipeDataStore>();
+            ServiceLocator.Instance.Register<IDataStore<RecipeCalendarEntry>, CalendarDataStore>();
             string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ItemDB.db3");
             if (!File.Exists(dbPath))
             {

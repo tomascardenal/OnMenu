@@ -1,4 +1,5 @@
-﻿using OnMenu.Models.Items;
+﻿using OnMenu.Models.Calendar;
+using OnMenu.Models.Items;
 using SQLite;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,11 @@ namespace OnMenu.Data
         /// </summary>
         private List<Ingredient> ingredientList;
         public List<Ingredient> IngredientList { get { return ingredientList; } }
+        /// <summary>
+        /// List of calendar entries
+        /// </summary>
+        private List<RecipeCalendarEntry> calendarList;
+        public List<RecipeCalendarEntry> CalendarList { get { return calendarList; } }
 
         /// <summary>
         /// Default constructor for this controller
@@ -41,6 +47,7 @@ namespace OnMenu.Data
             _database = new SQLiteAsyncConnection(dbPath);
             _database.CreateTableAsync<Ingredient>().Wait();
             _database.CreateTableAsync<Recipe>().Wait();
+            _database.CreateTableAsync<RecipeCalendarEntry>().Wait();
 
             StopConnectionCommand = new Command(async () => await StopConnectionAsync());
         }
@@ -158,6 +165,64 @@ namespace OnMenu.Data
         {
             recipeList.Remove(recipe);
             return await _database.DeleteAsync<Recipe>(recipe.Id);
+        }
+
+
+        /// <summary>
+        /// Fetches the calendar entries asyncronously into the list
+        /// </summary>
+        public async Task<List<RecipeCalendarEntry>> GetCalendarEntriesAsync()
+        {
+            if (calendarList != null)
+            {
+                calendarList.Clear();
+            }
+            calendarList = await _database.Table<RecipeCalendarEntry>().ToListAsync();
+            return calendarList;
+        }
+
+        /// <summary>
+        /// Gets the calendar entry from the given id asyncronously
+        /// </summary>
+        /// <param name="id">The id of the calendar entry to retrieve</param>
+        /// <returns>The calendar entry with the given id</returns>
+        public async Task<RecipeCalendarEntry> GetCalendarEntryAsync(int id)
+        {
+            return await _database.Table<RecipeCalendarEntry>()
+                .Where(i => i.Id == id)
+                .FirstOrDefaultAsync();
+        }
+
+        /// <summary>
+        /// Saves an calendar entry to the database asyncronously
+        /// </summary>
+        /// <param name="entry">The calendar entry to store</param>
+        /// <returns>An integer indicating the primary key of the calendar entry</returns>
+        public async Task<int> SaveCalendarEntryAsync(RecipeCalendarEntry entry)
+        {
+            if (CalendarList != null && CalendarList.Any(e => e.Id == entry.Id))
+            {
+                return await _database.UpdateAsync(entry);
+            }
+            else if (entry.Id != 0)
+            {
+                return await _database.InsertOrReplaceAsync(entry);
+            }
+            else
+            {
+                return await _database.InsertAsync(entry);
+            }
+        }
+
+        /// <summary>
+        /// Deletes a calendar entry from the database asyncronously
+        /// </summary>
+        /// <param name="entry">The calendar entry to delete</param>
+        /// <returns>An integer indicating the deleted id</returns>
+        public async Task<int> DeleteCalendarEntryAsync(RecipeCalendarEntry entry)
+        {
+            CalendarList.Remove(entry);
+            return await _database.DeleteAsync<RecipeCalendarEntry>(entry.Id);
         }
 
         /// <summary>
