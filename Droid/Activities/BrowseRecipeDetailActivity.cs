@@ -5,6 +5,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Support.V7.Widget;
+using Android.Text.Method;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
@@ -32,9 +33,9 @@ namespace OnMenu.Droid.Activities
         /// </summary>
         protected RecipeDetailViewModel viewModel;
         /// <summary>
-        /// EditText to show the recipe details
+        /// TextView to show the recipe details
         /// </summary>
-        protected EditText recipeDetails;
+        protected TextView recipeDetails;
         /// <summary>
         /// Textview to show if the recipe has allergens
         /// </summary>
@@ -76,12 +77,14 @@ namespace OnMenu.Droid.Activities
             recipe = Newtonsoft.Json.JsonConvert.DeserializeObject<Recipe>(data);
             viewModel = new RecipeDetailViewModel(recipe, BrowseIngredientFragment.ViewModel);
 
-            recipeDetails = FindViewById<EditText>(Resource.Id.instructions_recipeDetail);
+            recipeDetails = FindViewById<TextView>(Resource.Id.instructions_recipeDetail);
             recipeAllergen = FindViewById<TextView>(Resource.Id.allergen_recipeDetail);
             recipePrice = FindViewById<TextView>(Resource.Id.price_recipeDetail); ;
             ingredientList = FindViewById<RecyclerView>(Resource.Id.recyclerList_recipeDetail);
             ratingSeekBar = FindViewById<SeekBar>(Resource.Id.seekBar_recipeDetail);
             seekBarValue = FindViewById<TextView>(Resource.Id.seekBarValue_recipeDetail);
+
+            recipeDetails.MovementMethod = new ScrollingMovementMethod();
 
             ratingSeekBar.ProgressChanged += RatingSeekBar_ProgressChanged;
             

@@ -92,12 +92,9 @@
                         android:layout_below="@+id/seekBarLayout_recipeDetail"
                     />
 
-                    <EditText
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:editable="false"
-                        android:scrollbars="vertical"
-                        android:lines="3"
                         android:textSize="12dp"
                         android:id="@+id/instructions_recipeDetail"
                         android:text = "Un plato de lentejas, con leche, sirope de caramelo, un monton de ajo crudo, con un buena gelatina royal mezcladito hay todo, luego ponle 1 kg de sal y 1 kg de azucar, agua para que quede caldoso y un monton de chorizo del fuerte ese que pica tanto, con pimienta y pimenton"

@@ -1,5 +1,5 @@
-﻿using OnMenu.Models.Items;
-using OnMenuAPI.Interfaces;
+﻿using OnMenuAPI.Interfaces;
+using OnMenuAPI.Models;
 using System;
 using System.Collections.Generic;
 

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OnMenu.Data;
+using OnMenuAPI.Data;
 
 namespace OnMenuAPI
 {
@@ -14,6 +14,10 @@ namespace OnMenuAPI
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            using(var db = new OnMenuDbContext())
+            {
+                
+            }
         }
 
         public IConfiguration Configuration { get; }

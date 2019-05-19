@@ -2,6 +2,7 @@
 using OnMenu.Models.Items;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OnMenu.Helpers
 {
@@ -48,7 +49,13 @@ namespace OnMenu.Helpers
             {
                 if (int.TryParse(id, out parsedId) && parsedId - 1 >= 0 && parsedId - 1 < viewModelReference.Ingredients.Count)
                 {
-                    ingredientList.Add(viewModelReference.Ingredients[parsedId - 1]);
+                    viewModelReference.Ingredients.ToList().ForEach(i =>
+                    {
+                        if(i.Id == parsedId)
+                        {
+                            ingredientList.Add(i);
+                        }
+                    });
                 }
             }
             return ingredientList;

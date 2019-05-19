@@ -14,6 +14,8 @@ namespace OnMenuAPI.Controllers
     [ApiController]
     public class IngredientsController : ControllerBase
     {
+        
+
         /// <summary>
         /// Gets the ingredients
         /// </summary>
