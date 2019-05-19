@@ -134,6 +134,7 @@ namespace OnMenu.Droid
         {
             selectedItem = e.Position;
             ViewModel.DeleteCalendarEntryCommand.Execute(ViewModel.Calendar[selectedItem]);
+            adapter.NotifyItemRemoved(selectedItem);
             Utils.ForceRefreshLayout(refresher, recyclerView);
         }
 
