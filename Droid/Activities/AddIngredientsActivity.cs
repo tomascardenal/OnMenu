@@ -148,8 +148,8 @@ namespace OnMenu.Droid
                     groupField.Text,
                     measureField.Text,
                     allergenButton.Checked,
-                    float.Parse(priceField.Text),
-                    float.Parse(estimatedPerField.Text)
+                    string.IsNullOrWhiteSpace(priceField.Text) ? 0 : float.Parse(priceField.Text),
+                    string.IsNullOrWhiteSpace(estimatedPerField.Text) ? 0 : float.Parse(estimatedPerField.Text)
                 );
                 ViewModel.AddIngredientsCommand.Execute(ingredient);
             }

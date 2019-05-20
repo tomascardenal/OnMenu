@@ -16,7 +16,6 @@ using OnMenu.ViewModels;
 
 namespace OnMenu.Droid.Activities
 {
-    //TODO rating system
     /// <summary>
     /// Activity to browse recipe details
     /// </summary>
@@ -65,6 +64,10 @@ namespace OnMenu.Droid.Activities
         /// </summary>
         protected Recipe recipe;
         /// <summary>
+        /// Sender row
+        /// </summary>
+        protected int senderRow;
+        /// <summary>
         /// Handles the actions to do when this activity is created
         /// </summary>
         /// <param name="savedInstanceState">Saved instance state.</param>
@@ -73,7 +76,7 @@ namespace OnMenu.Droid.Activities
             base.OnCreate(savedInstanceState);
 
             var data = Intent.GetStringExtra("data");
-
+            senderRow = Intent.GetIntExtra("row", 0);
             recipe = Newtonsoft.Json.JsonConvert.DeserializeObject<Recipe>(data);
             viewModel = new RecipeDetailViewModel(recipe, BrowseIngredientFragment.ViewModel);
 
@@ -162,11 +165,28 @@ namespace OnMenu.Droid.Activities
             switch (item.ItemId)
             {
                 case Resource.Id.menu_deleteItem:
-                    List<Ingredient> ingList = ItemParser.IdCSVToIngredientList(recipe.Ingredients, BrowseIngredientFragment.ViewModel);
-                    ingList.ForEach(i => i.CanDelete = true);
-                    BrowseRecipeFragment.ViewModel.DeleteRecipesCommand.Execute(recipe);
-                    SetResult(Result.Ok);
-                    this.Finish();
+                    if (recipe.CanDelete)
+                    {
+                        AlertDialog.Builder confirmAlert = new AlertDialog.Builder(this);
+                        confirmAlert.SetTitle(recipe.Name);
+                        confirmAlert.SetMessage(GetString(Resource.String.recipe_confirmDelete));
+                        confirmAlert.SetPositiveButton(GetString(Resource.String.yes), (senderFromAlert, args) =>
+                        {
+                            List<Ingredient> ingList = ItemParser.IdCSVToIngredientList(recipe.Ingredients, BrowseIngredientFragment.ViewModel);
+                            ingList.ForEach(i => i.CanDelete = true);
+                            BrowseRecipeFragment.ViewModel.DeleteRecipesCommand.Execute(recipe); 
+                            Intent resultIt = new Intent();
+                            resultIt.PutExtra("deleted", senderRow);
+                            SetResult(Result.FirstUser);
+                            this.Finish();
+                        });
+                        Dialog dialog = confirmAlert.Create();
+                        dialog.Show();
+                    }
+                    else
+                    {
+                        Toast.MakeText(this.ApplicationContext, Resource.String.recipe_cantDelete_toast,ToastLength.Long).Show();
+                    }
                     break;
                 case Resource.Id.menu_editItem:
                     Intent intent = new Intent(this, typeof(AddRecipeActivity));

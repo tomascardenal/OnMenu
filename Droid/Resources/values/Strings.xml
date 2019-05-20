@@ -11,7 +11,7 @@
   <string name="signing_in">Registrando...</string>
   <string name="version_number">Versión 1.0</string>
   <string name="login">Ingresa</string>
-  <string name="learn_more">Aprende Más</string>
+  <string name="learn_more">Aprende sobre Xamarin...</string>
   <string name="description">Descripción:</string>
   <string name="ingredient_group">Grupo</string>
   <string name="ingredient_measure">Medida</string>
@@ -23,7 +23,7 @@
   <string name="hint_name">Nombre</string>
   <string name="info">Información</string>
   <string name="hint_description">Descripción</string>
-  <string name="app_description">Esta app ha sido escrita en C# y APIs nativas utilizando la plataforma Xamarin. Comparte código con sus versiones de iOS, Android, y Windows.</string>
+  <string name="app_description">Esta app ha sido escrita en C# y APIs nativas utilizando la plataforma Xamarin. Realizado como proyecto para Desarrollo de Aplicaciones Multiplataforma por Tomás Cardenal López</string>
   <string name="sign_in_text">Ingresa con tu cuenta para agregar y quitar items</string>
   <string name="title_add_ingredient">Nuevo ingrediente</string>
   <string name="title_add_recipe">Nueva receta</string>
@@ -48,8 +48,13 @@
   <string name="addrecipe_btnRemoveIngredient">Quita ingrediente</string>
   <string name="addrecipe_addQuantity">Indica la cantidad necesaria</string>
   <string name="addrecipe_confirmDeleteIngredient">¿Está seguro de querer eliminar este ingrediente de la receta?</string>
+  <string name="recipe_confirmDelete">¿Está seguro de querer eliminar esta receta?</string>
+  <string name="ingredient_confirmDelete">¿Está seguro de querer eliminar este ingrediente?</string>
+  <string name="calendar_confirmDelete">¿Está seguro de querer eliminar esta entrada del calendario?</string>
+  <string name="recipe_cantDelete_toast">Esta receta no puede ser eliminada porque se encuentra en el calendario</string>
   <string name="addrecipe_removeInfoToast">Mantén pulsado un ingrediente para eliminarlo de la receta</string>
   <string name="cantDelete_toast">Este ingrediente está en una receta y no puede ser borrado</string>
+  <string name="calendar_confirmDelete">¿Está seguro de querer borrar esta entrada?</string>
   <string name="addToCalendar">Añadir al calendario</string>
   <string name="addIngredient_menu">Nuevo ingrediente</string>
   <string name="addRecipe_menu">Nueva receta</string>
@@ -65,6 +70,8 @@
   <string name="delete">Borrar</string>
   <string name="yes">Si</string>
   <string name="no">No</string>
-  <string name="pickdate_text">Escoge un día y hora para esta receta</string>
+  <string name="pickdate_text">Escoge una fecha para esta receta</string>
+  <string name="picktime_text">Escoge una hora para esta receta</string>
   <string name="deletecalendar_toast">Manten pulsado para borrar esta entrada</string>
+  <string name="inputquantity">Introduce la cantidad del ingrediente</string>
 </resources>

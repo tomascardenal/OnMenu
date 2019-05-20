@@ -21,7 +21,7 @@
             android:id="@+id/editQuantity_dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Input the quantity"
+            android:hint="@string/inputquantity"
             android:numeric="decimal"
             android:layout_weight="1"
         />

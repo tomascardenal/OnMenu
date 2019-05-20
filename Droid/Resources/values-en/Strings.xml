@@ -10,7 +10,7 @@
   <string name="signing_in">Signing in...</string>
   <string name="version_number">Version 1.0</string>
   <string name="login">Login</string>
-  <string name="learn_more">Learn More</string>
+  <string name="learn_more">Learn about Xamarin</string>
   <string name="description">Description:</string>
   <string name="ingredient_group">Group</string>
   <string name="ingredient_measure">Measure</string>
@@ -22,7 +22,7 @@
   <string name="hint_name">Name</string>
   <string name="info">Information</string>
   <string name="hint_description">Description</string>
-  <string name="app_description">This app is written in C# and native APIs using the Xamarin Platform. It shares code with its iOS, Android, &amp; Windows versions.</string>
+  <string name="app_description">This app is written in C# and native APIs using the Xamarin Platform. Done as a project for Multiplatform Application Development in 2019. By Tomás Cardenal López</string>
   <string name="sign_in_text">Sign in with your account to save and sync items</string>
   <string name="title_add_ingredient">New ingredient</string>
   <string name="title_add_recipe">New recipe</string>
@@ -47,8 +47,13 @@
   <string name="addrecipe_ingredientList">Ingredient list:</string>
   <string name="addrecipe_addQuantity">Type the necessary quantity</string>
   <string name="addrecipe_confirmDeleteIngredient">Are you sure you want to delete this ingredient from the recipe?</string>
+  <string name="recipe_confirmDelete">Are you sure you want to delete this recipe?</string>
+  <string name="ingredient_confirmDelete">Are you sure you want to delete this ingredient?</string>
+  <string name="calendar_confirmDelete">Are you sure you want to delete this entry from the calendar?</string>
+  <string name="recipe_cantDelete_toast">This recipe cannot be deleted because it\'s on the calendar</string>
   <string name="addrecipe_removeInfoToast">Long click an ingredient to remove it from the recipe</string>
   <string name="cantDelete_toast">This ingredient is being used on a recipe and cannot be deleted</string>
+  <string name="calendar_confirmDelete">Are you sure you want to delete this entry?</string>
   <string name="addIngredient_menu">New ingredient</string>
   <string name="addRecipe_menu">New recipe</string>
   <string name="addToCalendar">Add to calendar</string>
@@ -62,6 +67,8 @@
   <string name="delete">Delete</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
-  <string name="pickdate_text">Pick a date and time for this recipe</string>
+  <string name="pickdate_text">Pick a date for this recipe</string>
+  <string name="picktime_text">Pick an hour for this recipea</string>
   <string name="deletecalendar_toast">Do a long click to delete this entry</string>
+  <string name="inputquantity">Input the quantity of the ingredient</string>
 </resources>

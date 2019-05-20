@@ -64,9 +64,9 @@ namespace OnMenuAPI.Models
         public Recipe(string name, string instructions, List<Ingredient> ingredients, List<float> quantities, int rating) : base(name)
         {
             Instructions = instructions;
-            Ingredients = ItemParser.IngredientsToIdCSV(ingredients);
+            //Ingredients = ItemParser.IngredientsToIdCSV(ingredients);
             Rating = rating;
-            Quantities = ItemParser.FloatListToQuantityValues(quantities);
+            //Quantities = ItemParser.FloatListToQuantityValues(quantities);
         }
 
         /// <summary>

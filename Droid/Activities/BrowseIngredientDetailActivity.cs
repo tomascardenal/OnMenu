@@ -42,6 +42,10 @@ namespace OnMenu.Droid
         /// Textview to show the price
         /// </summary>
         protected TextView priceView;
+        /// <summary>
+        /// Sender row
+        /// </summary>
+        protected int senderRow;
 
         /// <summary>
         /// Handles the actions to do when this activity is created
@@ -52,6 +56,7 @@ namespace OnMenu.Droid
             base.OnCreate(savedInstanceState);
 
             var data = Intent.GetStringExtra("data");
+            senderRow = Intent.GetIntExtra("row",0);
             ingredient = Newtonsoft.Json.JsonConvert.DeserializeObject<Ingredient>(data);
             viewModel = new IngredientDetailViewModel(ingredient);
             foodGroupView = FindViewById<TextView>(Resource.Id.foodgroup_ingredientDetail);
@@ -95,9 +100,19 @@ namespace OnMenu.Droid
                 case Resource.Id.menu_deleteItem:
                     if (ingredient.CanDelete)
                     {
-                        BrowseIngredientFragment.ViewModel.DeleteIngredientsCommand.Execute(ingredient);
-                        SetResult(Result.Ok);
-                        this.Finish();
+                        AlertDialog.Builder confirmAlert = new AlertDialog.Builder(this);
+                        confirmAlert.SetTitle(ingredient.Name);
+                        confirmAlert.SetMessage(GetString(Resource.String.ingredient_confirmDelete));
+                        confirmAlert.SetPositiveButton(GetString(Resource.String.yes), (senderFromAlert, args) =>
+                        {
+                            BrowseIngredientFragment.ViewModel.DeleteIngredientsCommand.Execute(ingredient);
+                            Intent resultIt = new Intent();
+                            resultIt.PutExtra("deleted", senderRow);
+                            SetResult(Result.FirstUser);
+                            this.Finish();
+                        });
+                        Dialog dialog = confirmAlert.Create();
+                        dialog.Show();
                     }
                     else
                     {

@@ -51,7 +51,7 @@ namespace OnMenu.Helpers
                 {
                     viewModelReference.Ingredients.ToList().ForEach(i =>
                     {
-                        if(i.Id == parsedId)
+                        if (i.Id == parsedId)
                         {
                             ingredientList.Add(i);
                         }
@@ -116,15 +116,16 @@ namespace OnMenu.Helpers
         /// <summary>
         /// Parse entries for RecipeCalendarEntry
         /// </summary>
-        /// <param name="datePicker">The DatePicker</param>
-        /// <param name="timePicker">The TimePicker</param>
+        /// <param name="dateTime">The DateTime entry</param>
+        /// <param name="hours">The hours</param>
+        /// <param name="minutes">The minutes</param>
         /// <returns>An array with position 0 being the date and position 1 being the time</returns>
-        public static string[] ParseDateTimeForEntry(DatePicker datePicker, TimePicker timePicker)
+        public static string[] ParseDateTimeForEntry(DateTime dateTime, int hours, int minutes)
         {
             return new string[]
             {
-                string.Format("{0:D2}/{1:D2}/{2:D4}", datePicker.DayOfMonth, datePicker.Month, datePicker.Year),
-                string.Format("{0:D2}:{1:D2}", timePicker.Hour, timePicker.Minute)
+                string.Format("{0:D2}/{1:D2}/{2:D4}", dateTime.Day, dateTime.Month, dateTime.Year),
+                string.Format("{0:D2}:{1:D2}",hours, minutes)
             };
         }
 

@@ -77,7 +77,6 @@ namespace OnMenu.Droid
 
             recyclerView.HasFixedSize = true;
             recyclerView.SetAdapter(adapter = new BrowseCalendarAdapter(Activity, ViewModel.Calendar));
-            //recyclerView.SetLayoutManager(
 
             refresher = view.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher_calendarFragment);
             refresher.SetColorSchemeColors(Resource.Color.accent);
@@ -132,10 +131,21 @@ namespace OnMenu.Droid
         /// <param name="e">the event args</param>
         private void Adapter_ItemLongClick(object sender, RecyclerClickEventArgs e)
         {
-            selectedItem = e.Position;
-            ViewModel.DeleteCalendarEntryCommand.Execute(ViewModel.Calendar[selectedItem]);
-            adapter.NotifyItemRemoved(selectedItem);
-            Utils.ForceRefreshLayout(refresher, recyclerView);
+            RecipeCalendarEntry entry = ViewModel.Calendar[selectedItem];
+
+            AlertDialog.Builder confirmAlert = new AlertDialog.Builder(this.Activity);
+            confirmAlert.SetTitle(BrowseRecipeFragment.ViewModel.Recipes[entry.RecipeId].Name);
+            confirmAlert.SetMessage(GetString(Resource.String.calendar_confirmDelete));
+            confirmAlert.SetPositiveButton(GetString(Resource.String.yes), (senderFromAlert, args) =>
+            {
+                selectedItem = e.Position;
+                ViewModel.DeleteCalendarEntryCommand.Execute(entry);
+                adapter.ShownEntries.Remove(entry);
+                adapter.NotifyItemRemoved(selectedItem);
+            });
+            Dialog dialog = confirmAlert.Create();
+            dialog.Show();
+            
         }
 
         /// <summary>
@@ -157,14 +167,12 @@ namespace OnMenu.Droid
         /// <param name="e">The args</param>
         private void Calendar_DateChange(object sender, CalendarView.DateChangeEventArgs e)
         {
-            string date = ItemParser.ParseDateToCompare(e.DayOfMonth, e.Month, e.Year);
+            string date = ItemParser.ParseDateToCompare(e.DayOfMonth, e.Month + 1, e.Year);
             adapter.ShownEntries.Clear();
             foreach (RecipeCalendarEntry entry in ViewModel.Calendar)
             {
-                Log.Debug("CALENDAR ADD", "Comparing entry date "+ entry.Date + "to " + date);
                 if (entry.Date == date)
                 {
-                    Log.Debug("CALENDAR ADD", entry.Date);
                     adapter.ShownEntries.Add(entry);
                 }
             }

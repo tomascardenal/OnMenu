@@ -53,6 +53,10 @@ namespace OnMenu.Models.Items
         /// CSV string with quantity references
         /// </summary>
         public string Quantities { get; set; }
+        /// <summary>
+        /// Indicates if this recipe can be deleted or not (if it's on the calendar, it shouldn't)
+        /// </summary>
+        public bool CanDelete { get; set; }
 
 
         /// <summary>
@@ -68,6 +72,7 @@ namespace OnMenu.Models.Items
             Ingredients = ItemParser.IngredientsToIdCSV(ingredients);
             Rating = rating;
             Quantities = ItemParser.FloatListToQuantityValues(quantities);
+            CanDelete = true;
         }
 
         /// <summary>

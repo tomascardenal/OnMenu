@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using OnMenu.Models.Items;
 using OnMenu.Droid.Helpers;
 using OnMenu.Models.Calendar;
+using static Android.App.TimePickerDialog;
+using Android.Util;
 
 namespace OnMenu.Droid
 {
@@ -51,7 +53,14 @@ namespace OnMenu.Droid
         /// The progress bar.
         /// </summary>
         protected ProgressBar progress;
-
+        /// <summary>
+        /// Pointer to the date when setting an entry to the calendar
+        /// </summary>
+        protected DateTime saveDate;
+        /// <summary>
+        /// Pointer to the recipe when setting an entry to the calendar
+        /// </summary>
+        protected Recipe calendarRecipe;
         /// <summary>
         /// Dialog builder for asking calendar entries
         /// </summary>
@@ -61,6 +70,7 @@ namespace OnMenu.Droid
         /// </summary>
         /// <value>The view model.</value>
         public static RecipeViewModel ViewModel { get; set; }
+
 
         /// <summary>
         /// Handles the actions when this fragment is created
@@ -137,6 +147,7 @@ namespace OnMenu.Droid
             var intent = new Intent(Activity, typeof(BrowseRecipeDetailActivity));
 
             intent.PutExtra("data", Newtonsoft.Json.JsonConvert.SerializeObject(item));
+            intent.PutExtra("row", e.Position);
             Activity.StartActivity(intent);
         }
 
@@ -164,10 +175,27 @@ namespace OnMenu.Droid
             switch (e.Item.ItemId)
             {
                 case Resource.Id.menu_deleteItem:
-                    List<Ingredient> ingList = ItemParser.IdCSVToIngredientList(ViewModel.Recipes[selectedItem].Ingredients, BrowseIngredientFragment.ViewModel);
-                    ingList.ForEach(i => i.CanDelete = true);
-                    ViewModel.DeleteRecipesCommand.Execute(ViewModel.Recipes[selectedItem]);
-                    adapter.NotifyItemRemoved(selectedItem);
+                    if (ViewModel.Recipes[selectedItem].CanDelete)
+                    {
+
+                        AlertDialog.Builder confirmAlert = new AlertDialog.Builder(this.Activity);
+                        confirmAlert.SetTitle(ViewModel.Recipes[selectedItem].Name);
+                        confirmAlert.SetMessage(GetString(Resource.String.recipe_confirmDelete));
+                        confirmAlert.SetPositiveButton(GetString(Resource.String.yes), (senderFromAlert, args) =>
+                        {
+                            List<Ingredient> ingList = ItemParser.IdCSVToIngredientList(ViewModel.Recipes[selectedItem].Ingredients, BrowseIngredientFragment.ViewModel);
+                            ingList.ForEach(i => i.CanDelete = true);
+                            ViewModel.DeleteRecipesCommand.Execute(ViewModel.Recipes[selectedItem]);
+                            adapter.NotifyItemRemoved(selectedItem);
+                        });
+                        Dialog dialog = confirmAlert.Create();
+                        dialog.Show();
+                        Utils.ForceRefreshLayout(refresher, recyclerView);
+                    }
+                    else
+                    {
+                        Toast.MakeText(this.Context, Resource.String.recipe_cantDelete_toast, ToastLength.Long).Show();
+                    }
                     break;
                 case Resource.Id.menu_editItem:
                     Intent intent = new Intent(Activity, typeof(AddRecipeActivity));
@@ -187,34 +215,69 @@ namespace OnMenu.Droid
         /// <param name="r">The recipe to add</param>
         protected void buildDateAlert(Recipe r)
         {
-            View dateView = LayoutInflater.From(this.Activity).Inflate(Resource.Layout.input_calendar_layout, null);
-            DatePicker datePicker = dateView.FindViewById<DatePicker>(Resource.Id.datepicker_Input);
-            TimePicker timePicker = dateView.FindViewById<TimePicker>(Resource.Id.timepicker_Input);
-            string date = "", time = "";
+            calendarRecipe = r;
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this.Context, Android.Resource.Style.ThemeHoloLightDialogMinWidth);
+            datePickerDialog.SetTitle(GetString(Resource.String.pickdate_text));
+            datePickerDialog.DateSet += DatePickerDialog_DateSet;
+            datePickerDialog.Show();
+        }
 
-            calendarEntryBuilder = new AlertDialog.Builder(this.Activity);
-            calendarEntryBuilder.SetView(dateView);
-            calendarEntryBuilder.SetCancelable(false)
-                .SetPositiveButton(Activity.ApplicationContext.GetString(Resource.String.accept), delegate
+        /// <summary>
+        /// Catches the event when the date is set
+        /// </summary>
+        /// <param name="sender">The sender</param>
+        /// <param name="e">The arguments</param>
+        private void DatePickerDialog_DateSet(object sender, DatePickerDialog.DateSetEventArgs e)
+        {
+            saveDate = e.Date;
+            TimePickerDialog timePickerDialog = new TimePickerDialog(
+               this.Context, OnTimeSet, DateTime.Now.TimeOfDay.Hours, DateTime.Now.TimeOfDay.Minutes, true);
+            timePickerDialog.SetTitle(Resource.String.picktime_text);
+            timePickerDialog.Show();
+
+        }
+
+        /// <summary>
+        /// Catches the event when the time is set
+        /// </summary>
+        /// <param name="sender">The sender</param>
+        /// <param name="e">The arguments</param>
+        private void OnTimeSet(object sender, TimeSetEventArgs e)
+        {
+            string[] datetime = ItemParser.ParseDateTimeForEntry(saveDate, e.HourOfDay, e.Minute);
+            string date = datetime[0];
+            string time = datetime[1];
+            if (!string.IsNullOrWhiteSpace(time) && !string.IsNullOrWhiteSpace(date))
+            {
+                RecipeCalendarEntry entry = new RecipeCalendarEntry();
+                entry.RecipeId = calendarRecipe.Id;
+                entry.Time = time;
+                entry.Date = date;
+                CalendarFragment.ViewModel.AddCalendarEntryCommand.Execute(entry);
+                calendarRecipe.CanDelete = false;
+                Log.Debug("DateTime", date + time);
+            }
+        }
+
+
+        /// <summary>
+        /// Handles the actions when an activity returns a result to this fragment
+        /// </summary>
+        /// <param name="requestCode">The request code</param>
+        /// <param name="resultCode">The result code</param>
+        /// <param name="data">The Intent with embedded data</param>
+        public override void OnActivityResult(int requestCode, int resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            if (requestCode == 0 && resultCode == 1)
+            {
+                int del = data.GetIntExtra("deleted", -1);
+                if (del != -1)
                 {
-                    string[] datetime = ItemParser.ParseDateTimeForEntry(datePicker, timePicker);
-                    date = datetime[0];
-                    time = datetime[1];
-                    if (!string.IsNullOrWhiteSpace(time) && !string.IsNullOrWhiteSpace(date))
-                    {
-                        RecipeCalendarEntry entry = new RecipeCalendarEntry();
-                        entry.RecipeId = r.Id;
-                        entry.Time = time;
-                        entry.Date = date;
-                        CalendarFragment.ViewModel.AddCalendarEntryCommand.Execute(entry);
-                    }
-                })
-                .SetNegativeButton(Activity.ApplicationContext.GetString(Resource.String.cancel), delegate
-                {
-                    calendarEntryBuilder.Dispose();
-                });
-            AlertDialog dialog = calendarEntryBuilder.Create();
-            dialog.Show();
+                    adapter.NotifyItemRemoved(del);
+                }
+            }
+            Utils.ForceRefreshLayout(refresher, recyclerView);
         }
 
         /// <summary>

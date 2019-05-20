@@ -164,6 +164,7 @@ namespace OnMenu.Droid.Activities
             confirmAlert.SetPositiveButton(GetString(Resource.String.yes), (senderFromAlert, args) =>
              {
                  addedIngredients.RemoveAt(e.Position);
+                 adapter.NotifyItemRemoved(e.Position);
              });
             Dialog dialog = confirmAlert.Create();
             dialog.Show();

@@ -123,6 +123,7 @@ namespace OnMenu.Droid
             var intent = new Intent(Activity, typeof(BrowseIngredientDetailActivity));
 
             intent.PutExtra("data", Newtonsoft.Json.JsonConvert.SerializeObject(item));
+            intent.PutExtra("row", e.Position);
             Activity.StartActivityForResult(intent, 0);
         }
 
@@ -135,6 +136,14 @@ namespace OnMenu.Droid
         public override void OnActivityResult(int requestCode, int resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
+            if (requestCode == 0 && resultCode == 1)
+            {
+                int del = data.GetIntExtra("deleted", -1);
+                if (del != -1)
+                {
+                    adapter.NotifyItemRemoved(del);
+                }
+            }
             Utils.ForceRefreshLayout(refresher, recyclerView);
         }
 
@@ -164,7 +173,16 @@ namespace OnMenu.Droid
                 case Resource.Id.menu_deleteItem:
                     if (ViewModel.Ingredients[selectedItem].CanDelete)
                     {
-                        ViewModel.DeleteIngredientsCommand.Execute(ViewModel.Ingredients[selectedItem]);
+                        AlertDialog.Builder confirmAlert = new AlertDialog.Builder(this.Activity);
+                        confirmAlert.SetTitle(ViewModel.Ingredients[selectedItem].Name);
+                        confirmAlert.SetMessage(GetString(Resource.String.ingredient_confirmDelete));
+                        confirmAlert.SetPositiveButton(GetString(Resource.String.yes), (senderFromAlert, args) =>
+                        {
+                            ViewModel.DeleteIngredientsCommand.Execute(ViewModel.Ingredients[selectedItem]);
+                            adapter.NotifyItemRemoved(selectedItem);
+                        });
+                        Dialog dialog = confirmAlert.Create();
+                        dialog.Show();
                         Utils.ForceRefreshLayout(refresher, recyclerView);
                     }
                     else
