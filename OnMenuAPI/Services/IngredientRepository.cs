@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace OnMenuAPI.Services
 {
+    /// <summary>
+    /// Not implemented, respository for ingredients
+    /// </summary>
     public class IngredientRepository : IItemRepository<Ingredient>
     {
         public  IEnumerable<Ingredient> Index => throw new NotImplementedException();

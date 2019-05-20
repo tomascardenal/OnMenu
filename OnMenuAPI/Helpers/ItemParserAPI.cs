@@ -1,17 +1,12 @@
-﻿using OnMenuAPI.Models;
-using System;
+﻿using OnMenuAPI.Data;
+using OnMenuAPI.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnMenuAPI.Helpers
 {
-    public class ItemParser
+    public class ItemParserAPI
     {
-        /// <summary>
-        /// Functions to parse items into SQLite valid datatypes
-        /// </summary>
-
         /// <summary>
         /// Parses a List of ingredients into a string with their ids separated by commas
         /// </summary>
@@ -33,26 +28,26 @@ namespace OnMenuAPI.Helpers
         /// <param name="idValues">The CSV containing the ids</param>
         /// <param name="dataStoreReference">A reference to the current ingredients viewmodel</param>
         /// <returns>A List with the corresponding ingredients</returns>
-        public static List<Ingredient> IdCSVToIngredientList(string idValues, List<Ingredient> apiIngredients)
+        public static List<Ingredient> IdCSVToIngredientList(string idValues)
         {
             List<Ingredient> ingredientList = new List<Ingredient>();
             string[] separatedValues = idValues.Split(',');
             int parsedId;
-            if (apiIngredients == null)
-            {
-                return ingredientList;
-            }
-
             foreach (string id in separatedValues)
             {
-                if (int.TryParse(id, out parsedId) && parsedId - 1 >= 0 && parsedId - 1 < apiIngredients.Count)
+                if (int.TryParse(id, out parsedId) && parsedId - 1 >= 0 && parsedId - 1 < DataContainer.Ingredients.Count)
                 {
-                    ingredientList.Add(apiIngredients[parsedId - 1]);
+                    DataContainer.Ingredients.ToList().ForEach(i =>
+                    {
+                        if (i.Id == parsedId)
+                        {
+                            ingredientList.Add(i);
+                        }
+                    });
                 }
             }
             return ingredientList;
         }
-
         /// <summary>
         /// Parses a float list to the quantities separated by front slashes
         /// </summary>
@@ -89,4 +84,3 @@ namespace OnMenuAPI.Helpers
         }
     }
 }
-

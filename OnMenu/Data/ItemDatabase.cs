@@ -228,7 +228,7 @@ namespace OnMenu.Data
         /// <summary>
         /// Stops the database connections
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A task</returns>
         public async Task StopConnectionAsync()
         {
             await _database.CloseAsync();

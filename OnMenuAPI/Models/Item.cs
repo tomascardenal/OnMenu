@@ -1,23 +1,29 @@
-﻿namespace OnMenuAPI.Models
+﻿using System.Runtime.Serialization;
+
+namespace OnMenuAPI.Models
 {
     /// <summary>
     /// Model for an Item
     /// </summary>
+    [DataContract]
     public class Item
     {
         /// <summary>
         /// The item's ID, autoincremented by SQLite
         /// </summary>
+        [DataMember]
         public int Id { get; set; }
 
         /// <summary>
         /// The item's name
         /// </summary>
+        [DataMember]
         private string name;
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
         /// <value>The item's name.</value>
+        [DataMember]
         public string Name { get => name; set => name = value; }
 
         /// <summary>

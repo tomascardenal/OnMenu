@@ -9,7 +9,7 @@ namespace OnMenuAPI.Data
     public static class DataContainer
     {
         /// <summary>
-        /// List of ingredients
+        /// List of ingredients //Placeholder for a would be REST api
         /// </summary>
         public static List<Ingredient> Ingredients = new List<Ingredient>
                 {

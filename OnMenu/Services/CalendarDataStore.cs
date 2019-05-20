@@ -1,9 +1,7 @@
 ﻿using Android.Util;
 using OnMenu.Models.Calendar;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OnMenu.Services
@@ -44,7 +42,7 @@ namespace OnMenu.Services
                 {
                     calendarEntries = new List<RecipeCalendarEntry>();
                 }
-                foreach(RecipeCalendarEntry entry in calendarEntries)
+                foreach (RecipeCalendarEntry entry in calendarEntries)
                 {
                     Log.Debug("Calendar ", entry.RecipeId + " " + entry.Time + " " + entry.Date);
                 }
@@ -127,7 +125,7 @@ namespace OnMenu.Services
         /// <summary>
         /// Edits all the calendar entries in the db
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A task with a boolean indicating it was finished</returns>
         public async Task<bool> EditItemsAsync()
         {
             foreach (RecipeCalendarEntry r in calendarEntries)

@@ -42,7 +42,6 @@ namespace OnMenu.Droid
         /// The allergen button.
         /// </summary>
         protected ToggleButton allergenButton;
-
         /// <summary>
         /// Whether this activity is on edit mode or not
         /// </summary>

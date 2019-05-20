@@ -1,8 +1,11 @@
-﻿namespace OnMenuAPI.Models
+﻿using System.Runtime.Serialization;
+
+namespace OnMenuAPI.Models
 {
     /// <summary>
     /// Model for an Ingredient
     /// </summary>
+    [DataContract]  
     public class Ingredient : Item
     {
         /// <summary>
@@ -13,6 +16,7 @@
         /// Gets or sets the food group for this ingredient.
         /// </summary>
         /// <value>The food group.</value>
+        [DataMember]
         public string Group { get => group; set => group = value; }
 
         /// <summary>
@@ -23,6 +27,7 @@
         /// Gets or sets the measure to use with this ingredient.
         /// </summary>
         /// <value>The measure.</value>
+        [DataMember]
         public string Measure { get => measure; set => measure = value; }
 
         /// <summary>
@@ -33,6 +38,7 @@
         /// Gets or sets a value indicating whether this <see cref="T:OnMenu.Models.Ingredient"/> is an allergen.
         /// </summary>
         /// <value><c>true</c> if the ingredient is an allergen; otherwise, <c>false</c>.</value>
+        [DataMember]
         public bool Allergen { get => allergen; set => allergen = value; }
 
         /// <summary>
@@ -43,14 +49,17 @@
         /// Gets or sets the estimated price of the ingredient.
         /// </summary>
         /// <value>The estimated price of this ingredient.</value>
+        [DataMember]
         public float EstimatedPrice { get => estimatedPrice; set => estimatedPrice = value; }
         /// <summary>
         /// Indicates if this ingredient can be deleted or not (if it's on a recipe, it shouldn't)
         /// </summary>
+        [DataMember]
         public bool CanDelete { get; set; }
         /// <summary>
         /// Indicates per how much of the quantity the ingredient price is estimated
         /// </summary>
+        [DataMember]
         public float EstimatedPer { get; set; }
 
         /// <summary>

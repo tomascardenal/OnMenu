@@ -137,7 +137,7 @@ namespace OnMenu
         /// <summary>
         /// Edits all the items in the db
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A task with a boolean indicating it was finished</returns>
         public async Task<bool> EditItemsAsync()
         {
             foreach (Ingredient i in ingredients)

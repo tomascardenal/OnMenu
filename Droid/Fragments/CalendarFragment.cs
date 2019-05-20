@@ -2,10 +2,8 @@
 using Android.OS;
 using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
-using OnMenu.Droid.Helpers;
 using OnMenu.Helpers;
 using OnMenu.Models.Calendar;
 using OnMenu.Models.Items;

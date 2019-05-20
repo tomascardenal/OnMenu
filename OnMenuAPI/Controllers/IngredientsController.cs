@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Json;
 using Microsoft.AspNetCore.Mvc;
+using OnMenuAPI.Data;
+using OnMenuAPI.Models;
 
 namespace OnMenuAPI.Controllers
 {
@@ -14,7 +14,7 @@ namespace OnMenuAPI.Controllers
     [ApiController]
     public class IngredientsController : ControllerBase
     {
-        
+
 
         /// <summary>
         /// Gets the ingredients
@@ -24,7 +24,19 @@ namespace OnMenuAPI.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Ingredient));
+            List<string> jsonArray = new List<string>();
+            foreach (Ingredient i in DataContainer.Ingredients)
+            {
+                MemoryStream stream1 = new MemoryStream();
+                ser.WriteObject(stream1, i);
+                stream1.Position = 0;
+                using (StreamReader sr = new StreamReader(stream1))
+                {
+                    jsonArray.Add(sr.ReadToEnd());
+                }
+            }
+            return jsonArray;
         }
         /// <summary>
         /// Gets an ingredient by it's id
@@ -35,7 +47,17 @@ namespace OnMenuAPI.Controllers
         [HttpGet("{id}", Name = "GetIngredients")]
         public string Get(int id)
         {
-            return "value";
+            MemoryStream stream1 = new MemoryStream();
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Ingredient));
+            string jsonObject = "";
+            Ingredient i = DataContainer.Ingredients[id];
+            ser.WriteObject(stream1, i);
+            stream1.Position = 0;
+            using (StreamReader sr = new StreamReader(stream1))
+            {
+                jsonObject = sr.ReadToEnd();
+            }
+            return jsonObject;
         }
 
         /// <summary>

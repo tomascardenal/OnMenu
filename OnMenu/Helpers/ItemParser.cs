@@ -1,5 +1,4 @@
-﻿using Android.Widget;
-using OnMenu.Models.Items;
+﻿using OnMenu.Models.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,7 +1,4 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnMenu.Models.Calendar
 {
@@ -34,6 +31,6 @@ namespace OnMenu.Models.Calendar
         /// </summary>
         public RecipeCalendarEntry() { }
 
-        
+
     }
 }
