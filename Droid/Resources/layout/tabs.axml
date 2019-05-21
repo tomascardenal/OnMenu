@@ -10,4 +10,4 @@
     app:tabTextAppearance="@style/tabAppearance" 
     app:tabIndicatorColor="@android:color/white"
     app:tabGravity="fill"
-    app:tabMode="fixed" />
+    app:tabMode="scrollable" />
