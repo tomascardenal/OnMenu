@@ -14,7 +14,7 @@ namespace OnMenu.Droid
     /// <summary>
     /// Main activity for the OnMenu android app.
     /// </summary>
-    [Activity(Label = "@string/app_name", Icon = "@mipmap/icon",
+    [Activity(Label = "@string/app_name", Icon = "@drawable/ic_launcher",
         LaunchMode = LaunchMode.SingleInstance,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
         ScreenOrientation = ScreenOrientation.Portrait)]
